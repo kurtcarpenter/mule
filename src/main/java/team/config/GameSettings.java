@@ -3,11 +3,11 @@ package team.config;
 public class GameSettings {
 
   public enum Difficulty {
-    BEGINNER
+    BEGINNER, STANDARD, TOURNAMENT
   }
 
   public enum Map {
-    BASIC, LARGE
+    STANDARD, RANDOM
   }
 
   private int numPlayers;
