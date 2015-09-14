@@ -10,18 +10,18 @@ import team.screens.ScreenMaster;
 public class MainApp extends Application {
 
     public static final String GAME_CONFIG_SCREEN = "gameConfig";
-    public static final String GAME_CONFIG_FXML = "gameConfig.fxml";
+    public static final String GAME_CONFIG_FXML = "fxml/gameConfig.fxml";
     public static final String PLAYER_CONFIG_SCREEN = "playerConfig";
-    public static final String PLAYER_CONFIG_FXML = "playerConfig.fxml";
+    public static final String PLAYER_CONFIG_FXML = "fxml/playerConfig.fxml";
     public static final String BLANK_SCREEN = "blankScreen";
-    public static final String BLANK_SCREEN_FXML = "blankScreen.fxml";
+    public static final String BLANK_SCREEN_FXML = "fxml/blankScreen.fxml";
 
     @Override
     public void start(Stage stage) throws Exception {
         ScreenMaster main = new ScreenMaster();
         main.loadScreen(GAME_CONFIG_SCREEN, GAME_CONFIG_FXML);
-        main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
-        main.loadScreen(BLANK_SCREEN, BLANK_SCREEN_FXML);
+        //main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
+        //main.loadScreen(BLANK_SCREEN, BLANK_SCREEN_FXML);
       	main.displayScreen(GAME_CONFIG_SCREEN);
 
         Group root = new Group();

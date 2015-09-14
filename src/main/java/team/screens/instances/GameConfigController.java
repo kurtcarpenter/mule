@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import team.screens.AScreen;
 
-public class FakeScreen1Controller extends AScreen {
+public class GameConfigController extends AScreen {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
