@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-background-color 0x001899ff?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane fx:controller="team.screens.instances.GameConfigController" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
     <ComboBox layoutX="205.0" layoutY="188.0" prefWidth="191.0" promptText="Difficulty">
       <items>

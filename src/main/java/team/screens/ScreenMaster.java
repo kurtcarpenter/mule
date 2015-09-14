@@ -49,14 +49,15 @@ public class ScreenMaster extends StackPane {
      */
     public boolean loadScreen(String name, String resource) {
         try {
-             FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
              Parent node = (Parent) loader.load();
              IScreen screenController = ((IScreen) loader.getController());
              screenController.setParent(this);
              addScreen(name, node);
              return true;
          } catch (Exception e) {
-             System.out.println("Load Screen exception: " + e.getMessage());
+             System.out.println("Load Screen exception:");
+             e.printStackTrace();
              return false;
          }
     }
