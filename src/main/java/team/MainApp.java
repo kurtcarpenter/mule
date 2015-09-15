@@ -21,7 +21,7 @@ public class MainApp extends Application {
         ScreenMaster main = new ScreenMaster();
         main.loadScreen(GAME_CONFIG_SCREEN, GAME_CONFIG_FXML);
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
-        //main.loadScreen(BLANK_SCREEN, BLANK_SCREEN_FXML);
+        main.loadScreen(BLANK_SCREEN, BLANK_SCREEN_FXML);
       	main.displayScreen(GAME_CONFIG_SCREEN);
 
         Group root = new Group();
