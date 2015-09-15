@@ -15,12 +15,12 @@ import team.MainApp;
 public class PlayerConfigController extends AScreen {
 
     @FXML
-	// fx:id="configPlayersButton"
-	private Button next;
+    // fx:id="nextButton"
+    private Button nextButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        configPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
+        nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 parent.displayScreen(MainApp.BLANK_SCREEN);
