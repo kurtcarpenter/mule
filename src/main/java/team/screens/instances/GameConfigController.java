@@ -37,9 +37,11 @@ public class GameConfigController extends AScreen {
             public void handle(ActionEvent event) {
                 //String difficulty = difficultyBox.getSelectionModel().getSelectedItem().toString();
                 //String map = mapBox.getSelectionModel().getSelectedItem().toString();
-                int numPlayers = Integer.parseInt(playersBox.getSelectionModel().getSelectedItem().toString().substring(0,1));
-
-								parent.config.getSettings().setNumPlayers(numPlayers);
+                int numPlayers = 0;
+				if (playersBox.getSelectionModel().getSelectedItem() != null) {
+					numPlayers = Integer.parseInt(playersBox.getSelectionModel().getSelectedItem().toString().substring(0,1));
+				}
+				parent.config.getSettings().setNumPlayers(numPlayers);
                 parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
             }
         });
