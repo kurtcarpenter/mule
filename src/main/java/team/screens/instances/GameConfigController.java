@@ -39,6 +39,7 @@ public class GameConfigController extends AScreen {
                 //String map = mapBox.getSelectionModel().getSelectedItem().toString();
                 int numPlayers = Integer.parseInt(playersBox.getSelectionModel().getSelectedItem().toString().substring(0,1));
 
+								parent.config.getSettings().setNumPlayers(numPlayers);
                 parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
             }
         });

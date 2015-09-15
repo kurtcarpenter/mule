@@ -4,12 +4,19 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
+import team.config.Configuration;
+import team.config.GameSettings;
 
 import java.util.HashMap;
 
 public class ScreenMaster extends StackPane {
 
     private HashMap<String, Node> screens = new HashMap<String, Node>();
+    public Configuration config;
+
+    public ScreenMaster(Configuration config) {
+        this.config = config;
+    }
 
     /**
      * Displays a given Screen, looked up by name (key)
