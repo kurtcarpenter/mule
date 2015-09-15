@@ -18,7 +18,7 @@ public class PlayerConfigController extends AScreen {
             public void handle(ActionEvent event) {
                 parent.displayScreen(MainApp.BLANK_SCREEN);
             }
-        };
+        }
     }
 
 
