@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 
 import team.screens.AScreen;
 import team.MainApp;
+import team.config.GameSettings;
 
 public class GameConfigController extends AScreen {
 
@@ -35,13 +36,14 @@ public class GameConfigController extends AScreen {
         configPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //String difficulty = difficultyBox.getSelectionModel().getSelectedItem().toString();
-                //String map = mapBox.getSelectionModel().getSelectedItem().toString();
-                int numPlayers = 0;
-				if (playersBox.getSelectionModel().getSelectedItem() != null) {
-					numPlayers = Integer.parseInt(playersBox.getSelectionModel().getSelectedItem().toString().substring(0,1));
-				}
-				parent.config.getSettings().setNumPlayers(numPlayers);
+                String difficulty = difficultyBox.getSelectionModel().getSelectedItem() == null ? "Beginner" :
+						difficultyBox.getSelectionModel().getSelectedItem().toString();
+                String map = mapBox.getSelectionModel().getSelectedItem() == null ? "Standard" :
+						mapBox.getSelectionModel().getSelectedItem().toString();
+                int numPlayers = playersBox.getSelectionModel().getSelectedItem() == null ? 0 :
+						Integer.parseInt(playersBox.getSelectionModel().getSelectedItem().toString().substring(0,1));
+				parent.config.setSettings(new GameSettings(GameSettings.Difficulty.valueOf(difficulty.toUpperCase()),
+						GameSettings.Map.valueOf(map.toUpperCase()), numPlayers));
                 parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
             }
         });
