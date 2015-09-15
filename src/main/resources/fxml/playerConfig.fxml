@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?scenebuilder-background-color 0xdfdfdfff?>
+
+<AnchorPane fx:controller="team.screens.instances.PlayerConfigController" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <ComboBox layoutX="262.0" layoutY="190.0" promptText="Race">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Flapper" />
+          <String fx:value="Human" />
+          <String fx:value="Others" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox layoutX="264.0" layoutY="260.0" promptText="Color">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Red" />
+          <String fx:value="Blue" />
+          <String fx:value="Green" />
+          <String fx:value="Yellow" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField layoutX="234.0" layoutY="94.0" prefWidth="132.0" promptText="Name" />
+    <Button layoutX="530.0" layoutY="365.0" mnemonicParsing="false" text="Next" />
+  </children>
+</AnchorPane>
