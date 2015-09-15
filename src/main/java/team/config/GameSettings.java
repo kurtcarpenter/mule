@@ -14,6 +14,10 @@ public class GameSettings {
   private Difficulty difficulty;
   private Map map;
 
+  public GameSettings() {
+
+  }
+
   public GameSettings(Difficulty difficulty, Map map, int numPlayers) {
     this.difficulty = difficulty;
     this.map = map;
@@ -30,5 +34,9 @@ public class GameSettings {
 
   public int getNumPlayers() {
     return numPlayers;
+  }
+
+  public void setNumPlayers(int players) {
+    numPlayers = players;
   }
 }
