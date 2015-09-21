@@ -32,7 +32,7 @@ public class TurnManager {
    */
   public void advanceStep(int steps) {
     step += steps;
-    turn = steps % playerCount + 1;
+    turn = step / playerCount + 1;
   }
 
   /**
