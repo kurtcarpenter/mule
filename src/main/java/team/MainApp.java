@@ -16,6 +16,8 @@ public class MainApp extends Application {
     public static final String PLAYER_CONFIG_FXML = "fxml/playerConfig.fxml";
     public static final String MAINMAP_SCREEN = "mainMapScreen";
     public static final String MAINMAP_SCREEN_FXML = "fxml/mainMapScreen.fxml";
+    public static final String TOWN_SCREEN = "townScreen";
+    public static final String TOWN_SCREEN_FXML = "fxml/townScreen.fxml";
 
     public Game game;
 
@@ -28,6 +30,7 @@ public class MainApp extends Application {
         main.loadScreen(GAME_CONFIG_SCREEN, GAME_CONFIG_FXML);
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
         main.loadScreen(MAINMAP_SCREEN, MAINMAP_SCREEN_FXML);
+        main.loadScreen(TOWN_SCREEN, TOWN_SCREEN_FXML);
       	main.displayScreen(GAME_CONFIG_SCREEN);
 
         Group root = new Group();
