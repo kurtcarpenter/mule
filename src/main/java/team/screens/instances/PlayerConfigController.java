@@ -9,12 +9,16 @@ import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
 
 public class PlayerConfigController extends AScreen {
+
+    @FXML
+    private Text playerNumText;
 
     @FXML
 	private ComboBox<String> raceBox;
@@ -42,6 +46,7 @@ public class PlayerConfigController extends AScreen {
                     colorBox.setValue(null);
                     parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
                 }
+                playerNumText.setText("Player Number: " + (parent.config.getPlayers().size() + 1));
             }
         });
     }
