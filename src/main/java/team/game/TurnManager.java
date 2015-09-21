@@ -55,4 +55,12 @@ public class TurnManager {
   public Player getCurrentPlayer() {
     return players.get(step % playerCount);
   }
+
+  public int getCurrentStep() {
+    return step;
+  }
+
+  public int getCurrentTurn() {
+    return turn;
+  }
 }
