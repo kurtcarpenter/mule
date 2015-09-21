@@ -5,9 +5,9 @@ public class GameMap {
 
   public GameMap() {
     grid = new GameTile[5][9];
-    for (int i = 0; i < tileArray.length; i++)
-      for (int j = 0; i < tileArray[0].length; j++) {
-        tileArray[i][j] = new GameTile(i, j);
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; i < grid[0].length; j++) {
+        grid[i][j] = new GameTile(i, j);
       }
     }
   }
@@ -16,7 +16,7 @@ public class GameMap {
     return grid;
   }
 
-  public Tile getTile(int x, int y) {
+  public GameTile getTile(int x, int y) {
     return grid[x][y];
   }
 }

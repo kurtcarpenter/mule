@@ -1,5 +1,7 @@
 package team.map;
 
+import team.config.Player;
+
 public class GameTile {
   private final int x;
   private final int y;
@@ -15,7 +17,7 @@ public class GameTile {
     return cost;
   }
 
-  public Player setOwner(Player p) {
+  public void setOwner(Player p) {
     this.owner = p;
   }
 
