@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import team.screens.ScreenMaster;
 import team.config.Configuration;
-import team.config.GameSettings;
 
 public class MainApp extends Application {
 
@@ -18,13 +17,14 @@ public class MainApp extends Application {
     public static final String MAINMAP_SCREEN = "mainMapScreen";
     public static final String MAINMAP_SCREEN_FXML = "fxml/mainMapScreen.fxml";
 
-    public Configuration configuration;
+    public Game game;
 
     @Override
     public void start(Stage stage) throws Exception {
-        configuration = new Configuration();
+        Configuration c = new Configuration();
+        game = new Game(c);
 
-        ScreenMaster main = new ScreenMaster(configuration);
+        ScreenMaster main = new ScreenMaster(game.getConfiguration());
         main.loadScreen(GAME_CONFIG_SCREEN, GAME_CONFIG_FXML);
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
         main.loadScreen(MAINMAP_SCREEN, MAINMAP_SCREEN_FXML);
