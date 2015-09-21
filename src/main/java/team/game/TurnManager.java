@@ -2,6 +2,7 @@ package team.game;
 
 import java.util.List;
 import team.config.Player;
+import team.Game.GameState;
 
 public class TurnManager {
   private int step;
@@ -9,11 +10,12 @@ public class TurnManager {
   private List<Player> players;
   private int playerCount;
 
-  public TurnManager(List<Player> players) {
+  public TurnManager(List<Player> players, GameState currentState) {
     this.players = players;
     this.playerCount = players.size();
     this.turn = 1;
     this.step = 0;
+
   }
 
   /**
