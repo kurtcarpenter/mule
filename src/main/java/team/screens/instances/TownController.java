@@ -2,10 +2,12 @@ package team.screens.instances;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 
 import team.screens.AScreen;
 
-public class BlankScreenController extends AScreen {
+public class TownController extends AScreen {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

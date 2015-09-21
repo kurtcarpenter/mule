@@ -39,7 +39,7 @@ public class PlayerConfigController extends AScreen {
             public void handle(ActionEvent event) {
                 parent.config.getPlayers().add(new Player(null, null, null));
                 if (parent.config.getSettings().getNumPlayers() <= parent.config.getPlayers().size()) {
-                    parent.displayScreen(MainApp.BLANK_SCREEN);
+                    parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
                     nameField.clear();
                     raceBox.setValue(null);
