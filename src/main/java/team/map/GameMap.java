@@ -6,7 +6,7 @@ public class GameMap {
   public GameMap() {
     grid = new GameTile[5][9];
     for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; i < grid[0].length; j++) {
+      for (int j = 0; j < grid[0].length; j++) {
         grid[i][j] = new GameTile(i, j);
       }
     }

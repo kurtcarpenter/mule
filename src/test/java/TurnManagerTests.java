@@ -7,12 +7,13 @@ import team.config.Player.PlayerRace;
 import team.config.Player.PlayerColor;
 import java.util.List;
 import java.util.ArrayList;
+import team.Game.GameState;
 
 public class TurnManagerTests {
 
   @Test
   public void constructorWorksAndInitialValuesCorrect() {
-    TurnManager tm = new TurnManager(getPlayers());
+    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN);
 
     assertEquals("Initial turn must be 1", 1, tm.getCurrentTurn());
     assertEquals("Initial step must be 0", 0, tm.getCurrentStep());
@@ -22,7 +23,7 @@ public class TurnManagerTests {
 
   @Test
   public void advanceStepCorrectlyAdvancesTurn() {
-    TurnManager tm = new TurnManager(getPlayers());
+    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN);
     tm.advanceStep();
     assertEquals("Turn must be 1", 1, tm.getCurrentTurn());
     assertEquals("Step must be 1", 1, tm.getCurrentStep());

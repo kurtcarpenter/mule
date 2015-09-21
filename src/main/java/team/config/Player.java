@@ -13,11 +13,13 @@ public class Player {
   private final String name;
   private final PlayerRace race;
   private final PlayerColor color;
+  private int money;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
     this.race = race;
     this.color = color;
+    this.money = 10000;
   }
 
   public String getName() {
@@ -32,4 +34,11 @@ public class Player {
     return color;
   }
 
+  public int getMoney() {
+    return money;
+  }
+
+  public void setMoney(int delta) {
+    this.money += delta;
+  }
 }
