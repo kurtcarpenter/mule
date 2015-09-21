@@ -1,17 +1,18 @@
 defaultTasks 'execute'
 apply plugin: 'java'
 
+repositories {
+  mavenCentral()
+}
+
 dependencies {
+  testCompile 'junit:junit:4.11'
 }
 
 jar {
     manifest {
         attributes 'Main-Class': 'team.MainApp'
     }
-}
-
-test {
-    classpath = sourceSets.main.runtimeClasspath
 }
 
 task execute(type:JavaExec) {
