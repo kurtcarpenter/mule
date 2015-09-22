@@ -36,13 +36,13 @@
     <Pane layoutX="13.0" layoutY="14.0" prefHeight="105.0" prefWidth="573.0">
       <children>
 
-        <Label fx:id="TurnLabel" layoutX="25.0" layoutY="36.0" text="Turn">
+        <Label fx:id="turnLabel" layoutX="25.0" layoutY="36.0" text="Turn">
           <font>
             <Font size="25.0" fx:id="x1" />
           </font>
         </Label>
-        <Label fx:id="NameLabel" font="$x1" layoutX="240.0" layoutY="36.0" text="Player Name" />
-        <Label fx:id="MoneyLabel" font="$x1" layoutX="450.0" layoutY="36.0" text="Money" />
+        <Label fx:id="nameLabel" font="$x1" layoutX="240.0" layoutY="36.0" text="Player Name" />
+        <Label fx:id="moneyLabel" font="$x1" layoutX="450.0" layoutY="36.0" text="Money" />
         <Rectangle fx:id="PlayerColor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="188.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
         <Button layoutX="500.0" layoutY="10.0" mnemonicParsing="false" text="Pass" fx:id="passButton"/>
       </children>

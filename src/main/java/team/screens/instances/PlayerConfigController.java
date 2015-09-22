@@ -37,7 +37,8 @@ public class PlayerConfigController extends AScreen {
         nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                parent.config.getPlayers().add(new Player(null, null, null));
+                parent.config.getPlayers().add(new Player(nameField.getText(), null, null));
+                System.out.println(parent.config.getPlayers().size());
                 if (parent.config.getSettings().getNumPlayers() <= parent.config.getPlayers().size()) {
                     parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {

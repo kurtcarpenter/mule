@@ -3,6 +3,8 @@ package team.screens.instances;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -22,6 +24,14 @@ public class MainMapController extends AScreen {
 
     @FXML
     private GridPane mapGrid;
+    @FXML
+    private Button passButton;
+    @FXML
+    private Label turnLabel;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label moneyLabel;
 
     private String mapLayout[][] = { {"P","P","M1","P","R","P","M3","P","P"},
         {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
@@ -29,6 +39,28 @@ public class MainMapController extends AScreen {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        passButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                parent.game.getTurnManager().advanceStep();
+                setPlayerStuff();
+            }
+        });
+        createMap();
+    }
+
+    public void setPlayerStuff() {
+        turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
+        nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
+        moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+    }
+
+
+    // public void processTile(int i, int j) {
+    //     parent.game.getLandSelectManager().buy(i, j);
+    // }
+
+    public void createMap() {
         for (int i = 0; i < mapLayout.length; i++) {
             for (int j = 0; j < mapLayout[i].length; j++) {
                 //System.out.println("i: " + i + " j: " + j);
@@ -75,7 +107,6 @@ public class MainMapController extends AScreen {
                 mapGrid.add(newButton, j, i);
             }
         }
-
     }
 
     public void processTile(int i, int j) {
