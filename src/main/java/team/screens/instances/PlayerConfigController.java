@@ -37,8 +37,15 @@ public class PlayerConfigController extends AScreen {
         nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                parent.config.getPlayers().add(new Player(nameField.getText(), null, null));
-                System.out.println(parent.config.getPlayers().size());
+                String name = nameField.getText();
+                String color = colorBox.getSelectionModel().getSelectedItem() == null ? "Red" :
+                    colorBox.getSelectionModel().getSelectedItem().toString();
+                String race = raceBox.getSelectionModel().getSelectedItem() == null ? "Human" :
+                    raceBox.getSelectionModel().getSelectedItem().toString();
+                parent.config.getPlayers().add(new Player(nameField.getText(),
+                    Player.PlayerRace.valueOf(race.toUpperCase()),
+                    Player.PlayerColor.valueOf(color.toUpperCase())));
+                // System.out.println(parent.config.getPlayers().size());
                 if (parent.config.getSettings().getNumPlayers() <= parent.config.getPlayers().size()) {
                     parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {

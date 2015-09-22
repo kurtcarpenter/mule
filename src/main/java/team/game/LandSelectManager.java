@@ -12,7 +12,7 @@ public class LandSelectManager {
     this.gameMap = gameMap;
   }
 
-  public void buyLand(int x, int y) {
+  public boolean buyLand(int x, int y) {
     if (gameMap.getTile(x, y).getOwner() == null) {
       gameMap.getTile(x, y).setOwner(turnManager.getCurrentPlayer());
       if (turnManager.getCurrentTurn() > 2) {
@@ -20,6 +20,8 @@ public class LandSelectManager {
       }
       turnManager.advanceStep();
       System.out.println("Bought land at location x: " + x + " y: " + y);
+      return true;
     }
+    return false;
   }
 }
