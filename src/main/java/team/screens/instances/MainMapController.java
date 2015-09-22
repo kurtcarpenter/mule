@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.layout.GridPane;
+import javafx.geometry.Pos;
+import javafx.geometry.HPos;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -86,6 +88,8 @@ public class MainMapController extends AScreen {
                 // }
                 final String layoutString = mapLayout[i][j];
                 Button newButton = new Button(mapLayout[i][j]);
+                GridPane.setHalignment(newButton, HPos.CENTER);
+                newButton.setAlignment(Pos.CENTER);
                 newButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
