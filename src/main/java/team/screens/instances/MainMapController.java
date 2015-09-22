@@ -101,21 +101,11 @@ public class MainMapController extends AScreen {
                         j /= 63;
                         i = (i - 13) / 52;
                         System.out.println("i: " + i + " j: " + j);
-                        processTile(i, j);
+                        parent.game.getMapManager().process(i, j);
                     }
                 });
                 mapGrid.add(newButton, j, i);
             }
         }
     }
-
-    public void processTile(int i, int j) {
-        parent.game.getMapManager().process(i, j);
-    }
-
-    /* Example method to navigate to a different screen
-    @FXML
-    private void goToMain(ActionEvent event){
-        parent.setScreen(ScreensFramework.MAIN_SCREEN);
-    }*/
 }
