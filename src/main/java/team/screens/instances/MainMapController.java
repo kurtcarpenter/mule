@@ -42,7 +42,7 @@ public class MainMapController extends AScreen {
         passButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                parent.game.getTurnManager().advanceStep();
+                parent.game.getMapManager().pass();
                 setPlayerStuff();
             }
         });
@@ -54,11 +54,6 @@ public class MainMapController extends AScreen {
         nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
     }
-
-
-    // public void processTile(int i, int j) {
-    //     parent.game.getLandSelectManager().buy(i, j);
-    // }
 
     public void createMap() {
         for (int i = 0; i < mapLayout.length; i++) {
@@ -102,6 +97,7 @@ public class MainMapController extends AScreen {
                         i = (i - 13) / 52;
                         System.out.println("i: " + i + " j: " + j);
                         parent.game.getMapManager().process(i, j);
+                        setPlayerStuff();
                     }
                 });
                 mapGrid.add(newButton, j, i);

@@ -18,6 +18,9 @@ public class TurnManager {
     this.currentState = currentState;
   }
 
+  public List<Player> getPlayers() {
+    return players;
+  }
   /**
    * Advances step. Call this when a player is done (one player at a time).
    * This is the method you should be using in most cases.
@@ -65,6 +68,10 @@ public class TurnManager {
 
   public int getCurrentTurn() {
     return turn;
+  }
+
+  public void setState(GameState state) {
+    currentState = state;
   }
 
   public GameState getGameState() {

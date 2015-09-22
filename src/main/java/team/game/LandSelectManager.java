@@ -13,11 +13,13 @@ public class LandSelectManager {
   }
 
   public void buyLand(int x, int y) {
-    gameMap.getTile(x, y).setOwner(turnManager.getCurrentPlayer());
-    if (turnManager.getCurrentTurn() > 2) {
-      turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(x, y).getCost());
+    if (gameMap.getTile(x, y).getOwner() == null) {
+      gameMap.getTile(x, y).setOwner(turnManager.getCurrentPlayer());
+      if (turnManager.getCurrentTurn() > 2) {
+        turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(x, y).getCost());
+      }
+      turnManager.advanceStep();
+      System.out.println("Bought land at location x: " + x + " y: " + y);
     }
-    turnManager.advanceStep();
-    System.out.println("Bought land at location x: " + x + " y: " + y);
   }
 }
