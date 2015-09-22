@@ -91,11 +91,9 @@ public class MainMapController extends AScreen {
                     public void handle(ActionEvent event) {
                         if (layoutString.equals("Town"))
                             parent.displayScreen(MainApp.TOWN_SCREEN);
-                        int j = (int) newButton.getLayoutX();
-                        int i = (int) newButton.getLayoutY();
-                        j /= 63;
-                        i = (i - 13) / 52;
-                        System.out.println("i: " + i + " j: " + j);
+                        int i = GridPane.getRowIndex(newButton);
+                        int j = GridPane.getColumnIndex(newButton);
+                        //System.out.println("i: " + i + " j: " + j);
                         parent.game.getMapManager().process(i, j);
                         setPlayerStuff();
                     }
