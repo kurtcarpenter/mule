@@ -36,7 +36,6 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
-    System.out.println(step);
     step += steps;
     turn = step / players.size() + 1;
   }

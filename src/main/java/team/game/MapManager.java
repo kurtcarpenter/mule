@@ -27,10 +27,12 @@ public class MapManager {
   }
 
   public void pass() {
-    passCount++;
-    if (passCount == turnManager.getPlayers().size()) {
-      turnManager.setState(GameState.MAIN);
+    if (turnManager.getGameState() == GameState.LAND_SELECT) {
+      passCount++;
+      if (passCount == turnManager.getPlayers().size()) {
+        turnManager.setState(GameState.MAIN);
+      }
+      turnManager.advanceStep();
     }
-    turnManager.advanceStep();
   }
 }

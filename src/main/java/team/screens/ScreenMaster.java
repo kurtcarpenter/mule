@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import team.config.Configuration;
 import team.config.GameSettings;
 import team.Game;
+import team.screens.instances.MainMapController;
 
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ public class ScreenMaster extends StackPane {
     private HashMap<String, Node> screens = new HashMap<String, Node>();
     public Game game;
     public Configuration config;
+    private IScreen mainMapController;
 
     public ScreenMaster(Game game) {
         this.game = game;
@@ -27,6 +29,9 @@ public class ScreenMaster extends StackPane {
      * @return Success
      */
     public boolean displayScreen(String name) {
+        if (name.equals("mainMapScreen")) {
+            ((MainMapController) mainMapController).setPlayerStuff();
+        }
         if (screens.get(name) != null) {
             if (!getChildren().isEmpty()) {
                 getChildren().remove(0);
@@ -62,6 +67,9 @@ public class ScreenMaster extends StackPane {
              FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
              Parent node = (Parent) loader.load();
              IScreen screenController = ((IScreen) loader.getController());
+             if (name.equals("mainMapScreen")) {
+               mainMapController = screenController;
+             }
              screenController.setParent(this);
              addScreen(name, node);
              return true;
