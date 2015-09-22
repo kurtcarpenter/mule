@@ -15,6 +15,8 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -34,8 +36,10 @@ public class MainMapController extends AScreen {
     private Label nameLabel;
     @FXML
     private Label moneyLabel;
+    @FXML
+    private Rectangle playerColor;
 
-    private String mapLayout[][] = { {"P","P","M1","P","R","P","M3","P","P"},
+    private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
         {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
         {"P","M2","P","P","R","P","M2","P","P"}, {"P","P","M2","P","R","P","P","P","M2"} };
 
@@ -51,10 +55,19 @@ public class MainMapController extends AScreen {
         createMap();
     }
 
+    public String getNewButtonColor() {
+        Color c = Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString());
+        return String.format( "#%02X%02X%02X",
+            (int)( c.getRed() * 255 ),
+            (int)( c.getGreen() * 255 ),
+            (int)( c.getBlue() * 255 ) );
+    }
+
     public void setPlayerStuff() {
         turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
         nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+        playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
     }
 
     public void createMap() {
@@ -95,10 +108,13 @@ public class MainMapController extends AScreen {
                     public void handle(ActionEvent event) {
                         if (layoutString.equals("Town"))
                             parent.displayScreen(MainApp.TOWN_SCREEN);
-                        int i = GridPane.getRowIndex(newButton);
-                        int j = GridPane.getColumnIndex(newButton);
-                        //System.out.println("i: " + i + " j: " + j);
-                        parent.game.getMapManager().process(i, j);
+                        int x = GridPane.getRowIndex(newButton);
+                        int y = GridPane.getColumnIndex(newButton);
+                        //System.out.println("x: " + x + " y: " + j);
+                        String hex = getNewButtonColor();
+                        boolean isValidTurn = parent.game.getMapManager().process(x, y);
+                        if (isValidTurn)
+                            newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
                         setPlayerStuff();
                     }
                 });

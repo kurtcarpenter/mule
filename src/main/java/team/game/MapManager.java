@@ -18,11 +18,12 @@ public class MapManager {
     passCount = 0;
   }
 
-  public void process(int x, int y) {
+  public boolean process(int x, int y) {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
-      landSelectManager.buyLand(x, y);
+      return landSelectManager.buyLand(x, y);
     } else {
       //other shit maybe view tile in the future
+      return false;
     }
   }
 

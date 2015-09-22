@@ -3,7 +3,7 @@ package team.config;
 public class Player {
 
   public enum PlayerRace {
-    HUMAN, ALIEN
+    HUMAN, FLAPPER, OTHERS
   }
 
   public enum PlayerColor {
