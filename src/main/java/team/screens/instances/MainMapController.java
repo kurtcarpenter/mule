@@ -108,14 +108,16 @@ public class MainMapController extends AScreen {
                     public void handle(ActionEvent event) {
                         if (layoutString.equals("Town"))
                             parent.displayScreen(MainApp.TOWN_SCREEN);
-                        int x = GridPane.getRowIndex(newButton);
-                        int y = GridPane.getColumnIndex(newButton);
-                        //System.out.println("x: " + x + " y: " + j);
-                        String hex = getNewButtonColor();
-                        boolean isValidTurn = parent.game.getMapManager().process(x, y);
-                        if (isValidTurn)
-                            newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
-                        setPlayerStuff();
+                        else {
+                            int x = GridPane.getRowIndex(newButton);
+                            int y = GridPane.getColumnIndex(newButton);
+                            //System.out.println("x: " + x + " y: " + j);
+                            String hex = getNewButtonColor();
+                            boolean isValidTurn = parent.game.getMapManager().process(x, y);
+                            if (isValidTurn)
+                                newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
+                            setPlayerStuff();
+                        }
                     }
                 });
                 mapGrid.add(newButton, j, i);
