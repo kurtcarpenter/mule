@@ -12,7 +12,6 @@ public class TurnManager {
 
   public TurnManager(List<Player> players, GameState currentState) {
     this.players = players;
-    this.playerCount = players.size();
     this.turn = 1;
     this.step = 0;
 
@@ -33,8 +32,9 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
+    System.out.println(step);
     step += steps;
-    turn = step / playerCount + 1;
+    turn = step / players.size() + 1;
   }
 
   /**
@@ -50,12 +50,12 @@ public class TurnManager {
    * Used for skipping a bunch of time into the future.
    */
   public void advanceTurn(int turns) {
-    step += playerCount * turns;
+    step += players.size() * turns;
     turn += turns;
   }
 
   public Player getCurrentPlayer() {
-    return players.get(step % playerCount);
+    return players.get(step % players.size());
   }
 
   public int getCurrentStep() {
