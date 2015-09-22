@@ -34,7 +34,7 @@ public class TurnManagerTests {
   private List<Player> getPlayers() {
     List<Player> players = new ArrayList<Player>();
     players.add(new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED));
-    players.add(new Player("Bob", PlayerRace.ALIEN, PlayerColor.YELLOW));
+    players.add(new Player("Bob", PlayerRace.FLAPPER, PlayerColor.YELLOW));
     players.add(new Player("Candice", PlayerRace.HUMAN, PlayerColor.BLUE));
     return players;
   }
