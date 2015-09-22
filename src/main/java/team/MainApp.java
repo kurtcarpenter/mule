@@ -25,7 +25,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         Configuration c = new Configuration();
         game = new Game(c);
-        ScreenMaster main = new ScreenMaster(game.getConfiguration());
+        ScreenMaster main = new ScreenMaster(game);
 
         main.loadScreen(GAME_CONFIG_SCREEN, GAME_CONFIG_FXML);
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
