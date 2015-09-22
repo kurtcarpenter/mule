@@ -9,14 +9,18 @@ public class TurnManager {
   private int turn;
   private List<Player> players;
   private int playerCount;
+  private GameState currentState;
 
   public TurnManager(List<Player> players, GameState currentState) {
     this.players = players;
     this.turn = 1;
     this.step = 0;
-
+    this.currentState = currentState;
   }
 
+  public List<Player> getPlayers() {
+    return players;
+  }
   /**
    * Advances step. Call this when a player is done (one player at a time).
    * This is the method you should be using in most cases.
@@ -32,7 +36,6 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
-    System.out.println(step);
     step += steps;
     turn = step / players.size() + 1;
   }
@@ -64,5 +67,13 @@ public class TurnManager {
 
   public int getCurrentTurn() {
     return turn;
+  }
+
+  public void setState(GameState state) {
+    currentState = state;
+  }
+
+  public GameState getGameState() {
+    return currentState;
   }
 }
