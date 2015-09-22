@@ -9,13 +9,14 @@ public class TurnManager {
   private int turn;
   private List<Player> players;
   private int playerCount;
+  private GameState currentState;
 
   public TurnManager(List<Player> players, GameState currentState) {
     this.players = players;
     this.playerCount = players.size();
     this.turn = 1;
     this.step = 0;
-
+    this.currentState = currentState;
   }
 
   /**
@@ -64,5 +65,9 @@ public class TurnManager {
 
   public int getCurrentTurn() {
     return turn;
+  }
+
+  public GameState getGameState() {
+    return currentState;
   }
 }

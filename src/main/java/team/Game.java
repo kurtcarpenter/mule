@@ -3,11 +3,13 @@ package team;
 import team.config.Configuration;
 import team.game.LandSelectManager;
 import team.game.TurnManager;
+import team.game.MapManager;
 import team.map.GameMap;
 
 public class Game {
   private final Configuration configuration;
   private final TurnManager turnManager;
+  private final MapManager mapManager;
   private final LandSelectManager landSelectManager;
   private GameState currentState;
   private GameMap gameMap;
@@ -22,6 +24,7 @@ public class Game {
     gameMap = new GameMap();
     turnManager = new TurnManager(configuration.getPlayers(), currentState);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
+    mapManager = new MapManager(turnManager, landSelectManager, gameMap);
   }
 
   public Configuration getConfiguration() {
@@ -38,5 +41,9 @@ public class Game {
 
   public GameState getCurrentState() {
     return currentState;
+  }
+
+  public MapManager getMapManager() {
+    return mapManager;
   }
 }

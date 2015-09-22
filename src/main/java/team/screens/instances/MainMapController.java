@@ -69,7 +69,7 @@ public class MainMapController extends AScreen {
                         j /= 63;
                         i = (i - 13) / 52;
                         System.out.println("i: " + i + " j: " + j);
-                        // processTile(i, j);
+                        processTile(i, j);
                     }
                 });
                 mapGrid.add(newButton, j, i);
@@ -78,9 +78,9 @@ public class MainMapController extends AScreen {
 
     }
 
-    // public void processTile(int i, int j) {
-    //     parent.game.getLandSelectManager().buy(i, j);
-    // }
+    public void processTile(int i, int j) {
+        parent.game.getMapManager().process(i, j);
+    }
 
     /* Example method to navigate to a different screen
     @FXML
