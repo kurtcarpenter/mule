@@ -6,16 +6,19 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import team.config.Configuration;
 import team.config.GameSettings;
+import team.Game;
 
 import java.util.HashMap;
 
 public class ScreenMaster extends StackPane {
 
     private HashMap<String, Node> screens = new HashMap<String, Node>();
+    public Game game;
     public Configuration config;
 
-    public ScreenMaster(Configuration config) {
-        this.config = config;
+    public ScreenMaster(Game game) {
+        this.game = game;
+        this.config = game.getConfiguration();
     }
 
     /**
