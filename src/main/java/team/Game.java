@@ -35,7 +35,7 @@ public class Game {
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
     timerManager = new TimerManager(turnManager);
-    pubManager = new PubManager(configuration.getPlayers(), turnManager);
+    pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
   }
 
   public Configuration getConfiguration() {
