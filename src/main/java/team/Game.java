@@ -4,6 +4,7 @@ import team.config.Configuration;
 import team.game.LandSelectManager;
 import team.game.TurnManager;
 import team.game.MapManager;
+import team.game.PubManager;
 import team.map.GameMap;
 
 public class Game {
@@ -11,6 +12,7 @@ public class Game {
   private final TurnManager turnManager;
   private final MapManager mapManager;
   private final LandSelectManager landSelectManager;
+  private final PubManager pubManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -25,6 +27,7 @@ public class Game {
     turnManager = new TurnManager(configuration.getPlayers(), currentState);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
+    pubManager = new PubManager(configuration.getPlayers(), turnManager);
   }
 
   public Configuration getConfiguration() {
@@ -33,6 +36,10 @@ public class Game {
 
   public TurnManager getTurnManager() {
     return turnManager;
+  }
+
+  public PubManager getPubManager() {
+    return pubManager;
   }
 
   public LandSelectManager getLandSelectManager() {
