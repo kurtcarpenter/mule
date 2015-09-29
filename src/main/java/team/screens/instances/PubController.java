@@ -15,19 +15,10 @@ import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
 
-public class TownController extends AScreen {
+public class PubController extends AScreen {
 
     @FXML
-    private Button landOfficeButton;
-
-    @FXML
-    private Button pubButton;
-
-    @FXML
-    private Button building3Button;
-
-    @FXML
-    private Button building4Button;
+    private Button gambleButton;
 
     @FXML
     private Button backButton;
@@ -37,14 +28,14 @@ public class TownController extends AScreen {
       backButton.setOnAction(new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-              parent.displayScreen(MainApp.MAINMAP_SCREEN);
+              parent.displayScreen(MainApp.TOWN_SCREEN);
           }
       });
 
-      pubButton.setOnAction(new EventHandler<ActionEvent>() {
+      gambleButton.setOnAction(new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-              parent.displayScreen(MainApp.PUB_SCREEN);
+            parent.game.getPubManager().gamble();
           }
       });
     }

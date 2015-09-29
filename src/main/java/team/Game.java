@@ -5,6 +5,8 @@ import team.game.LandSelectManager;
 import team.game.TurnManager;
 import team.game.MapManager;
 import team.game.TimerManager;
+import team.game.ScoreManager;
+import team.game.PubManager;
 import team.map.GameMap;
 import team.screens.ScreenMaster;
 
@@ -14,6 +16,8 @@ public class Game {
   private final MapManager mapManager;
   private final LandSelectManager landSelectManager;
   private final TimerManager timerManager;
+  private final ScoreManager scoreManager;
+  private final PubManager pubManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -25,10 +29,13 @@ public class Game {
     currentState = GameState.LAND_SELECT;
     configuration = config;
     gameMap = new GameMap();
-    turnManager = new TurnManager(configuration.getPlayers(), currentState);
+    scoreManager = new ScoreManager(configuration.getPlayers());
+    turnManager = new TurnManager(configuration.getPlayers(), currentState,
+        scoreManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
     timerManager = new TimerManager(turnManager);
+    pubManager = new PubManager(configuration.getPlayers(), turnManager);
   }
 
   public Configuration getConfiguration() {
@@ -37,6 +44,10 @@ public class Game {
 
   public TurnManager getTurnManager() {
     return turnManager;
+  }
+
+  public PubManager getPubManager() {
+    return pubManager;
   }
 
   public LandSelectManager getLandSelectManager() {
