@@ -34,13 +34,13 @@ public class TurnManager {
   }
 
   public void regenerateList() {
+    scoreManager.updateScores();
     currentTurnOrder.clear();
     for (Player p : players) {
       currentTurnOrder.add(p);
     }
-    if (currentState != GameState.LAND_SELECT) {
+    if (currentState != GameState.CONFIGURE) {
       Collections.sort(currentTurnOrder);
-      Collections.reverse(currentTurnOrder);
     }
   }
 
@@ -50,10 +50,6 @@ public class TurnManager {
    * Calling this method a bunch of times makes the Turn increment
    */
   public void advanceStep() {
-    scoreManager.updateScores();
-    if (step % players.size() == 0) {
-      regenerateList();
-    }
     this.advanceStep(1);
   }
 
@@ -63,7 +59,6 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
-    scoreManager.updateScores();
     if (step % players.size() == 0) {
       regenerateList();
     }
@@ -97,7 +92,13 @@ public class TurnManager {
   }
 
   public Player getCurrentPlayer() {
-    return players.get(step % players.size());
+    if (step == 0) {
+      regenerateList();
+    }
+    if (currentTurnOrder.size() == 0) {
+      regenerateList();
+    }
+    return currentTurnOrder.get(step % players.size());
   }
 
   public int getCurrentStep() {

@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
+import team.Game.GameState;
 
 public class PlayerConfigController extends AScreen {
 
@@ -47,6 +48,8 @@ public class PlayerConfigController extends AScreen {
                     Player.PlayerColor.valueOf(color.toUpperCase())));
                 // System.out.println(parent.config.getPlayers().size());
                 if (parent.config.getSettings().getNumPlayers() <= parent.config.getPlayers().size()) {
+                    parent.game.setCurrentState(GameState.LAND_SELECT);
+                    parent.game.getTurnManager().setState(GameState.LAND_SELECT);
                     parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
                     nameField.clear();

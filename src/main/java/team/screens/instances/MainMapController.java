@@ -41,6 +41,8 @@ public class MainMapController extends AScreen {
     private Rectangle playerColor;
     @FXML
     private Label timerLabel;
+    @FXML
+    private Label scoreLabel;
 
     private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
         {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
@@ -76,6 +78,7 @@ public class MainMapController extends AScreen {
         if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
             timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
         }
+        scoreLabel.setText("Score " + parent.game.getTurnManager().getCurrentPlayer().getScore());
         //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
     }
 
