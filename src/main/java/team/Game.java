@@ -22,11 +22,11 @@ public class Game {
   private GameMap gameMap;
 
   public enum GameState {
-    MAIN, LAND_SELECT
+    MAIN, LAND_SELECT, CONFIGURE
   }
 
   public Game(Configuration config) {
-    currentState = GameState.LAND_SELECT;
+    currentState = GameState.CONFIGURE;
     configuration = config;
     gameMap = new GameMap();
     scoreManager = new ScoreManager(configuration.getPlayers());
@@ -56,6 +56,10 @@ public class Game {
 
   public GameState getCurrentState() {
     return currentState;
+  }
+
+  public void setCurrentState(GameState s) {
+    currentState = s;
   }
 
   public MapManager getMapManager() {

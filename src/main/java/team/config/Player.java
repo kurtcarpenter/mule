@@ -77,6 +77,7 @@ public class Player implements Comparable<Player> {
   }
 
   public int getScore() {
+    System.out.println(name + score);
     return score;
   }
 
