@@ -21,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
+import team.Game.GameState;
 
 import team.screens.AScreen;
 
@@ -55,6 +56,7 @@ public class MainMapController extends AScreen {
             }
         });
         createMap();
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
     }
 
     public String getNewButtonColor() {
@@ -71,7 +73,10 @@ public class MainMapController extends AScreen {
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
         // Change init time based on player attributes
-        timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer(50));
+        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
+            timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        }
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
     }
 
     public void createMap() {
