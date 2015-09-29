@@ -14,6 +14,8 @@ public class Player {
   private final PlayerRace race;
   private final PlayerColor color;
   private int money;
+  private int score;
+  private int tilesOwned;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
@@ -40,5 +42,21 @@ public class Player {
 
   public void setMoney(int delta) {
     this.money += delta;
+  }
+
+  public void setScore(int score) {
+    this.score = score;
+  }
+
+  public int getScore() {
+    return score;
+  }
+
+  public int getTilesOwned() {
+    return tilesOwned;
+  }
+
+  public void setTilesOwned(int delta) {
+    this.tilesOwned += delta;
   }
 }
