@@ -118,9 +118,10 @@ public class MainMapController extends AScreen {
                             //System.out.println("x: " + x + " y: " + j);
                             String hex = getNewButtonColor();
                             boolean isValidTurn = parent.game.getMapManager().process(x, y);
-                            if (isValidTurn)
+                            if (isValidTurn) {
                                 newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
-                            setPlayerStuff();
+                                setPlayerStuff();
+                            }
                         }
                     }
                 });
