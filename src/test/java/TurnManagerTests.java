@@ -2,6 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import team.game.TurnManager;
+import team.game.ScoreManager;
 import team.config.Player;
 import team.config.Player.PlayerRace;
 import team.config.Player.PlayerColor;
@@ -13,7 +14,7 @@ public class TurnManagerTests {
 
   @Test
   public void constructorWorksAndInitialValuesCorrect() {
-    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN);
+    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN, new ScoreManager(getPlayers()));
 
     assertEquals("Initial turn must be 1", 1, tm.getCurrentTurn());
     assertEquals("Initial step must be 0", 0, tm.getCurrentStep());
@@ -23,7 +24,7 @@ public class TurnManagerTests {
 
   @Test
   public void advanceStepCorrectlyAdvancesTurn() {
-    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN);
+    TurnManager tm = new TurnManager(getPlayers(), GameState.MAIN, new ScoreManager(getPlayers()));
     tm.advanceStep();
     assertEquals("Turn must be 1", 1, tm.getCurrentTurn());
     assertEquals("Step must be 1", 1, tm.getCurrentStep());
