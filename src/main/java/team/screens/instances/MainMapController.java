@@ -17,6 +17,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+ import javafx.scene.image.ImageView;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -100,7 +102,32 @@ public class MainMapController extends AScreen {
                 //         break;
                 // }
                 final String layoutString = mapLayout[i][j];
-                Button newButton = new Button(mapLayout[i][j]);
+                Image image = new Image("graphics/test.png");
+                switch(mapLayout[i][j]) {
+                    case "P":
+                        image = new Image("graphics/plain.png");
+                        break;
+                    case "R":
+                        image = new Image("graphics/river.png");
+                        break;
+                    case "Town":
+                        image = new Image("graphics/town.png");
+                        break;
+                    case "M1":
+                        image = new Image("graphics/m1.png");
+                        break;
+                    case "M2":
+                        image = new Image("graphics/m2.png");
+                        break;
+                    case "M3":
+                        image = new Image("graphics/m3.png");
+                        break;
+                }
+                ImageView iv = new ImageView();
+                iv.setImage(image);
+                iv.setFitHeight(40);
+                iv.setFitWidth(40);
+                Button newButton = new Button("", iv);
                 GridPane.setHalignment(newButton, HPos.CENTER);
                 newButton.setAlignment(Pos.CENTER);
                 newButton.setOnAction(new EventHandler<ActionEvent>() {
