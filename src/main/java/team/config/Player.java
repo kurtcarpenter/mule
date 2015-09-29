@@ -16,12 +16,32 @@ public class Player {
   private int money;
   private int score;
   private int tilesOwned;
+  private int land;
+  private int food;
+  private int energy;
+  private int smithore;
+  private int crystite;
+  private int mule;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
     this.race = race;
     this.color = color;
-    this.money = 10000;
+    setStartingMoney();
+  }
+
+  private void setStartingMoney() {
+    switch (race) {
+      case HUMAN:
+          money = 600;
+          break;
+      case FLAPPER:
+          money = 1600;
+          break;
+      case OTHERS:
+          money = 1000;
+          break;
+    }
   }
 
   public String getName() {
@@ -58,5 +78,9 @@ public class Player {
 
   public void setTilesOwned(int delta) {
     this.tilesOwned += delta;
+  }
+
+  public int getScorableResources() {
+    return energy + smithore + crystite + food;
   }
 }

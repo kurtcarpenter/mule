@@ -5,3 +5,4 @@ jdk:
 
 notifications:
   slack: cs2340:eiSqONnfAsXhmkflJq0RMAat
+  email: false
