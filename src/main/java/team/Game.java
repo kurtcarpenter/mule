@@ -4,6 +4,7 @@ import team.config.Configuration;
 import team.game.LandSelectManager;
 import team.game.TurnManager;
 import team.game.MapManager;
+import team.game.TimerManager;
 import team.map.GameMap;
 
 public class Game {
@@ -11,6 +12,7 @@ public class Game {
   private final TurnManager turnManager;
   private final MapManager mapManager;
   private final LandSelectManager landSelectManager;
+  private final TimerManager timerManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -25,6 +27,7 @@ public class Game {
     turnManager = new TurnManager(configuration.getPlayers(), currentState);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
+    timerManager = new TimerManager();
   }
 
   public Configuration getConfiguration() {
@@ -45,5 +48,9 @@ public class Game {
 
   public MapManager getMapManager() {
     return mapManager;
+  }
+
+  public TimerManager getTimerManager() {
+      return timerManager;
   }
 }
