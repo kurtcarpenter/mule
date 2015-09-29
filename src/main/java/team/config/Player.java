@@ -17,6 +17,7 @@ public class Player implements Comparable<Player> {
   private final PlayerColor color;
   private int money;
   private int score;
+  private int land;
   private int tilesOwned;
   private int food;
   private int energy;
@@ -29,6 +30,8 @@ public class Player implements Comparable<Player> {
     this.race = race;
     this.color = color;
     setStartingMoney();
+    // Set food to 8 for Beginner Level
+    food = 8;
   }
 
   private void setStartingMoney() {
@@ -63,6 +66,10 @@ public class Player implements Comparable<Player> {
 
   public void setMoney(int delta) {
     this.money += delta;
+  }
+
+  public int getFood() {
+    return food;
   }
 
   public void setScore(int score) {
