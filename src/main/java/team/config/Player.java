@@ -89,4 +89,8 @@ public class Player implements Comparable<Player> {
   public int compareTo(Player p) {
     return this.getScore() - p.getScore();
   }
+
+  public void incScore(int delta) {
+    score += delta;
+  }
 }

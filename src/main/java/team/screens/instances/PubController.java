@@ -35,7 +35,7 @@ public class PubController extends AScreen {
       gambleButton.setOnAction(new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-            //gamble
+            parent.game.getPubManager().gamble();
           }
       });
     }
