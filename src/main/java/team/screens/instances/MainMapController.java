@@ -17,6 +17,12 @@ import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -38,6 +44,8 @@ public class MainMapController extends AScreen {
     private Label moneyLabel;
     @FXML
     private Rectangle playerColor;
+    @FXML
+    private Label timerLabel;
 
     private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
         {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
@@ -68,6 +76,20 @@ public class MainMapController extends AScreen {
         nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
+        // Change init time based on player attributes
+        startTimer(50);
+    }
+
+    public void startTimer(final int STARTTIME) {
+        Timeline timeline = new Timeline();
+        IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+        timerLabel.textProperty().bind(timeSeconds.asString());
+        timerLabel.setTextFill(Color.BLACK);
+        timeSeconds.set(STARTTIME);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(STARTTIME+1),
+                new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
     }
 
     public void createMap() {
