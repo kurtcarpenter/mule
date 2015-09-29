@@ -1,32 +1,59 @@
 package team.game;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import team.config.Player;
 import team.Game.GameState;
+import team.game.ScoreManager;
 
 public class TurnManager {
   private int step;
   private int turn;
   private List<Player> players;
+  private List<Player> currentTurnOrder;
   private int playerCount;
   private GameState currentState;
+  private ScoreManager scoreManager;
 
-  public TurnManager(List<Player> players, GameState currentState) {
+  public TurnManager(List<Player> players, GameState currentState,
+      ScoreManager scoreManager) {
     this.players = players;
     this.turn = 1;
     this.step = 0;
     this.currentState = currentState;
+    this.scoreManager = scoreManager;
+
+    currentTurnOrder = new ArrayList<Player>();
+    regenerateList();
   }
 
   public List<Player> getPlayers() {
     return players;
   }
+
+  public void regenerateList() {
+    currentTurnOrder.clear();
+    for (Player p : players) {
+      currentTurnOrder.add(p);
+    }
+    if (currentState != GameState.LAND_SELECT) {
+      Collections.sort(currentTurnOrder);
+      Collections.reverse(currentTurnOrder);
+    }
+  }
+
   /**
    * Advances step. Call this when a player is done (one player at a time).
    * This is the method you should be using in most cases.
    * Calling this method a bunch of times makes the Turn increment
    */
   public void advanceStep() {
+    scoreManager.updateScores();
+    if (step % players.size() == 0) {
+      regenerateList();
+    }
     this.advanceStep(1);
   }
 
@@ -36,6 +63,10 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
+    scoreManager.updateScores();
+    if (step % players.size() == 0) {
+      regenerateList();
+    }
     step += steps;
     turn = step / players.size() + 1;
   }
@@ -45,6 +76,10 @@ public class TurnManager {
    * you do not advance steps.
    */
   public void advanceTurn() {
+    scoreManager.updateScores();
+    if (step % players.size() == 0) {
+      regenerateList();
+    }
     this.advanceTurn(1);
   }
 
@@ -53,6 +88,10 @@ public class TurnManager {
    * Used for skipping a bunch of time into the future.
    */
   public void advanceTurn(int turns) {
+    scoreManager.updateScores();
+    if (step % players.size() == 0) {
+      regenerateList();
+    }
     step += players.size() * turns;
     turn += turns;
   }

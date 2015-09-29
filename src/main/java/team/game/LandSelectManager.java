@@ -14,6 +14,7 @@ public class LandSelectManager {
 
   public boolean buyLand(int x, int y) {
     if (gameMap.getTile(x, y).getOwner() == null) {
+      turnManager.getCurrentPlayer().setTilesOwned(1);
       gameMap.getTile(x, y).setOwner(turnManager.getCurrentPlayer());
       if (turnManager.getCurrentTurn() > 2) {
         turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(x, y).getCost());

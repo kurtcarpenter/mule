@@ -1,6 +1,8 @@
 package team.config;
 
-public class Player {
+import java.lang.Comparable;
+
+public class Player implements Comparable<Player> {
 
   public enum PlayerRace {
     HUMAN, FLAPPER, OTHERS
@@ -16,7 +18,6 @@ public class Player {
   private int money;
   private int score;
   private int tilesOwned;
-  private int land;
   private int food;
   private int energy;
   private int smithore;
@@ -82,5 +83,10 @@ public class Player {
 
   public int getScorableResources() {
     return energy + smithore + crystite + food;
+  }
+
+  @Override
+  public int compareTo(Player p) {
+    return this.getScore() - p.getScore();
   }
 }

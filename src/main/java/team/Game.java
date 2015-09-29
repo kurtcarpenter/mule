@@ -4,6 +4,7 @@ import team.config.Configuration;
 import team.game.LandSelectManager;
 import team.game.TurnManager;
 import team.game.MapManager;
+import team.game.ScoreManager;
 import team.map.GameMap;
 
 public class Game {
@@ -11,6 +12,7 @@ public class Game {
   private final TurnManager turnManager;
   private final MapManager mapManager;
   private final LandSelectManager landSelectManager;
+  private final ScoreManager scoreManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -22,7 +24,9 @@ public class Game {
     currentState = GameState.LAND_SELECT;
     configuration = config;
     gameMap = new GameMap();
-    turnManager = new TurnManager(configuration.getPlayers(), currentState);
+    scoreManager = new ScoreManager(configuration.getPlayers());
+    turnManager = new TurnManager(configuration.getPlayers(), currentState,
+        scoreManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
   }
