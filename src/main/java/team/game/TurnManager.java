@@ -59,7 +59,7 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
-    if (step % players.size() == 0) {
+    if (step % players.size() == 0 && step != 0 && step != 1) {
       regenerateList();
     }
     step += steps;
@@ -71,7 +71,6 @@ public class TurnManager {
    * you do not advance steps.
    */
   public void advanceTurn() {
-    scoreManager.updateScores();
     if (step % players.size() == 0) {
       regenerateList();
     }
@@ -83,7 +82,6 @@ public class TurnManager {
    * Used for skipping a bunch of time into the future.
    */
   public void advanceTurn(int turns) {
-    scoreManager.updateScores();
     if (step % players.size() == 0) {
       regenerateList();
     }
@@ -92,9 +90,6 @@ public class TurnManager {
   }
 
   public Player getCurrentPlayer() {
-    if (step == 0) {
-      regenerateList();
-    }
     if (currentTurnOrder.size() == 0) {
       regenerateList();
     }
