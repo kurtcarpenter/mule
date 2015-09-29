@@ -89,4 +89,8 @@ public class ScreenMaster extends StackPane {
     public boolean removeScreen(String name) {
         return screens.remove(name) != null;
     }
+
+    public IScreen getMainMapController() {
+        return mainMapController;
+    }
 }

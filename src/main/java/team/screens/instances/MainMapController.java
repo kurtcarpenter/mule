@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
+import team.Game.GameState;
 
 import team.screens.AScreen;
 
@@ -40,6 +41,8 @@ public class MainMapController extends AScreen {
     private Label moneyLabel;
     @FXML
     private Rectangle playerColor;
+    @FXML
+    private Label timerLabel;
 
     private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
         {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
@@ -55,6 +58,7 @@ public class MainMapController extends AScreen {
             }
         });
         createMap();
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
     }
 
     public String getNewButtonColor() {
@@ -70,6 +74,11 @@ public class MainMapController extends AScreen {
         nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
+        // Change init time based on player attributes
+        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
+            timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        }
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
     }
 
     public void createMap() {
@@ -141,9 +150,10 @@ public class MainMapController extends AScreen {
                             //System.out.println("x: " + x + " y: " + j);
                             String hex = getNewButtonColor();
                             boolean isValidTurn = parent.game.getMapManager().process(x, y);
-                            if (isValidTurn)
+                            if (isValidTurn) {
                                 newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
-                            setPlayerStuff();
+                                setPlayerStuff();
+                            }
                         }
                     }
                 });
