@@ -6,6 +6,7 @@ import team.game.TurnManager;
 import team.game.MapManager;
 import team.game.TimerManager;
 import team.map.GameMap;
+import team.screens.ScreenMaster;
 
 public class Game {
   private final Configuration configuration;
@@ -51,6 +52,10 @@ public class Game {
   }
 
   public TimerManager getTimerManager() {
-      return timerManager;
+    return timerManager;
+  }
+
+  public void passScreenMaster(ScreenMaster screenMaster) {
+    timerManager.passScreenMaster(screenMaster);
   }
 }

@@ -31,7 +31,8 @@ public class MainApp extends Application {
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
         main.loadScreen(MAINMAP_SCREEN, MAINMAP_SCREEN_FXML);
         main.loadScreen(TOWN_SCREEN, TOWN_SCREEN_FXML);
-      	main.displayScreen(GAME_CONFIG_SCREEN);
+      	game.passScreenMaster(main);
+        main.displayScreen(GAME_CONFIG_SCREEN);
 
         Group root = new Group();
         root.getChildren().addAll(main);

@@ -11,10 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import team.config.Player;
+import team.screens.ScreenMaster;
+import team.screens.instances.MainMapController;
 
 public class TimerManager {
     private Timeline timeline;
     private TurnManager turnManager;
+    private ScreenMaster screenMaster;
     IntegerProperty timeSeconds;
 
     public TimerManager(TurnManager turnManager) {
@@ -24,7 +27,7 @@ public class TimerManager {
             @Override
             public void handle(ActionEvent event) {
                 resetTimer();
-                System.out.println("Timer Finished");
+                //System.out.println("Timer Finished");
             }
         });
         timeSeconds = new SimpleIntegerProperty(50);
@@ -57,11 +60,11 @@ public class TimerManager {
         return timeSeconds.asString();
     }
 
-    public StringBinding resetTimer() {
+    public void resetTimer() {
         // Next step
         turnManager.advanceStep();
-        // Get view to change somehow
-        return startTimer();
+        // Get MainMap view to change
+        screenMaster.displayScreen("mainMapScreen");
     }
 
     public void stopTimer() {
@@ -70,6 +73,10 @@ public class TimerManager {
 
     public int getTime() {
         return timeSeconds.getValue();
+    }
+
+    public void passScreenMaster(ScreenMaster screenMaster) {
+        this.screenMaster = screenMaster;
     }
 
 }
