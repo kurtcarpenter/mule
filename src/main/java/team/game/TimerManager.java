@@ -79,4 +79,8 @@ public class TimerManager {
         this.screenMaster = screenMaster;
     }
 
+    public StringBinding getTimerBinding() {
+      return timeSeconds.asString();
+    }
+
 }
