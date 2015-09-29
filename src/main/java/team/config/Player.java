@@ -66,4 +66,8 @@ public class Player {
   public int getScore() {
     return money + 500 * land + 30 * food + 50 * smithore + 100 * crystite + 100 * mule;
   }
+
+  public void incScore(int delta) {
+    score += delta;
+  }
 }
