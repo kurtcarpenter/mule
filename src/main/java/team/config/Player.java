@@ -27,6 +27,8 @@ public class Player {
     this.race = race;
     this.color = color;
     setStartingMoney();
+    // Set food to 8 for Beginner Level
+    food = 8;
   }
 
   private void setStartingMoney() {
