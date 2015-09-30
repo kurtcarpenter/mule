@@ -20,7 +20,6 @@ public class LandSelectManager {
         turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(x, y).getCost());
       }
       turnManager.advanceStep();
-      System.out.println("Bought land at location x: " + x + " y: " + y);
       return true;
     }
     return false;
