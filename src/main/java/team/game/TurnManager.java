@@ -7,6 +7,7 @@ import java.util.Collections;
 import team.config.Player;
 import team.Game.GameState;
 import team.game.ScoreManager;
+import team.config.Configuration;
 
 public class TurnManager {
   private int step;
@@ -26,7 +27,6 @@ public class TurnManager {
     this.scoreManager = scoreManager;
 
     currentTurnOrder = new ArrayList<Player>();
-    regenerateList();
   }
 
   public List<Player> getPlayers() {
@@ -59,7 +59,7 @@ public class TurnManager {
    * @param steps Number of steps to advance
    */
   public void advanceStep(int steps) {
-    if (step % players.size() == 0 && step != 0 && step != 1) {
+    if ((step + steps) % players.size() == 0) {
       regenerateList();
     }
     step += steps;
@@ -70,7 +70,7 @@ public class TurnManager {
    * Advances turn. Should not usually be called, unless all players end and
    * you do not advance steps.
    */
-  public void advanceTurn() {
+  /*public void advanceTurn() {
     if (step % players.size() == 0) {
       regenerateList();
     }
@@ -81,13 +81,13 @@ public class TurnManager {
    * Advances turn by a number. Should not usually be called.
    * Used for skipping a bunch of time into the future.
    */
-  public void advanceTurn(int turns) {
+  /*public void advanceTurn(int turns) {
     if (step % players.size() == 0) {
       regenerateList();
     }
     step += players.size() * turns;
     turn += turns;
-  }
+  }*/
 
   public Player getCurrentPlayer() {
     if (currentTurnOrder.size() == 0) {

@@ -20,7 +20,6 @@ public class ScoreManager {
   }
 
   public void updateScore(Player p) {
-    System.out.println(p.getName() + " " + calculateScore(p));
     p.setScore(calculateScore(p));
   }
 
