@@ -2,6 +2,8 @@ package team.screens.instances;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.collections.ObservableList;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -33,16 +36,20 @@ public class PlayerConfigController extends AScreen {
     @FXML
     private Button nextButton;
 
+    private List<String> colorsUsed;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        colorsUsed = new ArrayList<>();
         nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String name = nameField.getText();
                 String color = colorBox.getSelectionModel().getSelectedItem() == null ? "Red" :
                     colorBox.getSelectionModel().getSelectedItem().toString();
-                String race = raceBox.getSelectionModel().getSelectedItem() == null ? "Human" :
+                String race = raceBox.getSelectionModel().getSelectedItem() == null ? "Flapper" :
                     raceBox.getSelectionModel().getSelectedItem().toString();
+                colorsUsed.add(color);
                 parent.config.getPlayers().add(new Player(nameField.getText(),
                     Player.PlayerRace.valueOf(race.toUpperCase()),
                     Player.PlayerColor.valueOf(color.toUpperCase())));
@@ -53,11 +60,13 @@ public class PlayerConfigController extends AScreen {
                     parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
                     nameField.setText("Player " + (parent.config.getPlayers().size() + 1));
-                    raceBox.setValue(null);
-                    colorBox.setValue(null);
+                    raceBox.setValue("Flapper");
+                    ObservableList<String> colors = colorBox.getItems();
+                    while (colorsUsed.contains(colors.get(0)))
+                        colors.remove(0);
+                    colorBox.setValue(colors.get(0));
                     parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
                 }
-                playerNumText.setText("Player " + (parent.config.getPlayers().size() + 1));
             }
         });
     }
