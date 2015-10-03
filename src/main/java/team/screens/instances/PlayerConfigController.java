@@ -52,12 +52,12 @@ public class PlayerConfigController extends AScreen {
                     parent.game.getTurnManager().setState(GameState.LAND_SELECT);
                     parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
-                    nameField.clear();
+                    nameField.setText("Player " + (parent.config.getPlayers().size() + 1));
                     raceBox.setValue(null);
                     colorBox.setValue(null);
                     parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
                 }
-                playerNumText.setText("Player Number: " + (parent.config.getPlayers().size() + 1));
+                playerNumText.setText("Player " + (parent.config.getPlayers().size() + 1));
             }
         });
     }
