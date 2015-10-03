@@ -21,7 +21,7 @@
         <Font size="18.0" fx:id="x1" />
       </font>
     </Button>
-    <GridPane layoutX="163.0" layoutY="172.0" prefHeight="133.0" prefWidth="273.0">
+    <GridPane layoutX="149.0" layoutY="172.0" prefHeight="133.0078125" prefWidth="303.0">
       <children>
         <TextField fx:id="nameField" prefWidth="132.0" promptText="" text="Player 1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <ComboBox fx:id="raceBox" prefWidth="136.0" promptText="Flapper" GridPane.columnIndex="1" GridPane.rowIndex="1">
