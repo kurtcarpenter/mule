@@ -1,6 +1,7 @@
 package team.config;
 
 import java.lang.Comparable;
+import team.game.containers.Resource;
 
 public class Player implements Comparable<Player> {
 
@@ -99,5 +100,18 @@ public class Player implements Comparable<Player> {
 
   public void incScore(int delta) {
     score += delta;
+  }
+
+  public int getResourceQuantity(Resource r) {
+    // TODO: implement
+    return 42;
+  }
+
+  public void setResourceQuantity(Resource r, int quantity) {
+    // TODO: implement
+  }
+
+  public void receiveMule(Resource type) {
+    // TODO: implement
   }
 }
