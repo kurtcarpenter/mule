@@ -73,7 +73,7 @@ public class MainMapController extends AScreen {
 
     public void setPlayerStuff() {
         turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
-        nameLabel.setText("Player " + parent.game.getTurnManager().getCurrentPlayer().getName());
+        nameLabel.setText(parent.game.getTurnManager().getCurrentPlayer().getName());
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
         // Change init time based on player attributes
