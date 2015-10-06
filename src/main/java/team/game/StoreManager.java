@@ -57,7 +57,7 @@ public class StoreManager {
     player.setResourceQuantity(resource, -1 * quantity);
   }
 
-  public void buyMule(Resource resource, Resource muleType)
+  public void buyMule(Resource resource, Resource muleType, int quantity)
       throws PlayerTransactionException, StoreTransactionException {
     if (muleType == Resource.MULE) {
       throw new PlayerTransactionException("Cannot buy a Mule-type Mule");

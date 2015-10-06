@@ -18,7 +18,7 @@ import javafx.beans.value.ObservableValue;
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
-import team.game.containers.MuleType;
+import team.game.containers.Resource;
 
 public class StoreController extends AScreen {
 
@@ -71,7 +71,7 @@ public class StoreController extends AScreen {
 	@FXML
 	private Label totalLabel;
 
-	private MuleType type = MuleType.FOOD;
+	private Resource muleType = Resource.FOOD;
 	private int total = 0;
 
     @Override
@@ -172,7 +172,7 @@ public class StoreController extends AScreen {
            		energyButton.setSelected(false);
            		smithoreButton.setSelected(false);
            		crystiteButton.setSelected(false);
-           		type = MuleType.FOOD;
+           		muleType = Resource.FOOD;
           	}
       	});
 
@@ -182,7 +182,7 @@ public class StoreController extends AScreen {
            		foodButton.setSelected(false);
            		smithoreButton.setSelected(false);
            		crystiteButton.setSelected(false);
-           		type = MuleType.ENERGY;
+           		muleType = Resource.ENERGY;
           	}
       	});
 
@@ -192,7 +192,7 @@ public class StoreController extends AScreen {
            		foodButton.setSelected(false);
            		energyButton.setSelected(false);
            		crystiteButton.setSelected(false);
-           		type = MuleType.SMITHORE;
+           		muleType = Resource.SMITHORE;
           	}
       	});
 
@@ -202,18 +202,38 @@ public class StoreController extends AScreen {
            		foodButton.setSelected(false);
            		energyButton.setSelected(false);
            		smithoreButton.setSelected(false);
-           		type = MuleType.CRYSTITE;
+           		muleType = Resource.CRYSTITE;
           	}
       	});
 
 		purchaseButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
           	public void handle(ActionEvent event) {
-           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+          		try {
+	          		parent.game.getStoreManager().buyResource(Resource.FOOD, Integer.parseInt(foodQuantity.getText()));
+	          		parent.game.getStoreManager().buyResource(Resource.ENERGY, Integer.parseInt(energyQuantity.getText()));
+	          		parent.game.getStoreManager().buyResource(Resource.SMITHORE, Integer.parseInt(smithoreQuantity.getText()));
+	          		parent.game.getStoreManager().buyResource(Resource.CRYSTITE, Integer.parseInt(crystiteQuantity.getText()));
+	          		parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(muleQuantity.getText()));
+	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+	           	} catch (Exception e) {
+	           	}
           	}
       	});
 
-    	
+    	sellButton.setOnAction(new EventHandler<ActionEvent>() {
+        	@Override
+          	public void handle(ActionEvent event) {
+          		try {
+	          		parent.game.getStoreManager().sellResource(Resource.FOOD, Integer.parseInt(foodQuantity.getText()));
+	          		parent.game.getStoreManager().sellResource(Resource.ENERGY, Integer.parseInt(energyQuantity.getText()));
+	          		parent.game.getStoreManager().sellResource(Resource.SMITHORE, Integer.parseInt(smithoreQuantity.getText()));
+	          		parent.game.getStoreManager().sellResource(Resource.CRYSTITE, Integer.parseInt(crystiteQuantity.getText()));
+	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+	           	} catch (Exception e) {
+	           	}
+          	}
+      	});
 
     	backButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
