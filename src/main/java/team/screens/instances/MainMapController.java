@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.scene.paint.Color;
@@ -31,6 +32,8 @@ public class MainMapController extends AScreen {
 
     @FXML
     private GridPane mapGrid;
+    @FXML
+    private Pane titlePane;
     @FXML
     private Button passButton;
     @FXML
@@ -55,12 +58,15 @@ public class MainMapController extends AScreen {
         passButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                parent.game.getMapManager().pass();
+                if (parent.game.getMapManager().pass()
+                        == parent.game.getTurnManager().getPlayers().size()) {
+                    titlePane.getChildren().remove(passButton);
+                }
                 setPlayerStuff();
             }
         });
         createMap();
-        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().getTimerBinding());
     }
 
     public String getNewButtonColor() {
@@ -77,42 +83,17 @@ public class MainMapController extends AScreen {
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
         // Change init time based on player attributes
-        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
+        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT
+                && parent.game.getTimerManager().isStart()) {
             timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
         }
         scoreLabel.setText("Score " + parent.game.getTurnManager().getCurrentPlayer().getScore());
-        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        timerLabel.textProperty().bind(parent.game.getTimerManager().getTimerBinding());
     }
 
     public void createMap() {
         for (int i = 0; i < mapLayout.length; i++) {
             for (int j = 0; j < mapLayout[i].length; j++) {
-                //System.out.println("i: " + i + " j: " + j);
-                // switch(mapLayout[i][j]) {
-                //     case "P":
-                //         //Make Plain
-                //         mapGrid.add(new Button("P"), j, i);
-                //         break;
-                //     case "R":
-                //         //Make River
-                //         mapGrid.add(new Button("R"), j, i);
-                //         break;
-                //     case "T":
-                //         mapGrid.add(townButton, j, i);
-                //         break;
-                //     case "M1":
-                //         //Make Mountain1
-                //         mapGrid.add(new Button("M1"), j, i);
-                //         break;
-                //     case "M2":
-                //         //Make Mountain2
-                //         mapGrid.add(new Button("M2"), j, i);
-                //         break;
-                //     case "M3":
-                //         //Make Mountain3
-                //         mapGrid.add(new Button("M3"), j, i);
-                //         break;
-                // }
                 final String layoutString = mapLayout[i][j];
                 Image image = new Image("graphics/test.png");
                 switch(mapLayout[i][j]) {

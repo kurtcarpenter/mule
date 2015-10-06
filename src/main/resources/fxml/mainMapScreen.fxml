@@ -33,7 +33,7 @@
       </rowConstraints>
     </GridPane>
 
-    <Pane layoutX="13.0" layoutY="14.0" prefHeight="105.0" prefWidth="573.0">
+    <Pane layoutX="13.0" layoutY="14.0" prefHeight="105.0" prefWidth="573.0" fx:id="titlePane">
       <children>
 
         <Label fx:id="turnLabel" layoutX="25.0" layoutY="36.0" text="Turn">

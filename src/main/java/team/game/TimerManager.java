@@ -18,6 +18,7 @@ public class TimerManager {
     private Timeline timeline;
     private TurnManager turnManager;
     private ScreenMaster screenMaster;
+    private boolean start = true;
     IntegerProperty timeSeconds;
 
     public TimerManager(TurnManager turnManager) {
@@ -34,6 +35,9 @@ public class TimerManager {
     }
 
     public StringBinding startTimer() {
+        if (start) {
+            start = false;
+        }
         int food = turnManager.getCurrentPlayer().getFood();
         // Perform checks
         int turn = turnManager.getCurrentTurn();
@@ -65,6 +69,7 @@ public class TimerManager {
         turnManager.advanceStep();
         // Get MainMap view to change
         screenMaster.displayScreen("mainMapScreen");
+        startTimer();
     }
 
     public void stopTimer() {
@@ -81,6 +86,10 @@ public class TimerManager {
 
     public StringBinding getTimerBinding() {
       return timeSeconds.asString();
+    }
+
+    public boolean isStart() {
+        return start;
     }
 
 }

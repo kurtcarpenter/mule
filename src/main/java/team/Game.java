@@ -7,6 +7,7 @@ import team.game.ScoreManager;
 import team.game.LandSelectManager;
 import team.game.MapManager;
 import team.game.PubManager;
+import team.game.MuleManager;
 import team.game.StoreManager;
 import team.map.GameMap;
 import team.screens.ScreenMaster;
@@ -15,6 +16,7 @@ public class Game {
   private final Configuration configuration;
   private final ScoreManager scoreManager;
   private final TurnManager turnManager;
+  private final MuleManager muleManager;
   private final TimerManager timerManager;
   private final LandSelectManager landSelectManager;
   private final MapManager mapManager;
@@ -36,7 +38,8 @@ public class Game {
         scoreManager);
     timerManager = new TimerManager(turnManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
-    mapManager = new MapManager(turnManager, landSelectManager, gameMap);
+    muleManager = new MuleManager(turnManager, gameMap);
+    mapManager = new MapManager(turnManager, landSelectManager, muleManager, gameMap);
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
     storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
   }
