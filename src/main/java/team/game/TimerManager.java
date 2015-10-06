@@ -69,6 +69,7 @@ public class TimerManager {
         turnManager.advanceStep();
         // Get MainMap view to change
         screenMaster.displayScreen("mainMapScreen");
+        startTimer();
     }
 
     public void stopTimer() {

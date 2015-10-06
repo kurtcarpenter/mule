@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.scene.paint.Color;
@@ -31,6 +32,8 @@ public class MainMapController extends AScreen {
 
     @FXML
     private GridPane mapGrid;
+    @FXML
+    private Pane titlePane;
     @FXML
     private Button passButton;
     @FXML
@@ -55,12 +58,15 @@ public class MainMapController extends AScreen {
         passButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                parent.game.getMapManager().pass();
                 setPlayerStuff();
+                if (parent.game.getMapManager().pass()
+                        == parent.game.getTurnManager().getPlayers().size()) {
+                    titlePane.getChildren().remove(passButton);
+                }
             }
         });
         createMap();
-        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        //timerLabel.textProperty().bind(parent.game.getTimerManager().getTimerBinding());
     }
 
     public String getNewButtonColor() {
@@ -82,7 +88,7 @@ public class MainMapController extends AScreen {
             timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
         }
         scoreLabel.setText("Score " + parent.game.getTurnManager().getCurrentPlayer().getScore());
-        //timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+        timerLabel.textProperty().bind(parent.game.getTimerManager().getTimerBinding());
     }
 
     public void createMap() {

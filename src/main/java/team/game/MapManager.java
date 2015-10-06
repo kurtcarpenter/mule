@@ -32,7 +32,7 @@ public class MapManager {
     }
   }
 
-  public void pass() {
+  public int pass() {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
       passCount++;
       if (passCount == turnManager.getPlayers().size()) {
@@ -40,5 +40,6 @@ public class MapManager {
       }
       turnManager.advanceStep();
     }
+    return passCount;
   }
 }
