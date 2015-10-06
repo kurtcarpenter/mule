@@ -1,19 +1,19 @@
 package team.map;
 
 import team.config.Player;
-import team.config.Player.Mule;
+import team.game.containers.Resource;
 
 public class GameTile {
   private final int x;
   private final int y;
   private Player owner;
-  private Mule mule;
+  private Resource muleType;
   private final int cost = 1000;
 
   public GameTile(int x, int y) {
     this.x = x;
     this.y = y;
-    mule = Mule.NONE;
+    muleType = null;
   }
 
   public int getCost() {
@@ -36,11 +36,11 @@ public class GameTile {
     return y;
   }
 
-  public void setMule(Mule mule) {
-      this.mule = mule;
+  public void setMule(Resource muleType) {
+      this.muleType = muleType;
   }
 
-  public Mule getMule() {
-      return mule;
+  public Resource getMule() {
+      return muleType;
   }
 }

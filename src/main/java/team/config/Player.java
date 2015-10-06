@@ -1,6 +1,7 @@
 package team.config;
 
 import java.lang.Comparable;
+import team.game.containers.Resource;
 
 public class Player implements Comparable<Player> {
 
@@ -10,10 +11,6 @@ public class Player implements Comparable<Player> {
 
   public enum PlayerColor {
     RED, BLUE, GREEN, YELLOW
-  }
-
-  public enum Mule {
-      FOOD, ENERGY, ORE, NONE
   }
 
   private final String name;
@@ -27,7 +24,7 @@ public class Player implements Comparable<Player> {
   private int energy;
   private int smithore;
   private int crystite;
-  private Mule mule;
+  private Resource mule;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
@@ -36,7 +33,7 @@ public class Player implements Comparable<Player> {
     setStartingMoney();
     // Set food to 8 for Beginner Level
     food = 8;
-    mule = Mule.NONE;
+    mule = null;
   }
 
   private void setStartingMoney() {
@@ -106,11 +103,21 @@ public class Player implements Comparable<Player> {
     score += delta;
   }
 
-  public Mule getMule() {
-      return mule;
+  public int getResourceQuantity(Resource r) {
+    // TODO: implement
+    return 42;
   }
 
-  public void setMule(Mule mule) {
-      this.mule = mule;
+  public void setResourceQuantity(Resource r, int quantity) {
+    // TODO: implement
+  }
+
+  public void receiveMule(Resource type) {
+    // TODO: implement
+    mule = type;
+  }
+
+  public Resource getMule() {
+      return mule;
   }
 }
