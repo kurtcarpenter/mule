@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -21,13 +23,33 @@ import team.game.containers.MuleType;
 public class StoreController extends AScreen {
 
 	@FXML
+	private Label foodStock;
+	@FXML
+	private Label foodPrice;
+	@FXML
 	private TextField foodQuantity;
+	@FXML
+	private Label energyStock;
+	@FXML
+	private Label energyPrice;
 	@FXML
 	private TextField energyQuantity;
 	@FXML
+	private Label smithoreStock;
+	@FXML
+	private Label smithorePrice;
+	@FXML
 	private TextField smithoreQuantity;
 	@FXML
+	private Label crystiteStock;
+	@FXML
+	private Label crystitePrice;
+	@FXML
 	private TextField crystiteQuantity;
+	@FXML
+	private Label muleStock;
+	@FXML
+	private Label mulePrice;
 	@FXML
 	private TextField muleQuantity;
 	@FXML
@@ -44,10 +66,105 @@ public class StoreController extends AScreen {
 	private Button sellButton;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Label moneyLabel;
+	@FXML
+	private Label totalLabel;
+
 	private MuleType type = MuleType.FOOD;
+	private int total = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+		foodQuantity.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		        try {
+		        	String newVal = newValue;
+		        	if (newVal.equals(""))
+		        		newVal = "0";
+		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(newVal)
+		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
+		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
+		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        	totalLabel.setText("$" + total);
+		        } catch (NumberFormatException nfe) {
+		        }
+		    }
+		});
+
+		energyQuantity.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		        try {
+		        	String newVal = newValue;
+		        	if (newVal.equals(""))
+		        		newVal = "0";
+		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
+		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(newVal)
+		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
+		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        	totalLabel.setText("$" + total);
+		        } catch (NumberFormatException nfe) {
+		        }
+		    }
+		});
+
+		smithoreQuantity.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		        try {
+		        	String newVal = newValue;
+		        	if (newVal.equals(""))
+		        		newVal = "0";
+		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
+		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
+		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(newVal)
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
+		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        	totalLabel.setText("$" + total);
+		        } catch (NumberFormatException nfe) {
+		        }
+		    }
+		});
+
+		crystiteQuantity.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		        try {
+		        	String newVal = newValue;
+		        	if (newVal.equals(""))
+		        		newVal = "0";
+		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
+		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
+		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(newVal)
+		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        	totalLabel.setText("$" + total);
+		        } catch (NumberFormatException nfe) {
+		        }
+		    }
+		});
+
+		muleQuantity.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+		        try {
+		        	String newVal = newValue;
+		        	if (newVal.equals(""))
+		        		newVal = "0";
+		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
+		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
+		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
+		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(newVal);
+		        	totalLabel.setText("$" + total);
+		        } catch (NumberFormatException nfe) {
+		        }
+		    }
+		});
 
     	foodButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
@@ -88,6 +205,15 @@ public class StoreController extends AScreen {
            		type = MuleType.CRYSTITE;
           	}
       	});
+
+		purchaseButton.setOnAction(new EventHandler<ActionEvent>() {
+        	@Override
+          	public void handle(ActionEvent event) {
+           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+          	}
+      	});
+
+    	
 
     	backButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
