@@ -29,11 +29,15 @@ public class StoreController extends AScreen {
 	@FXML
 	private TextField foodQuantity;
 	@FXML
+	private Label foodInventory;
+	@FXML
 	private Label energyStock;
 	@FXML
 	private Label energyPrice;
 	@FXML
 	private TextField energyQuantity;
+	@FXML
+	private Label energyInventory;
 	@FXML
 	private Label smithoreStock;
 	@FXML
@@ -41,17 +45,23 @@ public class StoreController extends AScreen {
 	@FXML
 	private TextField smithoreQuantity;
 	@FXML
+	private Label smithoreInventory;
+	@FXML
 	private Label crystiteStock;
 	@FXML
 	private Label crystitePrice;
 	@FXML
 	private TextField crystiteQuantity;
 	@FXML
+	private Label crystiteInventory;
+	@FXML
 	private Label muleStock;
 	@FXML
 	private Label mulePrice;
 	@FXML
 	private TextField muleQuantity;
+	@FXML
+	private Label muleInventory;
 	@FXML
 	private RadioButton foodButton;
 	@FXML
@@ -211,12 +221,28 @@ public class StoreController extends AScreen {
           	public void handle(ActionEvent event) {
           		try {
 	          		parent.game.getStoreManager().buyResource(Resource.FOOD, Integer.parseInt(foodQuantity.getText()));
+	          		foodInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.FOOD));
+	          		foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
+
 	          		parent.game.getStoreManager().buyResource(Resource.ENERGY, Integer.parseInt(energyQuantity.getText()));
+	          		energyInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.ENERGY));
+	          		energyStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.ENERGY));
+
 	          		parent.game.getStoreManager().buyResource(Resource.SMITHORE, Integer.parseInt(smithoreQuantity.getText()));
+	          		smithoreInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.SMITHORE));
+	          		smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.SMITHORE));
+
 	          		parent.game.getStoreManager().buyResource(Resource.CRYSTITE, Integer.parseInt(crystiteQuantity.getText()));
+	          		crystiteInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.CRYSTITE));
+	          		crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
+
 	          		parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(muleQuantity.getText()));
+	          		muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.MULE));
+	          		muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
+
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
 	           	} catch (Exception e) {
+	           		System.out.println(e.getMessage());
 	           	}
           	}
       	});
@@ -226,11 +252,24 @@ public class StoreController extends AScreen {
           	public void handle(ActionEvent event) {
           		try {
 	          		parent.game.getStoreManager().sellResource(Resource.FOOD, Integer.parseInt(foodQuantity.getText()));
+	          		foodInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.FOOD));
+	          		foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
+
 	          		parent.game.getStoreManager().sellResource(Resource.ENERGY, Integer.parseInt(energyQuantity.getText()));
+					energyInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.ENERGY));
+					energyStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.ENERGY));
+
 	          		parent.game.getStoreManager().sellResource(Resource.SMITHORE, Integer.parseInt(smithoreQuantity.getText()));
+					smithoreInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.SMITHORE));
+					smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.SMITHORE));
+
 	          		parent.game.getStoreManager().sellResource(Resource.CRYSTITE, Integer.parseInt(crystiteQuantity.getText()));
+	          		crystiteInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.CRYSTITE));
+	          		crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
+
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
 	           	} catch (Exception e) {
+	           		System.out.println(e.getMessage());
 	           	}
           	}
       	});
