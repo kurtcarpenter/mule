@@ -70,7 +70,7 @@
       </font>
     </Label>
     <Label font="$x1" layoutX="381.0" layoutY="184.0" text="Current money" />
-    <Label fx:id="moneyLabel" font="$x1" layoutX="527.0" layoutY="184.0" text="\$1000" />
+    <Label fx:id="moneyLabel" font="$x1" layoutX="527.0" layoutY="184.0" text="\$1600" />
     <Label fx:id="totalLabel" font="$x1" layoutX="527.0" layoutY="214.0" text="\$0" />
     <Button fx:id="backButton" layoutX="38.0" layoutY="333.0" mnemonicParsing="false" text="Back" />
     <Button fx:id="sellButton" layoutX="256.0" layoutY="360.0" mnemonicParsing="false" text="Sell items" />
