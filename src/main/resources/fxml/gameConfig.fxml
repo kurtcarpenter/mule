@@ -9,44 +9,60 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-background-color 0x001899ff?>
 
-<AnchorPane fx:controller="team.screens.instances.GameConfigController" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="team.screens.instances.GameConfigController">
   <children>
-    <ComboBox layoutX="205.0" layoutY="188.0" prefWidth="191.0" promptText="Difficulty" fx:id="difficultyBox">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Beginner" />
-          <String fx:value="Standard" />
-          <String fx:value="Tournament" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <ComboBox layoutX="244.0" layoutY="234.0" prefWidth="111.0" promptText="Map Type" fx:id="mapBox">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Standard" />
-          <String fx:value="Random" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <ComboBox layoutX="197.0" layoutY="280.0" prefWidth="206.0" promptText="Number of Players" fx:id="playersBox">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="2 Players" />
-          <String fx:value="3 Players" />
-          <String fx:value="4 Players" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <Text fill="RED" fontSmoothingType="GRAY" layoutX="129.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M.U.L.E." textAlignment="CENTER">
+    <Text fill="RED" fontSmoothingType="GRAY" layoutX="130.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M.U.L.E." textAlignment="CENTER">
       <font>
         <Font size="100.0" />
       </font>
     </Text>
-    <Text fill="RED" layoutX="15.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kurt Carpenter, Nathan Dass, Sai Gundlapalli, Kunaal Naik, Srivas Sundar">
+    <Text fill="RED" layoutX="16.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kurt Carpenter, Nathan Dass, Sai Gundlapalli, Kunaal Naik, Srivas Sundar">
       <font>
-        <Font size="18.0" />
+        <Font size="18.0" fx:id="x1" />
       </font>
     </Text>
-    <Button layoutX="217.0" layoutY="338.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="167.0" text="Configure Players" fx:id="configPlayersButton"/>
+    <Button fx:id="configPlayersButton" layoutX="217.0" layoutY="338.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="167.0" text="Configure Players" />
+    <GridPane alignment="CENTER" layoutX="145.0" layoutY="190.0" prefHeight="133.0" prefWidth="313.0">
+      <children>
+        <ComboBox fx:id="difficultyBox" prefWidth="191.0" promptText="Beginner" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Beginner" />
+              <String fx:value="Standard" />
+              <String fx:value="Tournament" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="mapBox" prefWidth="156.0" promptText="Standard" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Standard" />
+              <String fx:value="Random" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="playersBox" prefWidth="206.0" promptText="2 Players" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="2 Players" />
+              <String fx:value="3 Players" />
+              <String fx:value="4 Players" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" prefWidth="155.0" text="Difficulty" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" prefWidth="156.0" text="Map Type" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label font="$x1" prefWidth="156.0" text="Number of Players" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>

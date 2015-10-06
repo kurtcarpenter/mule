@@ -9,29 +9,53 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-background-color 0xdfdfdfff?>
 
-<AnchorPane fx:controller="team.screens.instances.PlayerConfigController" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="team.screens.instances.PlayerConfigController">
   <children>
-    <Text fill="RED" fontSmoothingType="GRAY" layoutX="250.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Number: 1" textAlignment="CENTER" fx:id="playerNumText" />
-    <ComboBox layoutX="262.0" layoutY="190.0" promptText="Race" fx:id="raceBox">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Flapper" />
-          <String fx:value="Human" />
-          <String fx:value="Others" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <ComboBox layoutX="264.0" layoutY="260.0" promptText="Color" fx:id="colorBox">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Red" />
-          <String fx:value="Blue" />
-          <String fx:value="Green" />
-          <String fx:value="Yellow" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <TextField layoutX="234.0" layoutY="94.0" prefWidth="132.0" promptText="Name" fx:id="nameField"/>
-    <Button layoutX="530.0" layoutY="365.0" mnemonicParsing="false" text="Next" fx:id="nextButton"/>
+    <Text fx:id="playerNumText" fill="RED" fontSmoothingType="GRAY" layoutX="126.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER">
+      <font>
+        <Font size="100.0" />
+      </font>
+    </Text>
+    <Button fx:id="nextButton" layoutX="256.0" layoutY="319.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="88.0" text="Next">
+      <font>
+        <Font size="18.0" fx:id="x1" />
+      </font>
+    </Button>
+    <GridPane layoutX="149.0" layoutY="172.0" prefHeight="133.0078125" prefWidth="303.0">
+      <children>
+        <TextField fx:id="nameField" prefWidth="132.0" promptText="" text="Player 1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <ComboBox fx:id="raceBox" prefWidth="136.0" promptText="Flapper" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Flapper" />
+              <String fx:value="Human" />
+              <String fx:value="Others" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="colorBox" prefWidth="136.0" promptText="Red" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Red" />
+              <String fx:value="Blue" />
+              <String fx:value="Green" />
+              <String fx:value="Yellow" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label alignment="CENTER" font="$x1" prefWidth="136.0" text="Name" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label alignment="CENTER" font="$x1" prefWidth="136.0" text="Race" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label alignment="CENTER" font="$x1" prefWidth="136.0" text="Color" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>
