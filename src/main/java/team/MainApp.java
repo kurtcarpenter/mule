@@ -20,6 +20,8 @@ public class MainApp extends Application {
     public static final String TOWN_SCREEN_FXML = "fxml/townScreen.fxml";
     public static final String PUB_SCREEN = "pubScreen";
     public static final String PUB_SCREEN_FXML = "fxml/pubScreen.fxml";
+    public static final String STORE_SCREEN = "store";
+    public static final String STORE_SCREEN_FXML = "fxml/store.fxml";
     public Game game;
 
     @Override
@@ -32,6 +34,7 @@ public class MainApp extends Application {
         main.loadScreen(PLAYER_CONFIG_SCREEN, PLAYER_CONFIG_FXML);
         main.loadScreen(MAINMAP_SCREEN, MAINMAP_SCREEN_FXML);
         main.loadScreen(TOWN_SCREEN, TOWN_SCREEN_FXML);
+        main.loadScreen(STORE_SCREEN, STORE_SCREEN_FXML);
       	game.passScreenMaster(main);
         main.displayScreen(GAME_CONFIG_SCREEN);
         main.loadScreen(PUB_SCREEN, PUB_SCREEN_FXML);

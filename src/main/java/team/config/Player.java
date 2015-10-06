@@ -104,16 +104,45 @@ public class Player implements Comparable<Player> {
   }
 
   public int getResourceQuantity(Resource r) {
-    // TODO: implement
-    return 42;
+    switch (r) {
+      case FOOD:
+        return food;
+      case ENERGY:
+        return energy;
+      case SMITHORE:
+        return smithore;
+      case CRYSTITE:
+        return crystite;
+      case MULE:
+        if (mule == null)
+            return 0;
+        else
+            return 1;
+    }
+    return -1;
   }
 
   public void setResourceQuantity(Resource r, int quantity) {
-    // TODO: implement
+    switch (r) {
+      case FOOD:
+        food += quantity;
+        break;
+      case ENERGY:
+        energy += quantity;
+        break;
+      case SMITHORE:
+        smithore += quantity;
+        break;
+      case CRYSTITE:
+        crystite += quantity;
+        break;
+      case MULE:
+        mule = null;
+        break;
+    }
   }
 
   public void receiveMule(Resource type) {
-    // TODO: implement
     mule = type;
   }
 
