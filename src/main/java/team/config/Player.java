@@ -12,6 +12,10 @@ public class Player implements Comparable<Player> {
     RED, BLUE, GREEN, YELLOW
   }
 
+  public enum Mule {
+      FOOD, ENERGY, ORE, NONE
+  }
+
   private final String name;
   private final PlayerRace race;
   private final PlayerColor color;
@@ -23,7 +27,7 @@ public class Player implements Comparable<Player> {
   private int energy;
   private int smithore;
   private int crystite;
-  private int mule;
+  private Mule mule;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
@@ -32,6 +36,7 @@ public class Player implements Comparable<Player> {
     setStartingMoney();
     // Set food to 8 for Beginner Level
     food = 8;
+    mule = Mule.NONE;
   }
 
   private void setStartingMoney() {
@@ -99,5 +104,13 @@ public class Player implements Comparable<Player> {
 
   public void incScore(int delta) {
     score += delta;
+  }
+
+  public Mule getMule() {
+      return mule;
+  }
+
+  public void setMule(Mule mule) {
+      this.mule = mule;
   }
 }

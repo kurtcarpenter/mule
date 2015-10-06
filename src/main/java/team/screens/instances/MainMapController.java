@@ -87,32 +87,6 @@ public class MainMapController extends AScreen {
     public void createMap() {
         for (int i = 0; i < mapLayout.length; i++) {
             for (int j = 0; j < mapLayout[i].length; j++) {
-                //System.out.println("i: " + i + " j: " + j);
-                // switch(mapLayout[i][j]) {
-                //     case "P":
-                //         //Make Plain
-                //         mapGrid.add(new Button("P"), j, i);
-                //         break;
-                //     case "R":
-                //         //Make River
-                //         mapGrid.add(new Button("R"), j, i);
-                //         break;
-                //     case "T":
-                //         mapGrid.add(townButton, j, i);
-                //         break;
-                //     case "M1":
-                //         //Make Mountain1
-                //         mapGrid.add(new Button("M1"), j, i);
-                //         break;
-                //     case "M2":
-                //         //Make Mountain2
-                //         mapGrid.add(new Button("M2"), j, i);
-                //         break;
-                //     case "M3":
-                //         //Make Mountain3
-                //         mapGrid.add(new Button("M3"), j, i);
-                //         break;
-                // }
                 final String layoutString = mapLayout[i][j];
                 Image image = new Image("graphics/test.png");
                 switch(mapLayout[i][j]) {
