@@ -83,6 +83,7 @@ public class StoreController extends AScreen {
 
 	private Resource muleType = Resource.FOOD;
 	private int total = 0;
+	private final int[] muleConfigPrices = {25, 50, 75, 100};
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,8 +97,9 @@ public class StoreController extends AScreen {
 		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(newVal)
 		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
 		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
-		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
-		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText());
+		        	total += (Integer.parseInt(mulePrice.getText().substring(1))
+						+ muleConfigPrices[muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
 		        	totalLabel.setText("$" + total);
 		        } catch (NumberFormatException nfe) {
 		        }
@@ -114,8 +116,9 @@ public class StoreController extends AScreen {
 		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
 		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(newVal)
 		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
-		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
-		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText());
+		        	total += (Integer.parseInt(mulePrice.getText().substring(1))
+						+ muleConfigPrices[muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
 		        	totalLabel.setText("$" + total);
 		        } catch (NumberFormatException nfe) {
 		        }
@@ -132,8 +135,9 @@ public class StoreController extends AScreen {
 		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
 		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
 		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(newVal)
-		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
-		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText());
+		        	total += (Integer.parseInt(mulePrice.getText().substring(1))
+						+ muleConfigPrices[muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
 		        	totalLabel.setText("$" + total);
 		        } catch (NumberFormatException nfe) {
 		        }
@@ -150,8 +154,9 @@ public class StoreController extends AScreen {
 		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
 		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
 		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
-		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(newVal)
-		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(muleQuantity.getText());
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(newVal);
+		        	total += (Integer.parseInt(mulePrice.getText().substring(1))
+						+ muleConfigPrices[muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
 		        	totalLabel.setText("$" + total);
 		        } catch (NumberFormatException nfe) {
 		        }
@@ -168,8 +173,9 @@ public class StoreController extends AScreen {
 		        	total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
 		        		+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
 		        		+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
-		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText())
-		        		+ Integer.parseInt(mulePrice.getText().substring(1)) * Integer.parseInt(newVal);
+		        		+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText());
+		        	total += (Integer.parseInt(mulePrice.getText().substring(1))
+						+ muleConfigPrices[muleType.ordinal()]) * Integer.parseInt(newVal);
 		        	totalLabel.setText("$" + total);
 		        } catch (NumberFormatException nfe) {
 		        }

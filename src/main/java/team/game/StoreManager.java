@@ -71,7 +71,12 @@ public class StoreManager {
     if (player.getResourceQuantity(Resource.MULE) >= 1)
       throw new PlayerTransactionException("Player already has a mule. Place the mule or sell the mule to buy another one.");
     verifyPurchase(resource, quantity);
-    player.setMoney(-1 * prices.get(resource) * quantity);
+    // Add the below into verifyPurchase
+    if (player.getMoney() < (prices.get(resource) + muleConfigPrices[muleType.ordinal()]) * quantity) {
+      throw new PlayerTransactionException("Player does not have enough money");
+    }
+
+    player.setMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()]) * quantity);
     player.receiveMule(muleType);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
