@@ -77,7 +77,8 @@ public class MainMapController extends AScreen {
         moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         playerColor.setFill(Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
         // Change init time based on player attributes
-        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
+        if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT
+                && parent.game.getTimerManager().isStart()) {
             timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
         }
         scoreLabel.setText("Score " + parent.game.getTurnManager().getCurrentPlayer().getScore());
