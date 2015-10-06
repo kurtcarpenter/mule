@@ -61,13 +61,16 @@ public class StoreManager {
 
   public void buyMule(Resource resource, Resource muleType, int quantity)
       throws PlayerTransactionException, StoreTransactionException {
-    if (muleType == Resource.MULE) {
+    if (muleType == Resource.MULE)
       throw new PlayerTransactionException("Cannot buy a Mule-type Mule");
-    }
+    if (quantity > 1)
+      throw new PlayerTransactionException("Cannot buy more than one mule at a time.");
     Player player = turnManager.getCurrentPlayer();
+    if (player.getResourceQuantity(Resource.MULE) >= 1)
+      throw new PlayerTransactionException("Player already has a mule. Place the mule or sell the mule to buy another one.");
     verifyPurchase(resource, quantity);
     player.setMoney(-1 * prices.get(resource) * quantity);
-    player.receiveMule(muleType, quantity);
+    player.receiveMule(muleType);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 

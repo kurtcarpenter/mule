@@ -237,7 +237,7 @@ public class StoreController extends AScreen {
 	          		crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
 
 	          		parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(muleQuantity.getText()));
-	          		muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.MULE));
+	          		muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMuleType());
 	          		muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
 
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
@@ -266,6 +266,10 @@ public class StoreController extends AScreen {
 	          		parent.game.getStoreManager().sellResource(Resource.CRYSTITE, Integer.parseInt(crystiteQuantity.getText()));
 	          		crystiteInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(Resource.CRYSTITE));
 	          		crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
+
+	          		parent.game.getStoreManager().sellResource(Resource.MULE, Integer.parseInt(muleQuantity.getText()));
+	          		muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMuleType());
+	          		muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
 
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
 	           	} catch (Exception e) {
