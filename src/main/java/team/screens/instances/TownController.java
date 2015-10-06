@@ -24,7 +24,7 @@ public class TownController extends AScreen {
     private Button pubButton;
 
     @FXML
-    private Button building3Button;
+    private Button storeButton;
 
     @FXML
     private Button building4Button;
@@ -45,6 +45,13 @@ public class TownController extends AScreen {
           @Override
           public void handle(ActionEvent event) {
               parent.displayScreen(MainApp.PUB_SCREEN);
+          }
+      });
+
+      storeButton.setOnAction(new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            parent.displayScreen(MainApp.STORE_SCREEN);
           }
       });
     }

@@ -44,6 +44,7 @@ public class StoreManager {
     verifyPurchase(resource, quantity);
     player.setMoney(-1 * prices.get(resource) * quantity);
     player.setResourceQuantity(resource, quantity);
+    resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
   public void sellResource(Resource resource, int quantity)
@@ -55,16 +56,22 @@ public class StoreManager {
     }
     player.setMoney(prices.get(resource) * quantity);
     player.setResourceQuantity(resource, -1 * quantity);
+    resourceStorage.put(resource, resourceStorage.get(resource) + quantity);
   }
 
-  public void buyMule(Resource resource, Resource muleType)
+  public void buyMule(Resource resource, Resource muleType, int quantity)
       throws PlayerTransactionException, StoreTransactionException {
-    if (muleType == Resource.MULE) {
+    if (muleType == Resource.MULE)
       throw new PlayerTransactionException("Cannot buy a Mule-type Mule");
-    }
+    if (quantity > 1)
+      throw new PlayerTransactionException("Cannot buy more than one mule at a time.");
     Player player = turnManager.getCurrentPlayer();
-    verifyPurchase(resource, 1);
+    if (player.getResourceQuantity(Resource.MULE) >= 1)
+      throw new PlayerTransactionException("Player already has a mule. Place the mule or sell the mule to buy another one.");
+    verifyPurchase(resource, quantity);
+    player.setMoney(-1 * prices.get(resource) * quantity);
     player.receiveMule(muleType);
+    resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
   private void verifyPurchase(Resource resource, int quantity)
@@ -80,5 +87,9 @@ public class StoreManager {
     if (player.getMoney() < currentPrice * quantity) {
       throw new PlayerTransactionException("Player does not have enough money");
     }
+  }
+
+  public int getResourceStock(Resource resource) {
+    return resourceStorage.get(resource);
   }
 }

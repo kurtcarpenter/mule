@@ -1,23 +1,25 @@
 package team;
 
 import team.config.Configuration;
-import team.game.LandSelectManager;
 import team.game.TurnManager;
-import team.game.MapManager;
 import team.game.TimerManager;
 import team.game.ScoreManager;
+import team.game.LandSelectManager;
+import team.game.MapManager;
 import team.game.PubManager;
+import team.game.StoreManager;
 import team.map.GameMap;
 import team.screens.ScreenMaster;
 
 public class Game {
   private final Configuration configuration;
-  private final TurnManager turnManager;
-  private final MapManager mapManager;
-  private final LandSelectManager landSelectManager;
-  private final TimerManager timerManager;
   private final ScoreManager scoreManager;
+  private final TurnManager turnManager;
+  private final TimerManager timerManager;
+  private final LandSelectManager landSelectManager;
+  private final MapManager mapManager;
   private final PubManager pubManager;
+  private final StoreManager storeManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -32,26 +34,43 @@ public class Game {
     scoreManager = new ScoreManager(configuration.getPlayers());
     turnManager = new TurnManager(configuration.getPlayers(), currentState,
         scoreManager);
+    timerManager = new TimerManager(turnManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     mapManager = new MapManager(turnManager, landSelectManager, gameMap);
-    timerManager = new TimerManager(turnManager);
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
+    storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
   }
 
   public Configuration getConfiguration() {
     return configuration;
   }
 
+  public ScoreManager getScoreManager() {
+    return scoreManager;
+  }
+
   public TurnManager getTurnManager() {
     return turnManager;
+  }
+
+  public TimerManager getTimerManager() {
+    return timerManager;
+  }
+
+  public LandSelectManager getLandSelectManager() {
+    return landSelectManager;
+  }
+
+  public MapManager getMapManager() {
+    return mapManager;
   }
 
   public PubManager getPubManager() {
     return pubManager;
   }
 
-  public LandSelectManager getLandSelectManager() {
-    return landSelectManager;
+  public StoreManager getStoreManager() {
+    return storeManager;
   }
 
   public GameState getCurrentState() {
@@ -60,14 +79,6 @@ public class Game {
 
   public void setCurrentState(GameState s) {
     currentState = s;
-  }
-
-  public MapManager getMapManager() {
-    return mapManager;
-  }
-
-  public TimerManager getTimerManager() {
-    return timerManager;
   }
 
   public void passScreenMaster(ScreenMaster screenMaster) {

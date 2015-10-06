@@ -25,6 +25,7 @@ public class Player implements Comparable<Player> {
   private int smithore;
   private int crystite;
   private int mule;
+  private Resource muleType;
 
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
@@ -103,15 +104,59 @@ public class Player implements Comparable<Player> {
   }
 
   public int getResourceQuantity(Resource r) {
-    // TODO: implement
-    return 42;
+    switch (r) {
+      case FOOD:
+        return food;
+      case ENERGY:
+        return energy;
+      case SMITHORE:
+        return smithore;
+      case CRYSTITE:
+        return crystite;
+      case MULE:
+        return mule;
+    }
+    return -1;
   }
 
   public void setResourceQuantity(Resource r, int quantity) {
-    // TODO: implement
+    switch (r) {
+      case FOOD:
+        food += quantity;
+        break;
+      case ENERGY:
+        energy += quantity;
+        break;
+      case SMITHORE:
+        smithore += quantity;
+        break;
+      case CRYSTITE:
+        crystite += quantity;
+        break;
+      case MULE:
+        mule += quantity;
+        break;
+    }
   }
 
   public void receiveMule(Resource type) {
-    // TODO: implement
+    muleType = type;
+    mule++;
+  }
+
+  public String getMuleType() {
+    if (mule == 0)
+      return "None";
+    switch (muleType) {
+      case FOOD:
+        return "Food";
+      case ENERGY:
+        return "Energy";
+      case SMITHORE:
+        return "Smithore";
+      case CRYSTITE:
+        return "Crystite";
+    }
+    return "None";
   }
 }

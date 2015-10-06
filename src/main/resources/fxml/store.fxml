@@ -7,35 +7,43 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="team.screens.instances.StoreController">
   <children>
-    <Label layoutX="136.0" layoutY="114.0" text="Item" />
-    <Label layoutX="192.0" layoutY="114.0" text="Stock" />
-    <Label layoutX="305.0" layoutY="114.0" text="Quantity" />
-    <GridPane layoutX="133.0" layoutY="149.0" prefWidth="227.0">
+    <GridPane layoutX="21.0" layoutY="129.0" prefHeight="146.0" prefWidth="353.0">
       <children>
-        <Label text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label text="Smithore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label text="16" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label text="16" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField prefWidth="200.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-        <TextField prefWidth="200.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-        <TextField prefWidth="200.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-        <TextField prefWidth="200.0" text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-        <Label text="Crystite" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label text="Mule" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="25" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label text="30" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <Label text="25" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <Label text="50" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-        <Label text="100" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-        <Label text="100" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <Label text="Food" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Smithore" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label fx:id="foodStock" text="16" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label fx:id="energyStock" text="16" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Label fx:id="smithoreStock" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <TextField fx:id="foodQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <TextField fx:id="energyQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <TextField fx:id="smithoreQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+        <TextField fx:id="crystiteQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+        <TextField fx:id="muleQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+        <Label text="Crystite" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="Mule" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label fx:id="crystiteStock" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <Label fx:id="muleStock" text="25" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+        <Label fx:id="foodPrice" text="\$30" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Label fx:id="energyPrice" text="\$25" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <Label fx:id="smithorePrice" text="\$50" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <Label fx:id="crystitePrice" text="\$100" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        <Label fx:id="mulePrice" text="\$100" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+        <Label text="Item" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Stock" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label text="Price" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <Label text="Quantity" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+        <Label text="Inventory" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label fx:id="foodInventory" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label fx:id="energyInventory" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label fx:id="smithoreInventory" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label fx:id="crystiteInventory" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label fx:id="muleInventory" text="None" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       </children>
       <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -47,18 +55,28 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button layoutX="233.0" layoutY="333.0" mnemonicParsing="false" text="Purchase items" />
-    <Label layoutX="250.0" layoutY="114.0" text="Price" />
+    <Button fx:id="purchaseButton" layoutX="237.0" layoutY="319.0" mnemonicParsing="false" text="Purchase items" />
     <Label layoutX="242.0" layoutY="14.0" text="Store">
       <font>
         <Font size="50.0" />
       </font>
     </Label>
-    <Label layoutX="437.0" layoutY="274.0" text="Total" />
-    <Label layoutX="404.0" layoutY="244.0" text="Current money" />
-    <Label layoutX="509.0" layoutY="244.0" text="1000" />
-    <Label layoutX="509.0" layoutY="274.0" text="0" />
+    <Label layoutX="426.0" layoutY="214.0" text="Total">
+      <font>
+        <Font size="20.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="381.0" layoutY="184.0" text="Current money" />
+    <Label fx:id="moneyLabel" font="$x1" layoutX="527.0" layoutY="184.0" text="\$1600" />
+    <Label fx:id="totalLabel" font="$x1" layoutX="527.0" layoutY="214.0" text="\$0" />
+    <Button fx:id="backButton" layoutX="38.0" layoutY="333.0" mnemonicParsing="false" text="Back" />
+    <Button fx:id="sellButton" layoutX="256.0" layoutY="360.0" mnemonicParsing="false" text="Sell items" />
+    <RadioButton fx:id="energyButton" layoutX="220.0" layoutY="278.0" mnemonicParsing="false" text="Energy" />
+    <RadioButton fx:id="crystiteButton" layoutX="412.0" layoutY="278.0" mnemonicParsing="false" text="Crystite" />
+    <RadioButton fx:id="foodButton" layoutX="141.0" layoutY="278.0" mnemonicParsing="false" selected="true" text="Food" />
+    <RadioButton fx:id="smithoreButton" layoutX="304.0" layoutY="278.0" mnemonicParsing="false" text="Smithore" />
   </children>
 </AnchorPane>
