@@ -42,7 +42,7 @@ public class MainApp extends Application {
 
         Group root = new Group();
         root.getChildren().addAll(main);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root); // 850, 400
         stage.setScene(scene);
         stage.show();
     }
