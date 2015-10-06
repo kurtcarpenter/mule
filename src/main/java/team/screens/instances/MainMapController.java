@@ -58,11 +58,11 @@ public class MainMapController extends AScreen {
         passButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                setPlayerStuff();
                 if (parent.game.getMapManager().pass()
                         == parent.game.getTurnManager().getPlayers().size()) {
                     titlePane.getChildren().remove(passButton);
                 }
+                setPlayerStuff();
             }
         });
         createMap();

@@ -21,7 +21,7 @@ public class MuleManager {
           if (curPlayer.getMule() != null) {
               gameMap.getTile(x, y).setMule(curPlayer.getMule());
               curPlayer.receiveMule(null);
-              System.out.println("Placed mule at (" + x + ", " + y + ")");
+              System.out.println("Placed " + curPlayer.getMule().toString() + "mule at (" + x + ", " + y + ")");
           } else {
               System.out.println("You don't own a mule to place here.");
           }
