@@ -17,14 +17,16 @@ public class TurnManager {
   private int playerCount;
   private GameState currentState;
   private ScoreManager scoreManager;
+  private MapManager mapManager;
 
   public TurnManager(List<Player> players, GameState currentState,
-      ScoreManager scoreManager) {
+      ScoreManager scoreManager, MapManager mapManager) {
     this.players = players;
     this.turn = 1;
     this.step = 0;
     this.currentState = currentState;
     this.scoreManager = scoreManager;
+    this.mapManager = mapManager;
 
     currentTurnOrder = new ArrayList<Player>();
   }
@@ -51,6 +53,7 @@ public class TurnManager {
    */
   public void advanceStep() {
     this.advanceStep(1);
+    mapManager.productionMap();
   }
 
   /**

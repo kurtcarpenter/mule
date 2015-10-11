@@ -35,7 +35,7 @@ public class Game {
     gameMap = new GameMap();
     scoreManager = new ScoreManager(configuration.getPlayers());
     turnManager = new TurnManager(configuration.getPlayers(), currentState,
-        scoreManager);
+        scoreManager, mapManager);
     timerManager = new TimerManager(turnManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     muleManager = new MuleManager(turnManager, gameMap);
