@@ -4,6 +4,8 @@ import team.map.GameMap;
 import team.Game.GameState;
 import team.config.Player;
 import team.game.containers.Resource;
+import team.map.GameTile;
+import team.game.containers.Terrain;
 
 public class MapManager {
 
@@ -53,7 +55,7 @@ public class MapManager {
         GameTile currentTile = grid[i][j];
         if (currentTile.getOwner().equals(currentPlayer)) {
           if (availableEnergy > 0) {
-            calculateProduction(currentTile, availableEnergy);
+            calculateProduction(currentTile, currentPlayer);
             availableEnergy--;
           } else {
            return;
@@ -68,7 +70,7 @@ public class MapManager {
     Resource r = g.getMule();
     int amount = 0;
     switch (r) {
-      case Resource.FOOD:
+      case FOOD:
         if (t.equals(Terrain.RIVER)) {
           amount = 4;
         } else if (t.equals(Terrain.PLAIN)) {
@@ -77,7 +79,7 @@ public class MapManager {
           amount = 1;
         }
         break;
-      case Resource.ENERGY;
+      case ENERGY:
         if (t.equals(Terrain.RIVER)) {
           amount = 2;
         } else if (t.equals(Terrain.PLAIN)) {
@@ -86,7 +88,7 @@ public class MapManager {
           amount = 1;
         }
         break;
-      case Resource.SMITHORE:
+      case SMITHORE:
         if (t.equals(Terrain.PLAIN)) {
           amount = 1;
         } else if (t.equals(Terrain.M1)) {
@@ -97,10 +99,10 @@ public class MapManager {
           amount = 4;
         }
         break;
-      case Resource.CRYSTITE:
+      case CRYSTITE:
         amount = (int) (Math.random() * 5);
         break;
     }
-    player.setResourceQuantity(r, t);
+    p.setResourceQuantity(r, amount);
   }
 }
