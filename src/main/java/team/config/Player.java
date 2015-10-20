@@ -32,7 +32,7 @@ public class Player implements Comparable<Player> {
     this.race = race;
     this.color = color;
     setStartingMoney();
-    // Set food to 8 for Beginner Level
+    // Set food to 8, energy to 4, ore to 0 for Beginner Level
     food = 8;
     energy = 4;
     ore = 0;

@@ -46,7 +46,7 @@
         <Rectangle fx:id="playerColor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="188.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
         <Button layoutX="500.0" layoutY="10.0" mnemonicParsing="false" text="Pass" fx:id="passButton"/>
         <Label fx:id="timerLabel" font="$x1" layoutX="600.0" layoutY="36.0" />
-        <Label fx:id="scoreLabel" font="$x1" layoutX="800.0" layoutY="36.0" />
+        <Label fx:id="scoreLabel" font="$x1" layoutX="675.0" layoutY="36.0" />
       </children>
     </Pane>
   </children>
