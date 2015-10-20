@@ -7,7 +7,10 @@ import java.util.Collections;
 import team.config.Player;
 import team.Game.GameState;
 import team.game.ScoreManager;
+import team.game.MapManager;
 import team.config.Configuration;
+import team.Game;
+
 
 public class TurnManager {
   private int step;
@@ -18,14 +21,16 @@ public class TurnManager {
   private GameState currentState;
   private ScoreManager scoreManager;
   private MapManager mapManager;
+  private Game game;
 
   public TurnManager(List<Player> players, GameState currentState,
-      ScoreManager scoreManager) {
+      ScoreManager scoreManager, Game game) {
     this.players = players;
     this.turn = 1;
     this.step = 0;
     this.currentState = currentState;
     this.scoreManager = scoreManager;
+    this.game = game;
 
     currentTurnOrder = new ArrayList<Player>();
   }
@@ -51,6 +56,10 @@ public class TurnManager {
    * Calling this method a bunch of times makes the Turn increment
    */
   public void advanceStep() {
+    if (currentState == GameState.MAIN) {
+      game.getMapManager().productionMap();
+    }
+    
     this.advanceStep(1);
   }
 

@@ -53,12 +53,13 @@ public class MapManager {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
         GameTile currentTile = grid[i][j];
-        if (currentTile.getOwner().equals(currentPlayer)) {
+        if (currentTile.getOwner() != null && currentTile.getOwner().equals(currentPlayer)) {
           if (availableEnergy > 0) {
             calculateProduction(currentTile, currentPlayer);
             availableEnergy--;
           } else {
-           return;
+            System.out.println("not enough energy");
+            return;
           }
         }
       }
@@ -68,9 +69,13 @@ public class MapManager {
   public void calculateProduction(GameTile g, Player p) {
     Terrain t = g.getTerrain();
     Resource r = g.getMule();
+    if (r == null) {
+      return;
+    }
     int amount = 0;
     switch (r) {
       case FOOD:
+        System.out.println("Food Mule added resources to production");
         if (t.equals(Terrain.RIVER)) {
           amount = 4;
         } else if (t.equals(Terrain.PLAIN)) {
@@ -80,6 +85,7 @@ public class MapManager {
         }
         break;
       case ENERGY:
+        System.out.println("Energy Mule added resources to production");
         if (t.equals(Terrain.RIVER)) {
           amount = 2;
         } else if (t.equals(Terrain.PLAIN)) {
@@ -89,6 +95,7 @@ public class MapManager {
         }
         break;
       case SMITHORE:
+        System.out.println("Smithore Mule added resources to production");
         if (t.equals(Terrain.PLAIN)) {
           amount = 1;
         } else if (t.equals(Terrain.M1)) {
@@ -100,6 +107,7 @@ public class MapManager {
         }
         break;
       case CRYSTITE:
+        System.out.println("Crystite Mule added resources to production");
         amount = (int) (Math.random() * 5);
         break;
     }
