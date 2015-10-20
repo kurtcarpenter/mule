@@ -2,6 +2,7 @@ package team.map;
 
 import team.config.Player;
 import team.game.containers.Resource;
+import team.game.containers.Terrain;
 
 public class GameTile {
   private final int x;
@@ -42,5 +43,10 @@ public class GameTile {
 
   public Resource getMule() {
       return muleType;
+  }
+
+  public Terrain getTerrain() {
+    // TODO: IMPLEMENT THIS
+    return Terrain.RIVER;
   }
 }

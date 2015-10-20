@@ -22,6 +22,7 @@ public class Player implements Comparable<Player> {
   private int tilesOwned;
   private int food;
   private int energy;
+  private int ore;
   private int smithore;
   private int crystite;
   private Resource mule;
@@ -31,9 +32,10 @@ public class Player implements Comparable<Player> {
     this.race = race;
     this.color = color;
     setStartingMoney();
-    // Set food to 8, energy to 4 for Beginner Level
+    // Set food to 8, energy to 4, ore to 0 for Beginner Level
     food = 8;
     energy = 4;
+    ore = 0;
     mule = null;
   }
 
@@ -73,6 +75,10 @@ public class Player implements Comparable<Player> {
 
   public int getFood() {
     return food;
+  }
+
+  public int getEnergy() {
+    return energy;
   }
 
   public void setScore(int score) {
