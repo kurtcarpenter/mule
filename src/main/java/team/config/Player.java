@@ -89,6 +89,14 @@ public class Player implements Comparable<Player> {
     return score;
   }
 
+  public void setOre(int ore) {
+    this.ore = ore;
+  }
+
+  public int getOre() {
+    return ore;
+  }
+
   public int getTilesOwned() {
     return tilesOwned;
   }
