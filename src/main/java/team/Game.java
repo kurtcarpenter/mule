@@ -9,6 +9,7 @@ import team.game.MapManager;
 import team.game.PubManager;
 import team.game.MuleManager;
 import team.game.StoreManager;
+import team.game.RandomEventManager;
 import team.map.GameMap;
 import team.screens.ScreenMaster;
 
@@ -22,6 +23,7 @@ public class Game {
   private final MapManager mapManager;
   private final PubManager pubManager;
   private final StoreManager storeManager;
+  private final RandomEventManager randomEventManager;
   private GameState currentState;
   private GameMap gameMap;
 
@@ -42,6 +44,7 @@ public class Game {
     mapManager = new MapManager(turnManager, landSelectManager, muleManager, gameMap);
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
     storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
+    randomEventManager = new RandomEventManager(configuration.getPlayers());
   }
 
   public Configuration getConfiguration() {
@@ -74,6 +77,10 @@ public class Game {
 
   public StoreManager getStoreManager() {
     return storeManager;
+  }
+
+  public RandomEventManager getRandomEventManager() {
+    return randomEventManager;
   }
 
   public GameState getCurrentState() {

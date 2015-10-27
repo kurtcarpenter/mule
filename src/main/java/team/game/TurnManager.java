@@ -8,6 +8,7 @@ import team.config.Player;
 import team.Game.GameState;
 import team.game.ScoreManager;
 import team.game.MapManager;
+import team.game.RandomEventManager;
 import team.config.Configuration;
 import team.Game;
 
@@ -58,8 +59,9 @@ public class TurnManager {
   public void advanceStep() {
     if (currentState == GameState.MAIN) {
       game.getMapManager().productionMap();
+      game.getRandomEventManager().triggerEvent(getCurrentPlayer(), turn);
     }
-    
+
     this.advanceStep(1);
   }
 
