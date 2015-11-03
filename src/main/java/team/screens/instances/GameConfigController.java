@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+//import javafx.scene.control.*;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -58,15 +58,18 @@ public class GameConfigController extends AScreen {
 				Game oldGame = parent.game.loadGame();
 				if (oldGame != null) {
 					parent.game = oldGame;
-					alertUser(false);
+					// alertUser(false);
+					System.out.println("Saved Game");
 					parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
-					alertUser(true);
+					// alertUser(true);
+					System.out.println("Game could not be loaded!");
 				}
 			}
 		});
     }
 
+/*
 	private void alertUser(boolean error) {
         String[] version = System.getProperty("java.version").split("_");
         if ((version[0].compareTo("1.9.0") >= 0) | (version[0].compareTo("1.8.0") >= 0 && version[1].compareTo("40") >= 0)) {
@@ -89,7 +92,7 @@ public class GameConfigController extends AScreen {
 				System.out.println("Java Version: " + System.getProperty("java.version"));
 	            System.out.println("Game could not be loaded!");
 			}
-
         }
     }
+*/
 }

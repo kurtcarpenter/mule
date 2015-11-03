@@ -60,12 +60,16 @@ public class TownController extends AScreen {
           @Override
           public void handle(ActionEvent event) {
               if (parent.game.saveGame()) {
-                  alertUser();
+                  //alertUser();
+                  System.out.println("Saved Game");
+              } else {
+                  System.out.println("Could not save game!");
               }
           }
       });
     }
 
+/*
     private void alertUser() {
         String[] version = System.getProperty("java.version").split("_");
         if ((version[0].compareTo("1.9.0") >= 0) | (version[0].compareTo("1.8.0") >= 0 && version[1].compareTo("40") >= 0)) {
@@ -79,6 +83,7 @@ public class TownController extends AScreen {
             System.out.println("Saved Game");
         }
     }
+*/
 
     /* Example method to navigate to a different screen
     @FXML
