@@ -58,20 +58,38 @@ public class GameConfigController extends AScreen {
 				Game oldGame = parent.game.loadGame();
 				if (oldGame != null) {
 					parent.game = oldGame;
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Load Game");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Game Loaded!");
-                    alert.showAndWait();
+					alertUser(false);
 					parent.displayScreen(MainApp.MAINMAP_SCREEN);
                 } else {
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Load Game");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Game could not be loaded!");
-                    alert.showAndWait();
+					alertUser(true);
 				}
 			}
 		});
+    }
+
+	private void alertUser(boolean error) {
+        String[] version = System.getProperty("java.version").split("_");
+        if ((version[0].compareTo("1.9.0") >= 0) | (version[0].compareTo("1.8.0") >= 0 && version[1].compareTo("40") >= 0)) {
+			if (!error) {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Load Game");
+				alert.setHeaderText("Game Loaded!");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Load Game");
+				alert.setHeaderText("Game could not be loaded!");
+				alert.showAndWait();
+			}
+        } else {
+			if (!error) {
+				System.out.println("Java Version: " + System.getProperty("java.version"));
+	            System.out.println("Saved Game");
+			} else {
+				System.out.println("Java Version: " + System.getProperty("java.version"));
+	            System.out.println("Game could not be loaded!");
+			}
+
+        }
     }
 }

@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -60,14 +60,24 @@ public class TownController extends AScreen {
           @Override
           public void handle(ActionEvent event) {
               if (parent.game.saveGame()) {
-                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                  alert.setTitle("Save Game");
-                  alert.setHeaderText(null);
-                  alert.setContentText("Game Saved!");
-                  alert.showAndWait();
+                  alertUser();
               }
           }
       });
+    }
+
+    private void alertUser() {
+        String[] version = System.getProperty("java.version").split("_");
+        if ((version[0].compareTo("1.9.0") >= 0) | (version[0].compareTo("1.8.0") >= 0 && version[1].compareTo("40") >= 0)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Save Game");
+            alert.setHeaderText("Game Saved!");
+            // alert.setContentText("Game Saved!");
+            alert.showAndWait();
+        } else {
+            System.out.println("Java Version: " + System.getProperty("java.version"));
+            System.out.println("Saved Game");
+        }
     }
 
     /* Example method to navigate to a different screen

@@ -104,6 +104,9 @@ public class Game implements Serializable {
       try {
           readObject(new ObjectInputStream(new FileInputStream("game.ser")));
           ((MainMapController) main.getMainMapController()).setMapButtons(gameMap);
+      } catch (FileNotFoundException f) {
+          System.out.println("Load Game File Not Found");
+          return null;
       } catch(Exception e) {
           e.printStackTrace();
           return null;
