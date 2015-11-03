@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.scene.control.Alert;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -27,7 +28,7 @@ public class TownController extends AScreen {
     private Button storeButton;
 
     @FXML
-    private Button building4Button;
+    private Button saveGameButton;
 
     @FXML
     private Button backButton;
@@ -52,6 +53,19 @@ public class TownController extends AScreen {
           @Override
           public void handle(ActionEvent event) {
             parent.displayScreen(MainApp.STORE_SCREEN);
+          }
+      });
+
+      saveGameButton.setOnAction(new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+              if (parent.game.saveGame()) {
+                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                  alert.setTitle("Save Game");
+                  alert.setHeaderText(null);
+                  alert.setContentText("Game Saved!");
+                  alert.showAndWait();
+              }
           }
       });
     }

@@ -4,7 +4,7 @@ import team.config.Player;
 import team.game.containers.Resource;
 import team.game.containers.Terrain;
 
-public class GameTile {
+public class GameTile implements java.io.Serializable {
   private final int x;
   private final int y;
   private Player owner;

@@ -5,7 +5,7 @@ import team.Game.GameState;
 import team.config.Player;
 import team.game.containers.Resource;
 
-public class MuleManager {
+public class MuleManager implements java.io.Serializable {
 
   private TurnManager turnManager;
   private GameMap gameMap;

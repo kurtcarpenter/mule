@@ -2,7 +2,7 @@ package team.game;
 
 import team.map.GameMap;
 
-public class LandSelectManager {
+public class LandSelectManager implements java.io.Serializable {
 
   private TurnManager turnManager;
   private GameMap gameMap;

@@ -8,7 +8,7 @@ import java.util.Comparator;
 import team.config.Player;
 import team.game.containers.Resource;
 
-public class RandomEventManager {
+public class RandomEventManager implements java.io.Serializable {
 
   private List<Player> players;
   private Random rand;
@@ -31,7 +31,7 @@ public class RandomEventManager {
           return;
         }
       }
-      
+
       switch (event) {
            case 1:  p.setResourceQuantity(Resource.FOOD, p.getFood() + 3);
                     p.setResourceQuantity(Resource.ENERGY, p.getFood() + 2);

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import team.config.GameSettings;
 
-public class Configuration {
+public class Configuration implements java.io.Serializable {
 
   private List<Player> players;
   private GameSettings settings;

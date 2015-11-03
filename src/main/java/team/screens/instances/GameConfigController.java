@@ -8,10 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.GameSettings;
+import team.Game;
 
 public class GameConfigController extends AScreen {
 
@@ -31,6 +33,9 @@ public class GameConfigController extends AScreen {
 	// fx:id="configPlayersButton"
 	private Button configPlayersButton;
 
+	@FXML
+	private Button loadGameButton;
+
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         configPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -47,5 +52,26 @@ public class GameConfigController extends AScreen {
                 parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
             }
         });
+		loadGameButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Game oldGame = parent.game.loadGame();
+				if (oldGame != null) {
+					parent.game = oldGame;
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Load Game");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Game Loaded!");
+                    alert.showAndWait();
+					parent.displayScreen(MainApp.MAINMAP_SCREEN);
+                } else {
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Load Game");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Game could not be loaded!");
+                    alert.showAndWait();
+				}
+			}
+		});
     }
 }
