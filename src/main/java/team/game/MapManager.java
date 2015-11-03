@@ -7,7 +7,7 @@ import team.game.containers.Resource;
 import team.map.GameTile;
 import team.game.containers.Terrain;
 
-public class MapManager {
+public class MapManager implements java.io.Serializable {
 
   private final TurnManager turnManager;
   private final LandSelectManager landSelectManager;

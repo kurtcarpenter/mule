@@ -8,10 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+//import javafx.scene.control.*;
 
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.GameSettings;
+import team.Game;
 
 public class GameConfigController extends AScreen {
 
@@ -31,6 +33,9 @@ public class GameConfigController extends AScreen {
 	// fx:id="configPlayersButton"
 	private Button configPlayersButton;
 
+	@FXML
+	private Button loadGameButton;
+
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         configPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -47,5 +52,47 @@ public class GameConfigController extends AScreen {
                 parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
             }
         });
+		loadGameButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Game oldGame = parent.game.loadGame();
+				if (oldGame != null) {
+					parent.game = oldGame;
+					// alertUser(false);
+					System.out.println("Saved Game");
+					parent.displayScreen(MainApp.MAINMAP_SCREEN);
+                } else {
+					// alertUser(true);
+					System.out.println("Game could not be loaded!");
+				}
+			}
+		});
     }
+
+/*
+	private void alertUser(boolean error) {
+        String[] version = System.getProperty("java.version").split("_");
+        if ((version[0].compareTo("1.9.0") >= 0) | (version[0].compareTo("1.8.0") >= 0 && version[1].compareTo("40") >= 0)) {
+			if (!error) {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Load Game");
+				alert.setHeaderText("Game Loaded!");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Load Game");
+				alert.setHeaderText("Game could not be loaded!");
+				alert.showAndWait();
+			}
+        } else {
+			if (!error) {
+				System.out.println("Java Version: " + System.getProperty("java.version"));
+	            System.out.println("Saved Game");
+			} else {
+				System.out.println("Java Version: " + System.getProperty("java.version"));
+	            System.out.println("Game could not be loaded!");
+			}
+        }
+    }
+*/
 }

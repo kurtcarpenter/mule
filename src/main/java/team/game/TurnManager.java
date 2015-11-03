@@ -13,7 +13,7 @@ import team.config.Configuration;
 import team.Game;
 
 
-public class TurnManager {
+public class TurnManager implements java.io.Serializable {
   private int step;
   private int turn;
   private List<Player> players;

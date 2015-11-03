@@ -3,7 +3,7 @@ package team.config;
 import java.lang.Comparable;
 import team.game.containers.Resource;
 
-public class Player implements Comparable<Player> {
+public class Player implements Comparable<Player>, java.io.Serializable  {
 
   public enum PlayerRace {
     HUMAN, FLAPPER, OTHERS

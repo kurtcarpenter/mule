@@ -3,7 +3,7 @@ package team.game;
 import team.config.Player;
 import java.util.List;
 
-public class ScoreManager {
+public class ScoreManager implements java.io.Serializable {
   private static final int MONEY_MULTIPLIER = 1;
   private static final int TILE_MULTIPLIER = 500;
   private static final int RESOURCE_MULTIPLIER = 1;

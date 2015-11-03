@@ -10,7 +10,7 @@ import team.game.containers.Resource;
 import java.util.Map;
 import java.util.HashMap;
 
-public class StoreManager {
+public class StoreManager implements java.io.Serializable {
   private HashMap<Resource, Integer> resourceStorage;
   private HashMap<Resource, Integer> prices;
   private TurnManager turnManager;

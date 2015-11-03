@@ -1,6 +1,6 @@
 package team.config;
 
-public class GameSettings {
+public class GameSettings implements java.io.Serializable {
 
   public enum Difficulty {
     BEGINNER, STANDARD, TOURNAMENT

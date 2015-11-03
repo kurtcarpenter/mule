@@ -14,7 +14,7 @@
     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Land Office" fx:id="landOfficeButton"/>
     <Button layoutX="10.0" layoutY="100.0" mnemonicParsing="false" text="Pub" fx:id="pubButton"/>
     <Button layoutX="150.0" layoutY="10.0" mnemonicParsing="false" text="Store" fx:id="storeButton"/>
-    <Button layoutX="150.0" layoutY="100.0" mnemonicParsing="false" text="Building 4" fx:id="building4Button"/>
+    <Button layoutX="150.0" layoutY="100.0" mnemonicParsing="false" text="Save Game" fx:id="saveGameButton"/>
     <Button layoutX="10.0" layoutY="200.0" mnemonicParsing="false" text="Back" fx:id="backButton"/>
   </children>
 </AnchorPane>

@@ -1,6 +1,6 @@
 package team.map;
 
-public class GameMap {
+public class GameMap implements java.io.Serializable {
   GameTile[][] grid;
 
   public GameMap() {

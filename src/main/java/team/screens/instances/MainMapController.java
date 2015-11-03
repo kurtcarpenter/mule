@@ -19,12 +19,14 @@ import javafx.geometry.HPos;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.image.Image;
- import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 
 import team.screens.AScreen;
 import team.MainApp;
 import team.config.Player;
 import team.Game.GameState;
+import team.map.GameMap;
 
 import team.screens.AScreen;
 
@@ -75,6 +77,24 @@ public class MainMapController extends AScreen {
             (int)( c.getRed() * 255 ),
             (int)( c.getGreen() * 255 ),
             (int)( c.getBlue() * 255 ) );
+    }
+
+    public void setMapButtons(GameMap map) {
+        for (Node node : mapGrid.getChildren()) {
+            if (node instanceof javafx.scene.Group)
+                continue;
+            int i = GridPane.getRowIndex(node);
+            int j = GridPane.getColumnIndex(node);
+            Player p = map.getTile(i, j).getOwner();
+            if (p != null) {
+                Color c = Color.valueOf(p.getColor().toString());
+                String hex = String.format( "#%02X%02X%02X",
+                    (int)( c.getRed() * 255 ),
+                    (int)( c.getGreen() * 255 ),
+                    (int)( c.getBlue() * 255 ) );
+                ((Button)node).setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
+            }
+        }
     }
 
     public void setPlayerStuff() {
