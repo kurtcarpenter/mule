@@ -11,6 +11,7 @@ public class PubManager implements java.io.Serializable {
   private TurnManager turnManager;
   private transient TimerManager timerManager;
   private Random r;
+  private static final long serialVersionUID = 42L; 
 
   private static final int[] ROUND_BONUS = {0, 50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
 
