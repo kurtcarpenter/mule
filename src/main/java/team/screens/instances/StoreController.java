@@ -103,6 +103,7 @@ public class StoreController extends AScreen {
 		        	// totalLabel.setText("$" + total);
 					updateTotal();
 		        } catch (NumberFormatException nfe) {
+							System.out.println("NumberFormatException");
 		        }
 		    }
 		});
@@ -123,6 +124,7 @@ public class StoreController extends AScreen {
 		        	// totalLabel.setText("$" + total);
 					updateTotal();
 		        } catch (NumberFormatException nfe) {
+							System.out.println("NumberFormatException");
 		        }
 		    }
 		});
@@ -143,6 +145,7 @@ public class StoreController extends AScreen {
 		        	// totalLabel.setText("$" + total);
 					updateTotal();
 		        } catch (NumberFormatException nfe) {
+							System.out.println("NumberFormatException");
 		        }
 		    }
 		});
@@ -163,6 +166,7 @@ public class StoreController extends AScreen {
 		        	// totalLabel.setText("$" + total);
 					updateTotal();
 		        } catch (NumberFormatException nfe) {
+							System.out.println("NumberFormatException");
 		        }
 		    }
 		});
@@ -183,6 +187,7 @@ public class StoreController extends AScreen {
 		        	// totalLabel.setText("$" + total);
 					updateTotal();
 		        } catch (NumberFormatException nfe) {
+							System.out.println("NumberFormatException");
 		        }
 		    }
 		});
@@ -261,9 +266,11 @@ public class StoreController extends AScreen {
 	          		muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
 
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
-	           	} catch (Exception e) {
+	           	} catch (team.game.exceptions.StoreTransactionException e) {
 	           		System.out.println(e.getMessage());
-	           	}
+	           	} catch (team.game.exceptions.PlayerTransactionException e) {
+								System.out.println(e.getMessage());
+							}
           	}
       	});
 
@@ -297,9 +304,11 @@ public class StoreController extends AScreen {
 	          		muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
 
 	           		moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
-	           	} catch (Exception e) {
+	           	} catch (team.game.exceptions.StoreTransactionException e) {
 	           		System.out.println(e.getMessage());
-	           	}
+	           	} catch (team.game.exceptions.PlayerTransactionException e) {
+								System.out.println(e.getMessage());
+							}
           	}
       	});
 
@@ -312,7 +321,7 @@ public class StoreController extends AScreen {
     }
 
 	private void updateTotal() {
-		int total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
+		total = Integer.parseInt(foodPrice.getText().substring(1)) * Integer.parseInt(foodQuantity.getText())
 			+ Integer.parseInt(energyPrice.getText().substring(1)) * Integer.parseInt(energyQuantity.getText())
 			+ Integer.parseInt(smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
 			+ Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(crystiteQuantity.getText());

@@ -135,6 +135,9 @@ public class MainMapController extends AScreen {
                     case "M3":
                         image = new Image("graphics/m3.png");
                         break;
+                    default:
+                        System.out.println("Defaulted");
+                        break;
                 }
                 ImageView iv = new ImageView();
                 iv.setImage(image);
