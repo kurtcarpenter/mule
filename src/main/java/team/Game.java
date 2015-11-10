@@ -1,17 +1,23 @@
 package team;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import team.config.Configuration;
-import team.game.TurnManager;
-import team.game.TimerManager;
-import team.game.ScoreManager;
 import team.game.LandSelectManager;
 import team.game.MapManager;
-import team.game.PubManager;
 import team.game.MuleManager;
-import team.game.StoreManager;
+import team.game.PubManager;
 import team.game.RandomEventManager;
+import team.game.ScoreManager;
+import team.game.StoreManager;
+import team.game.TimerManager;
+import team.game.TurnManager;
 import team.map.GameMap;
 import team.screens.ScreenMaster;
 import team.screens.instances.MainMapController;
@@ -35,6 +41,10 @@ public class Game implements Serializable {
     MAIN, LAND_SELECT, CONFIGURE
   }
 
+  /**
+   * Sets up game instance that persists through playthrough.
+   * @param config congig object to instantiate Game
+   */
   public Game(Configuration config) {
     currentState = GameState.CONFIGURE;
     configuration = config;
@@ -91,69 +101,68 @@ public class Game implements Serializable {
     return currentState;
   }
 
-  public void setCurrentState(GameState s) {
-    currentState = s;
+  public void setCurrentState(GameState state) {
+    currentState = state;
   }
 
   public void passScreenMaster(ScreenMaster screenMaster) {
-      main = screenMaster;
-      timerManager.passScreenMaster(screenMaster);
+    main = screenMaster;
+    timerManager.passScreenMaster(screenMaster);
   }
 
   public Game loadGame() {
-      try {
-          readObject(new ObjectInputStream(new FileInputStream("game.ser")));
-          ((MainMapController) main.getMainMapController()).setMapButtons(gameMap);
-      } catch (FileNotFoundException f) {
-          System.out.println("Load Game File Not Found");
-          return null;
-      } catch(Exception e) {
-          e.printStackTrace();
-          return null;
-      }
-      return this;
+    try {
+      readObject(new ObjectInputStream(new FileInputStream("game.ser")));
+      ((MainMapController) main.getMainMapController()).setMapButtons(gameMap);
+    } catch (FileNotFoundException f) {
+      System.out.println("Load Game File Not Found");
+      return null;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+    return this;
   }
 
   public boolean saveGame() {
-      try {
-        writeObject(new ObjectOutputStream(new FileOutputStream("game.ser")));
-      } catch(Exception e) {
-          e.printStackTrace();
-          return false;
-      }
-      return true;
+    try {
+      writeObject(new ObjectOutputStream(new FileOutputStream("game.ser")));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 
   private void writeObject(ObjectOutputStream out) throws IOException {
-      out.writeObject(configuration);
-      out.writeObject(scoreManager);
-      out.writeObject(turnManager);
-      out.writeObject(muleManager);
-      out.writeObject(landSelectManager);
-      out.writeObject(mapManager);
-      out.writeObject(pubManager);
-      out.writeObject(storeManager);
-      out.writeObject(randomEventManager);
-      out.writeObject(currentState);
-      out.writeObject(gameMap);
+    out.writeObject(configuration);
+    out.writeObject(scoreManager);
+    out.writeObject(turnManager);
+    out.writeObject(muleManager);
+    out.writeObject(landSelectManager);
+    out.writeObject(mapManager);
+    out.writeObject(pubManager);
+    out.writeObject(storeManager);
+    out.writeObject(randomEventManager);
+    out.writeObject(currentState);
+    out.writeObject(gameMap);
   }
 
   private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-      configuration = (Configuration) in.readObject();
-      scoreManager = (ScoreManager) in.readObject();
-      turnManager = (TurnManager) in.readObject();
-      muleManager = (MuleManager) in.readObject();
-      landSelectManager = (LandSelectManager) in.readObject();
-      mapManager = (MapManager) in.readObject();
-      pubManager = (PubManager) in.readObject();
-      storeManager = (StoreManager) in.readObject();
-      randomEventManager = (RandomEventManager) in.readObject();
-      currentState = (GameState) in.readObject();
-      gameMap = (GameMap) in.readObject();
+    configuration = (Configuration) in.readObject();
+    scoreManager = (ScoreManager) in.readObject();
+    turnManager = (TurnManager) in.readObject();
+    muleManager = (MuleManager) in.readObject();
+    landSelectManager = (LandSelectManager) in.readObject();
+    mapManager = (MapManager) in.readObject();
+    pubManager = (PubManager) in.readObject();
+    storeManager = (StoreManager) in.readObject();
+    randomEventManager = (RandomEventManager) in.readObject();
+    currentState = (GameState) in.readObject();
+    gameMap = (GameMap) in.readObject();
 
-      timerManager = new TimerManager(turnManager);
-      timerManager.passScreenMaster(main);
-      pubManager.setTimerManager(timerManager);
+    timerManager = new TimerManager(turnManager);
+    timerManager.passScreenMaster(main);
+    pubManager.setTimerManager(timerManager);
   }
-
 }
