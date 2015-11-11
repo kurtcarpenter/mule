@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.assertEquals;
 
 import team.game.ScoreManager;
@@ -10,7 +11,7 @@ import team.config.Player.PlayerRace;
 import team.config.Player.PlayerColor;
 import team.config.Player;
 import team.config.GameSettings.Difficulty;
-import team.config.Game.GameState;
+import team.Game.GameState;
 import team.game.containers.Resource;
 
 import java.util.List;
@@ -42,18 +43,26 @@ public class BuyResourceTests {
 
 	@Test(expected = PlayerTransactionException.class)
 	public void throwsPlayerTransactionException() {
-		storeManager.buyResource(Resource.MULE, 1);
+		try {
+			storeManager.buyResource(Resource.MULE, 1);
+		} catch (PlayerTransactionException pte) {
+		} catch (StoreTransactionException ste) {
+		}
 	}
 
 	@Test
 	public void buyResource() {
 		int prevPlayerOre = turnManager.getCurrentPlayer().getOre();
 		int prevMoney = turnManager.getCurrentPlayer().getMoney();
-		int prevStoreOre = storeManager.getResource(Resource.ORE);
-		storeManager.buyResource(Resource.ORE, 1);
+		int prevStoreOre = storeManager.getResourceStock(Resource.SMITHORE);
+		try {
+			storeManager.buyResource(Resource.SMITHORE, 1);
+		} catch (PlayerTransactionException pte) {
+		} catch (StoreTransactionException ste) {
+		}
 		assertEquals(turnManager.getCurrentPlayer().getOre(), prevPlayerOre + 1);
-		assertEquals(turnManager.getCurrentPlayer.getMoney, prevMoney - storeManager.getPrice(Resource.ORE));
-		assertEquals(storeManager.getResource(Resource.ORE), prevStoreOre - 1);
+		assertEquals(turnManager.getCurrentPlayer().getMoney(), prevMoney - storeManager.getPrice(Resource.SMITHORE));
+		assertEquals(storeManager.getResourceStock(Resource.SMITHORE), prevStoreOre - 1);
 	}
 
 	@Test
@@ -61,25 +70,37 @@ public class BuyResourceTests {
 		int prevPlayerOre = turnManager.getCurrentPlayer().getOre();
 		int prevPlayerEnergy = turnManager.getCurrentPlayer().getEnergy();
 		int prevMoney = turnManager.getCurrentPlayer().getMoney();
-		int prevStoreOre = storeManager.getResource(Resource.ORE);
-		int prevStoreEnergy = storeManager.getResource(Resource.ENERGY);
-		storeManager.buyResource(Resource.ORE, 1);
-		storeManager.buyResource(Resource.ENERGY, 1);
+		int prevStoreOre = storeManager.getResourceStock(Resource.SMITHORE);
+		int prevStoreEnergy = storeManager.getResourceStock(Resource.ENERGY);
+		try {
+			storeManager.buyResource(Resource.SMITHORE, 1);
+			storeManager.buyResource(Resource.ENERGY, 1);
+		} catch (PlayerTransactionException pte) {
+		} catch (StoreTransactionException ste) {
+		}
 		assertEquals(turnManager.getCurrentPlayer().getOre(), prevPlayerOre + 1);
 		assertEquals(turnManager.getCurrentPlayer().getEnergy(), prevPlayerEnergy + 1);
-		assertEquals(turnManager.getCurrentPlayer.getMoney, prevMoney - storeManager.getPrice(Resource.ORE) - storeManager.getPrice(Resource.ENERGY));
-		assertEquals(storeManager.getResource(Resource.ORE), prevStoreOre - 1);
-		assertEquals(storeManager.getResource(Resource.ENERGY), prevStoreEnergy - 1);
+		assertEquals(turnManager.getCurrentPlayer().getMoney(), prevMoney - storeManager.getPrice(Resource.SMITHORE) - storeManager.getPrice(Resource.ENERGY));
+		assertEquals(storeManager.getResourceStock(Resource.SMITHORE), prevStoreOre - 1);
+		assertEquals(storeManager.getResourceStock(Resource.ENERGY), prevStoreEnergy - 1);
 	}
 
-	@Test(expected = PlayerTransactionException.class)
+	@Test(expected=PlayerTransactionException.class)
 	public void notEnoughMoney() {
-		turnManager.getCurrentPlayer().setMoney(turnManager.getCurrentPlayer().getMoney - 1);
-		storeManager.buyResource(Resource.ORE, 1);
+		turnManager.getCurrentPlayer().setMoney(turnManager.getCurrentPlayer().getMoney() - 1);
+		try {
+			storeManager.buyResource(Resource.SMITHORE, 1);
+		} catch (PlayerTransactionException pte) {
+		} catch (StoreTransactionException ste) {
+		}
 	}
 
-	@Test(expected = StoreTransactionException.class)
+	@Test(expected=StoreTransactionException.class)
 	public void notEnoughResources() {
-		storeManager.buyResource(Resource.ORE, 500);
+		try {
+			storeManager.buyResource(Resource.SMITHORE, 500);
+		} catch (PlayerTransactionException pte) {
+		} catch (StoreTransactionException ste) {
+		}
 	}
 }
