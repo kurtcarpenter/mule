@@ -99,4 +99,8 @@ public class StoreManager implements java.io.Serializable {
   public int getResourceStock(Resource resource) {
     return resourceStorage.get(resource);
   }
+
+  public int getPrice(Resource resource) {
+    return prices.get(resource);
+  }
 }
