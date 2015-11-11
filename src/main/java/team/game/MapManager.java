@@ -108,7 +108,10 @@ public class MapManager implements java.io.Serializable {
         break;
       case CRYSTITE:
         System.out.println("Crystite Mule added resources to production");
-        amount = (int) (Math.random() * 5);
+        amount = new java.util.Random().nextInt(5);
+        break;
+      default:
+        System.out.println("Defaulted");
         break;
     }
     p.setResourceQuantity(r, amount);

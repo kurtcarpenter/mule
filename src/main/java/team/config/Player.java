@@ -114,6 +114,20 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
     return this.getScore() - p.getScore();
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o != null && o instanceof Player) {
+      Player temp = (Player)o;
+      return temp.getName().equals(getName());
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return getName().hashCode();
+  }
+
   public void incScore(int delta) {
     score += delta;
   }

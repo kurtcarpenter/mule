@@ -55,6 +55,9 @@ public class RandomEventManager implements java.io.Serializable {
            case 7:  p.setMoney(randFactor[round] * -6);
                     System.out.println("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $6*m TO CLEAN IT UP.");
                     break;
+           default:
+              System.out.println("Defaulted");
+              break;
        }
     }
   }

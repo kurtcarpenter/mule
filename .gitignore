@@ -3,3 +3,4 @@ src/main/deploy
 *.class
 .gradle/
 build/
+game.ser

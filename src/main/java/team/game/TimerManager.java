@@ -45,11 +45,11 @@ public class TimerManager {
         if (food == 0) {
             startTime = 5;
         } else {
-            if ((turn <= 4 && food < 3))
+            if (turn <= 4 && food < 3)
                 startTime = 30;
-            else if ((turn <= 8 && food < 4))
+            else if (turn <= 8 && food < 4)
                 startTime = 30;
-            else if ((turn <= 12 && food < 5))
+            else if (turn <= 12 && food < 5)
                 startTime = 30;
         }
         return startTimer(startTime);

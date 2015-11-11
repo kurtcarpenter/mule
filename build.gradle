@@ -1,6 +1,9 @@
 defaultTasks 'execute'
 apply plugin: 'java'
 
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
 repositories {
   mavenCentral()
 }

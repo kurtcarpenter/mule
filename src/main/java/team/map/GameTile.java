@@ -9,7 +9,7 @@ public class GameTile implements java.io.Serializable {
   private final int y;
   private Player owner;
   private Resource muleType;
-  private final int cost = 1000;
+  private static final int cost = 1000;
 
   public GameTile(int x, int y) {
     this.x = x;
