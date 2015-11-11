@@ -43,6 +43,7 @@ public class Game implements Serializable {
 
   /**
    * Sets up game instance that persists through playthrough.
+   * 
    * @param config congig object to instantiate Game
    */
   public Game(Configuration config) {
@@ -110,6 +111,13 @@ public class Game implements Serializable {
     timerManager.passScreenMaster(screenMaster);
   }
 
+  /**
+   * Loads the game file and sets the map buttons.
+   *
+   * @return the current Game object if the file is found, otherwise null
+   * @throws FileNotFoundException if the game file is not found
+   * @throws Exception if for any other exception
+   */
   public Game loadGame() {
     try {
       readObject(new ObjectInputStream(new FileInputStream("game.ser")));
@@ -124,6 +132,12 @@ public class Game implements Serializable {
     return this;
   }
 
+  /**
+   * Saves the current game file for future use.
+   * 
+   * @return true if the game file was successfully saved, false otherwise
+   * @throws Exception if an exception occurs
+   */
   public boolean saveGame() {
     try {
       writeObject(new ObjectOutputStream(new FileOutputStream("game.ser")));
