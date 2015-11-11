@@ -18,6 +18,13 @@ public class GameSettings implements java.io.Serializable {
 
   }
 
+  /**
+   * Creates a GameSettings object.
+   *
+   * @param difficulty the difficulty for the game
+   * @param map the type of map for the game
+   * @param numPlayers the number of players in this game
+   */
   public GameSettings(Difficulty difficulty, Map map, int numPlayers) {
     this.difficulty = difficulty;
     this.map = map;
