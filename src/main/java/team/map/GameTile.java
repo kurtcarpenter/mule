@@ -13,13 +13,13 @@ public class GameTile implements java.io.Serializable {
 
   /**
    * Creates a GameTile object at a specified position.
-   * 
+   *
    * @param myX the x position of the object
    * @param myY the y position of the object
    */
   public GameTile(int myX, int myY) {
-    this.x = myX;
-    this.y = myY;
+    this.myX = myX;
+    this.myY = myY;
     muleType = null;
   }
 

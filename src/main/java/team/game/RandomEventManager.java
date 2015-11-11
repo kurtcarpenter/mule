@@ -21,7 +21,7 @@ public class RandomEventManager implements java.io.Serializable {
 
   /**
    * Method called when a random event has been triggered.
-   * 
+   *
    * @param player the player for which the random event is being applied to.
    * @param round the current round number
    */
@@ -63,7 +63,7 @@ public class RandomEventManager implements java.io.Serializable {
           System.out.println("FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $4*m.");
           break;
         case 6:
-          player.setResourceQuantity(Resource.FOOD, p.getFood() / 2);
+          player.setResourceQuantity(Resource.FOOD, player.getFood() / 2);
           System.out.println("MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF"
               + " YOUR FOOD.");
           break;

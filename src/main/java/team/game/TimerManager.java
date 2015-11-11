@@ -23,7 +23,7 @@ public class TimerManager {
 
   /**
    * Creates a TimerManager object.
-   * 
+   *
    * @param turnManager the TurnManager object associated with this object
    */
   public TimerManager(TurnManager turnManager) {
@@ -40,7 +40,7 @@ public class TimerManager {
 
   /**
    * Starts the timer for the current player's turn.
-   * 
+   *
    * @return the time remaining
    */
   public StringBinding startTimer() {
@@ -67,7 +67,7 @@ public class TimerManager {
 
   private StringBinding startTimer(final int startTime) {
     timeSeconds.set(startTime);
-    timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(
+    timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(startTime + 1), new KeyValue(
         timeSeconds, 0)));
     timeline.playFromStart();
     return timeSeconds.asString();
