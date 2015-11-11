@@ -13,10 +13,12 @@ public class RandomEventManager implements java.io.Serializable {
   private List<Player> players;
   private Random rand;
   private final int[] randFactor = {0, 25, 25, 25, 50, 50, 50, 50, 75, 75, 75, 75, 100};
+  private final int chance;
 
-  public RandomEventManager(List<Player> players) {
+  public RandomEventManager(List<Player> players, int chance) {
     this.players = players;
     rand = new Random(System.currentTimeMillis());
+    this.chance = chance;
   }
 
   /**
@@ -26,10 +28,14 @@ public class RandomEventManager implements java.io.Serializable {
    * @param round the current round number
    */
   public void triggerEvent(Player player, int round) {
-    if (rand.nextInt(100) < 27) {
+    System.out.println("checking for event");
+    if (rand.nextInt(100) < 27 || chance == 1) {
       System.out.println("Executing a random event!");
       int event = rand.nextInt(7) + 1;
-      if (event > 4) {
+
+      if (chance == 1) {
+        event = 2;
+      } else if (event > 4) {
         Comparator<Player> comp = (p1, p2) -> Integer.compare( p1.getScore(), p2.getScore());
         int minScore = players.stream().min(comp).get().getScore();
         if (player.getScore() == minScore) {
@@ -37,6 +43,7 @@ public class RandomEventManager implements java.io.Serializable {
           return;
         }
       }
+
 
       switch (event) {
         case 1:
