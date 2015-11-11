@@ -27,6 +27,13 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   private int crystite;
   private Resource mule;
 
+  /**
+   * Creates a Player object.
+   *
+   * @param name the name of the Player
+   * @param race the race of the Player
+   * @param color the color of the Player
+   */
   public Player(String name, PlayerRace race, PlayerColor color) {
     this.name = name;
     this.race = race;
@@ -42,14 +49,17 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   private void setStartingMoney() {
     switch (race) {
       case HUMAN:
-          money = 600;
-          break;
+        money = 600;
+        break;
       case FLAPPER:
-          money = 1600;
-          break;
+        money = 1600;
+        break;
       case OTHERS:
-          money = 1000;
-          break;
+        money = 1000;
+        break;
+      default:
+        money = 0;
+        break;
     }
   }
 
@@ -110,14 +120,14 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   }
 
   @Override
-  public int compareTo(Player p) {
-    return this.getScore() - p.getScore();
+  public int compareTo(Player player) {
+    return this.getScore() - player.getScore();
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (o != null && o instanceof Player) {
-      Player temp = (Player)o;
+  public boolean equals(Object obj) {
+    if (obj != null && obj instanceof Player) {
+      Player temp = (Player) obj;
       return temp.getName().equals(getName());
     }
     return false;
@@ -132,8 +142,14 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
     score += delta;
   }
 
-  public int getResourceQuantity(Resource r) {
-    switch (r) {
+  /**
+   * Returns the amount of a resource.
+   * 
+   * @param resource the type or resource being checked
+   * @return the amount of the resource
+   */
+  public int getResourceQuantity(Resource resource) {
+    switch (resource) {
       case FOOD:
         return food;
       case ENERGY:
@@ -143,16 +159,25 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
       case CRYSTITE:
         return crystite;
       case MULE:
-        if (mule == null)
-            return 0;
-        else
-            return 1;
+        if (mule == null) {
+          return 0;
+        } else {
+          return 1;
+        }
+      default:
+        return -1;
     }
-    return -1;
   }
 
-  public void setResourceQuantity(Resource r, int quantity) {
-    switch (r) {
+  /**
+   * Adds a specified quantity of the resource to the current amount of
+   * resources.
+   *
+   * @param resource the type of resource being set
+   * @param quantity the amount of resources to be added to the current amount
+   */
+  public void setResourceQuantity(Resource resource, int quantity) {
+    switch (resource) {
       case FOOD:
         food += quantity;
         break;
@@ -168,6 +193,8 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
       case MULE:
         mule = null;
         break;
+      default:
+        break;
     }
   }
 
@@ -176,6 +203,6 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   }
 
   public Resource getMule() {
-      return mule;
+    return mule;
   }
 }

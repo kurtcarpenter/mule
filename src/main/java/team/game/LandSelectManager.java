@@ -12,12 +12,19 @@ public class LandSelectManager implements java.io.Serializable {
     this.gameMap = gameMap;
   }
 
-  public boolean buyLand(int x, int y) {
-    if (gameMap.getTile(x, y).getOwner() == null) {
+  /**
+   * Method used for the current player to buy a piece of land.
+   * 
+   * @param myX x position of the land being bought
+   * @param myY y position of the land being bought
+   * @return true if the land was successfully bought, false otherwise
+   */
+  public boolean buyLand(int myX, int myY) {
+    if (gameMap.getTile(myX, myY).getOwner() == null) {
       turnManager.getCurrentPlayer().setTilesOwned(1);
-      gameMap.getTile(x, y).setOwner(turnManager.getCurrentPlayer());
+      gameMap.getTile(myX, myY).setOwner(turnManager.getCurrentPlayer());
       if (turnManager.getCurrentTurn() > 2) {
-        turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(x, y).getCost());
+        turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(myX, myY).getCost());
       }
       turnManager.advanceStep();
       return true;

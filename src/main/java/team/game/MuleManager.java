@@ -15,20 +15,26 @@ public class MuleManager implements java.io.Serializable {
     this.gameMap = gameMap;
   }
 
-  public void placeMule(int x, int y) {
-      Player curPlayer = turnManager.getCurrentPlayer();
-      if (gameMap.getTile(x, y).getOwner() == curPlayer) {
-          if (curPlayer.getMule() != null) {
-              gameMap.getTile(x, y).setMule(curPlayer.getMule());
-              System.out.println("Placed " + curPlayer.getMule().toString() + "mule at (" + x + ", " + y + ")");
-              curPlayer.receiveMule(null);
-          } else {
-              System.out.println("You don't own a mule to place here.");
-          }
+  /**
+   * Method called to place a mule on a piece of land if the player owns that piece of land.
+   * 
+   * @param myX the x position of the tile
+   * @param myY the y position of the tile
+   */
+  public void placeMule(int myX, int myY) {
+    Player curPlayer = turnManager.getCurrentPlayer();
+    if (gameMap.getTile(myX, myY).getOwner() == curPlayer) {
+      if (curPlayer.getMule() != null) {
+        gameMap.getTile(myX, myY).setMule(curPlayer.getMule());
+        System.out.println("Placed " + curPlayer.getMule().toString() + "mule at (" + myX + ", "
+            + myY + ")");
+        curPlayer.receiveMule(null);
       } else {
-          curPlayer.receiveMule(null);
-          System.out.println("You don't own this tile!");
+        System.out.println("You don't own a mule to place here.");
       }
+    } else {
+      curPlayer.receiveMule(null);
+      System.out.println("You don't own this tile!");
+    }
   }
-
 }
