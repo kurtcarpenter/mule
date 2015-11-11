@@ -5,15 +5,21 @@ import team.game.containers.Resource;
 import team.game.containers.Terrain;
 
 public class GameTile implements java.io.Serializable {
-  private final int x;
-  private final int y;
+  private final int myX;
+  private final int myY;
   private Player owner;
   private Resource muleType;
   private static final int cost = 1000;
 
-  public GameTile(int x, int y) {
-    this.x = x;
-    this.y = y;
+  /**
+   * Creates a GameTile object at a specified position.
+   * 
+   * @param myX the x position of the object
+   * @param myY the y position of the object
+   */
+  public GameTile(int myX, int myY) {
+    this.x = myX;
+    this.y = myY;
     muleType = null;
   }
 
@@ -21,8 +27,8 @@ public class GameTile implements java.io.Serializable {
     return cost;
   }
 
-  public void setOwner(Player p) {
-    this.owner = p;
+  public void setOwner(Player player) {
+    this.owner = player;
   }
 
   public Player getOwner() {
@@ -30,19 +36,19 @@ public class GameTile implements java.io.Serializable {
   }
 
   public int getX() {
-    return x;
+    return myX;
   }
 
   public int getY() {
-    return y;
+    return myY;
   }
 
   public void setMule(Resource muleType) {
-      this.muleType = muleType;
+    this.muleType = muleType;
   }
 
   public Resource getMule() {
-      return muleType;
+    return muleType;
   }
 
   public Terrain getTerrain() {
