@@ -13,18 +13,21 @@ public class ScoreManager implements java.io.Serializable {
     this.players = players;
   }
 
+  /**
+   * Method called to update the scores of all players.
+   */
   public void updateScores() {
-    for (Player p : players) {
-      updateScore(p);
+    for (Player player : players) {
+      updateScore(player);
     }
   }
 
-  public void updateScore(Player p) {
-    p.setScore(calculateScore(p));
+  public void updateScore(Player player) {
+    player.setScore(calculateScore(player));
   }
 
-  private int calculateScore(Player p) {
-    return MONEY_MULTIPLIER * p.getMoney() + TILE_MULTIPLIER * p.getTilesOwned()
-        + RESOURCE_MULTIPLIER * p.getScorableResources();
+  private int calculateScore(Player player) {
+    return MONEY_MULTIPLIER * player.getMoney() + TILE_MULTIPLIER * player.getTilesOwned()
+        + RESOURCE_MULTIPLIER * player.getScorableResources();
   }
 }

@@ -24,6 +24,14 @@ public class TurnManager implements java.io.Serializable {
   private MapManager mapManager;
   private Game game;
 
+  /**
+   * Creates a TurnManager object.
+   * 
+   * @param players the list of players
+   * @param currentState the GameState that the game is currently in
+   * @param scoreManager the ScoreManager object being associated with this object
+   * @param game the Game object being associated with this object
+   */
   public TurnManager(List<Player> players, GameState currentState,
       ScoreManager scoreManager, Game game) {
     this.players = players;
@@ -40,6 +48,9 @@ public class TurnManager implements java.io.Serializable {
     return players;
   }
 
+  /**
+   *Updates each player's score and turn order for the game.
+   */
   public void regenerateList() {
     scoreManager.updateScores();
     currentTurnOrder.clear();
@@ -79,28 +90,9 @@ public class TurnManager implements java.io.Serializable {
   }
 
   /**
-   * Advances turn. Should not usually be called, unless all players end and
-   * you do not advance steps.
+   * Returns the current player and calls regenerateList if there is more than one player left in
+   * the current turn.
    */
-  /*public void advanceTurn() {
-    if (step % players.size() == 0) {
-      regenerateList();
-    }
-    this.advanceTurn(1);
-  }
-
-  /**
-   * Advances turn by a number. Should not usually be called.
-   * Used for skipping a bunch of time into the future.
-   */
-  /*public void advanceTurn(int turns) {
-    if (step % players.size() == 0) {
-      regenerateList();
-    }
-    step += players.size() * turns;
-    turn += turns;
-  }*/
-
   public Player getCurrentPlayer() {
     if (currentTurnOrder.size() == 0) {
       regenerateList();
