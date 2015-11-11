@@ -15,8 +15,16 @@ public class MapManager implements java.io.Serializable {
   private final GameMap gameMap;
   private int passCount;
 
-  public MapManager(TurnManager turnManager, LandSelectManager landSelectManager,
-                        MuleManager muleManager, GameMap gameMap) {
+  /**
+   * Creates a MapManager object.
+   * 
+   * @param turnManager the TurnManager object being associated with this object
+   * @param landSelectManager the LandSelectManager object being associated with this object
+   * @param muleManager the MuleManager object being associated with this object
+   * @param gameMap the GameMap object being associated with this object
+   */
+  public MapManager(TurnManager turnManager, LandSelectManager landSelectManager, 
+      MuleManager muleManager, GameMap gameMap) {
     this.turnManager = turnManager;
     this.landSelectManager = landSelectManager;
     this.muleManager = muleManager;
@@ -24,17 +32,24 @@ public class MapManager implements java.io.Serializable {
     passCount = 0;
   }
 
-  public boolean process(int x, int y) {
+  /**
+   * Method used to buy land during the land selection phase or place a mule on land.
+   * 
+   * @param myX the x position of the tile being processed
+   * @param myY the y position of the tile being processed
+   */
+  public boolean process(int myX, int myY) {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
-      return landSelectManager.buyLand(x, y);
+      return landSelectManager.buyLand(myX, myY);
     } else {
-      //other shit maybe view tile in the future
-
-      muleManager.placeMule(x, y);
+      muleManager.placeMule(myX, myY);
       return false;
     }
   }
 
+  /**
+   * Method used to register that the user has passed their turn.
+   */
   public int pass() {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
       passCount++;
@@ -46,6 +61,9 @@ public class MapManager implements java.io.Serializable {
     return passCount;
   }
 
+  /**
+   * Calculates the production of the entire map and updates the score of each player's inventory.
+   */
   public void productionMap() {
     GameTile[][] grid = gameMap.getGrid();
     Player currentPlayer = turnManager.getCurrentPlayer();
@@ -66,19 +84,25 @@ public class MapManager implements java.io.Serializable {
     }
   }
 
-  public void calculateProduction(GameTile g, Player p) {
-    Terrain t = g.getTerrain();
-    Resource r = g.getMule();
-    if (r == null) {
+  /**
+   * Calculates the production granted to a player for a tile that they own.
+   * 
+   * @param gameTile the tile whose production is being calculated
+   * @param player the player who owns the tile
+   */
+  public void calculateProduction(GameTile gameTile, Player player) {
+    Terrain terrain = gameTile.getTerrain();
+    Resource resource = gameTile.getMule();
+    if (resource == null) {
       return;
     }
     int amount = 0;
-    switch (r) {
+    switch (resource) {
       case FOOD:
         System.out.println("Food Mule added resources to production");
-        if (t.equals(Terrain.RIVER)) {
+        if (terrain.equals(Terrain.RIVER)) {
           amount = 4;
-        } else if (t.equals(Terrain.PLAIN)) {
+        } else if (terrain.equals(Terrain.PLAIN)) {
           amount = 2;
         } else {
           amount = 1;
@@ -86,9 +110,9 @@ public class MapManager implements java.io.Serializable {
         break;
       case ENERGY:
         System.out.println("Energy Mule added resources to production");
-        if (t.equals(Terrain.RIVER)) {
+        if (terrain.equals(Terrain.RIVER)) {
           amount = 2;
-        } else if (t.equals(Terrain.PLAIN)) {
+        } else if (terrain.equals(Terrain.PLAIN)) {
           amount = 3;
         } else {
           amount = 1;
@@ -96,21 +120,24 @@ public class MapManager implements java.io.Serializable {
         break;
       case SMITHORE:
         System.out.println("Smithore Mule added resources to production");
-        if (t.equals(Terrain.PLAIN)) {
+        if (terrain.equals(Terrain.PLAIN)) {
           amount = 1;
-        } else if (t.equals(Terrain.M1)) {
+        } else if (terrain.equals(Terrain.M1)) {
           amount = 2;
-        } else if (t.equals(Terrain.M2)) {
+        } else if (terrain.equals(Terrain.M2)) {
           amount = 3;
-        } else if (t.equals(Terrain.M3)) {
+        } else if (terrain.equals(Terrain.M3)) {
           amount = 4;
         }
         break;
       case CRYSTITE:
         System.out.println("Crystite Mule added resources to production");
-        amount = (int) (Math.random() * 5);
+        amount = new java.util.Random().nextInt(5);
+        break;
+      default:
+        System.out.println("Defaulted");
         break;
     }
-    p.setResourceQuantity(r, amount);
+    player.setResourceQuantity(resource, amount);
   }
 }

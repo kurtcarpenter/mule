@@ -1,8 +1,11 @@
 package team.map;
 
 public class GameMap implements java.io.Serializable {
-  GameTile[][] grid;
+  private GameTile[][] grid;
 
+  /**
+   * Creates a GameMap object.
+   */
   public GameMap() {
     grid = new GameTile[5][9];
     for (int i = 0; i < grid.length; i++) {
@@ -13,10 +16,10 @@ public class GameMap implements java.io.Serializable {
   }
 
   public GameTile[][] getGrid() {
-    return grid;
+    return grid.clone();
   }
 
-  public GameTile getTile(int x, int y) {
-    return grid[x][y];
+  public GameTile getTile(int myX, int myY) {
+    return grid[myX][myY];
   }
 }
