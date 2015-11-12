@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Srivas Sundararajan
@@ -51,8 +53,9 @@ public class MuleManagerTests {
    * Setup Stream to test STDOUT.
    */
   @Before
-  public void setUpStreams() {
-    System.setOut(new PrintStream(outContent));
+  public void setUpStreams() throws UnsupportedEncodingException {
+    System.setOut(new PrintStream(outContent, false,
+        Charset.defaultCharset().displayName()));
   }
 
   /**
