@@ -34,6 +34,7 @@ public class MuleManagerTests {
   TurnManager turnManager;
   GameMap gameMap;
   ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+  String defaultCharset = Charset.defaultCharset().displayName();
 
   /**
    * Setup test variable for use.
@@ -54,8 +55,7 @@ public class MuleManagerTests {
    */
   @Before
   public void setUpStreams() throws UnsupportedEncodingException {
-    System.setOut(new PrintStream(outContent, false,
-        Charset.defaultCharset().displayName()));
+    System.setOut(new PrintStream(outContent, false, defaultCharset));
   }
 
   /**
@@ -67,7 +67,7 @@ public class MuleManagerTests {
   }
 
   @Test
-  public void placeValidMule() {
+  public void placeValidMule() throws UnsupportedEncodingException {
     int myX = 2;
     int myY = 2;
     Player curPlayer = turnManager.getCurrentPlayer();
@@ -78,39 +78,44 @@ public class MuleManagerTests {
         gameMap.getTile(myX, myY).getMule());
     assertNull("Player still has mule,", curPlayer.getMule());
     String outString = "Placed " + Resource.FOOD.toString() + "mule at ("
-        + myX + ", " + myY + ")\n";
-    assertEquals("Incorrect output,", outString, outContent.toString());
+        + myX + ", " + myY + ")";
+    assertEquals("Incorrect output,", outString,
+        outContent.toString(defaultCharset).trim());
   }
 
   @Test
-  public void placeMuleWithoutMule() {
+  public void placeMuleWithoutMule() throws UnsupportedEncodingException {
     Player curPlayer = turnManager.getCurrentPlayer();
     gameMap.getTile(4, 8).setOwner(curPlayer);
     muleManager.placeMule(4, 8);
     assertNull("Game Tile Mule not null,", gameMap.getTile(4, 8).getMule());
-    String outString = "You don't own a mule to place here.\n";
-    assertEquals("Incorrect output,", outString, outContent.toString());
+    String outString = "You don't own a mule to place here.";
+    assertEquals("Incorrect output,", outString,
+        outContent.toString(defaultCharset).trim());
   }
 
   @Test
-  public void placeMuleWithMuleWithoutOwningTile() {
+  public void placeMuleWithMuleWithoutOwningTile()
+        throws UnsupportedEncodingException {
     Player curPlayer = turnManager.getCurrentPlayer();
     curPlayer.receiveMule(Resource.ENERGY);
     muleManager.placeMule(4, 0);
     assertNull("Game Tile Mule not null,", gameMap.getTile(4, 0).getMule());
     assertNull("Player Mule not null,", curPlayer.getMule());
-    String outString = "You don't own this tile!\n";
-    assertEquals("Incorrect output,", outString, outContent.toString());
+    String outString = "You don't own this tile!";
+    assertEquals("Incorrect output,", outString,
+        outContent.toString(defaultCharset).trim());
   }
 
   @Test
-  public void placeMuleWithoutOwningTile() {
+  public void placeMuleWithoutOwningTile() throws UnsupportedEncodingException {
     Player curPlayer = turnManager.getCurrentPlayer();
     muleManager.placeMule(1, 0);
     assertNull("Game Tile Mule not null,", gameMap.getTile(4, 0).getMule());
     assertNull("Player Mule not null,", curPlayer.getMule());
-    String outString = "You don't own this tile!\n";
-    assertEquals("Incorrect output,", outString, outContent.toString());
+    String outString = "You don't own this tile!";
+    assertEquals("Incorrect output,", outString,
+        outContent.toString(defaultCharset).trim());
   }
 
   private List<Player> getPlayers() {
