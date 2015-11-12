@@ -9,6 +9,12 @@ public class ScoreManager implements java.io.Serializable {
   private static final int RESOURCE_MULTIPLIER = 1;
   private List<Player> players;
 
+
+  /**
+   * Creates a ScoreManager object.
+   *
+   * @param players the list of players
+   */
   public ScoreManager(List<Player> players) {
     if (players == null) {
       throw new IllegalArgumentException("Players list was null");

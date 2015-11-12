@@ -59,7 +59,7 @@ public class MainMapController extends AScreen {
     passButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        if (parent.game.getMapManager().pass() 
+        if (parent.game.getMapManager().pass()
             == parent.game.getTurnManager().getPlayers().size()) {
           titlePane.getChildren().remove(passButton);
         }
@@ -69,49 +69,72 @@ public class MainMapController extends AScreen {
     createMap();
   }
 
+  /**
+   * Get the hex representation of the current player's color.
+   *
+   * @return hex representation of color.
+   */
   public String getNewButtonColor() {
-    Color c = Color.valueOf(parent.game.getTurnManager().getCurrentPlayer().getColor().toString());
-    return String.format("#%02X%02X%02X", (int) (c.getRed() * 255), (int) (c.getGreen() * 255),
-        (int) (c.getBlue() * 255));
+    Color col = Color.valueOf(parent.game.getTurnManager()
+        .getCurrentPlayer().getColor().toString());
+    return String.format("#%02X%02X%02X", (int) (col.getRed() * 255),
+        (int) (col.getGreen() * 255), (int) (col.getBlue() * 255));
   }
 
+  /**
+   * Set colors for all map buttons.
+   *
+   * @param map The game map
+   */
   public void setMapButtons(GameMap map) {
     for (Node node : mapGrid.getChildren()) {
-      if (node instanceof javafx.scene.Group)
+      if (node instanceof javafx.scene.Group) {
         continue;
-      int i = GridPane.getRowIndex(node);
-      int j = GridPane.getColumnIndex(node);
-      Player p = map.getTile(i, j).getOwner();
-      if (p != null) {
-        Color c = Color.valueOf(p.getColor().toString());
-        String hex = String.format("#%02X%02X%02X", (int) (c.getRed() * 255),
-            (int) (c.getGreen() * 255), (int) (c.getBlue() * 255 ));
+      }
+      int rowIndex = GridPane.getRowIndex(node);
+      int colIndex = GridPane.getColumnIndex(node);
+      Player player = map.getTile(rowIndex, colIndex).getOwner();
+      if (player != null) {
+        Color col = Color.valueOf(player.getColor().toString());
+        String hex = String.format("#%02X%02X%02X", (int) (col.getRed() * 255),
+            (int) (col.getGreen() * 255), (int) (col.getBlue() * 255 ));
         ((Button)node).setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
       }
     }
   }
 
+  /**
+   * Sets the various labels corresponding to players and the current turn.
+   */
   public void setPlayerStuff() {
     turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
-    nameLabel.setText(parent.game.getTurnManager().getCurrentPlayer().getName());
-    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
+    nameLabel.setText(parent.game.getTurnManager()
+        .getCurrentPlayer().getName());
+    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer()
+        .getMoney());
     playerColor.setFill(Color.valueOf(
         parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
     // Change init time based on player attributes
     if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT
         && parent.game.getTimerManager().isStart()) {
-      timerLabel.textProperty().bind(parent.game.getTimerManager().startTimer());
+      timerLabel.textProperty().bind(parent.game.getTimerManager()
+          .startTimer());
     }
-    scoreLabel.setText("Score " + parent.game.getTurnManager().getCurrentPlayer().getScore());
-    timerLabel.textProperty().bind(parent.game.getTimerManager().getTimerBinding());
+    scoreLabel.setText("Score " + parent.game.getTurnManager()
+        .getCurrentPlayer().getScore());
+    timerLabel.textProperty().bind(parent.game.getTimerManager()
+        .getTimerBinding());
   }
 
+  /**
+   * Creates the map.
+   */
   public void createMap() {
     for (int i = 0; i < mapLayout.length; i++) {
       for (int j = 0; j < mapLayout[i].length; j++) {
         final String layoutString = mapLayout[i][j];
         Image image = new Image("graphics/test.png");
-        switch(mapLayout[i][j]) {
+        switch (mapLayout[i][j]) {
           case "P":
             image = new Image("graphics/plain.png");
             break;
@@ -144,13 +167,13 @@ public class MainMapController extends AScreen {
         newButton.setOnAction(new EventHandler<ActionEvent>() {
           @Override
           public void handle(ActionEvent event) {
-            if (layoutString.equals("Town"))
+            if (layoutString.equals("Town")) {
               parent.displayScreen(MainApp.TOWN_SCREEN);
-            else {
-              int x = GridPane.getRowIndex(newButton);
-              int y = GridPane.getColumnIndex(newButton);
+            } else {
+              int rowIndex = GridPane.getRowIndex(newButton);
+              int colIndex = GridPane.getColumnIndex(newButton);
               String hex = getNewButtonColor();
-              boolean isValidTurn = parent.game.getMapManager().process(x, y);
+              boolean isValidTurn = parent.game.getMapManager().process(rowIndex, colIndex);
               if (isValidTurn) {
                 newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
                 setPlayerStuff();
