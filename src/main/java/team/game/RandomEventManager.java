@@ -15,6 +15,12 @@ public class RandomEventManager implements java.io.Serializable {
   private final int[] randFactor = {0, 25, 25, 25, 50, 50, 50, 50, 75, 75, 75, 75, 100};
   private final int chance;
 
+  /**
+   * Creates a RandomEventManager object.
+   *
+   * @param players the list of players
+   * @param chance the chance for the random event
+   */
   public RandomEventManager(List<Player> players, int chance) {
     this.players = players;
     rand = new Random(System.currentTimeMillis());
