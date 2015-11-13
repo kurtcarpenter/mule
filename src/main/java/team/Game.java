@@ -43,7 +43,7 @@ public class Game implements Serializable {
 
   /**
    * Sets up game instance that persists through playthrough.
-   * 
+   *
    * @param config congig object to instantiate Game
    */
   public Game(Configuration config) {
@@ -59,7 +59,7 @@ public class Game implements Serializable {
     mapManager = new MapManager(turnManager, landSelectManager, muleManager, gameMap);
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
     storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
-    randomEventManager = new RandomEventManager(configuration.getPlayers());
+    randomEventManager = new RandomEventManager(configuration.getPlayers(), 0);
   }
 
   public Configuration getConfiguration() {
@@ -134,7 +134,7 @@ public class Game implements Serializable {
 
   /**
    * Saves the current game file for future use.
-   * 
+   *
    * @return true if the game file was successfully saved, false otherwise
    * @throws Exception if an exception occurs
    */
