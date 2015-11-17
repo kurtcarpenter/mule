@@ -35,12 +35,12 @@ public class RandomEventManager implements java.io.Serializable {
    */
   public void triggerEvent(Player player, int round) {
     System.out.println("checking for event");
-    if (rand.nextInt(100) < 27 || chance == 1) {
+    if (rand.nextInt(100) < 27 || chance >= 1) {
       System.out.println("Executing a random event!");
       int event = rand.nextInt(7) + 1;
 
-      if (chance == 1) {
-        event = 2;
+      if (chance >= 1) {
+        event = chance;
       } else if (event > 4) {
         Comparator<Player> comp = (p1, p2) -> Integer.compare( p1.getScore(), p2.getScore());
         int minScore = players.stream().min(comp).get().getScore();
