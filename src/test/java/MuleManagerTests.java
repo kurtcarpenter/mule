@@ -63,7 +63,7 @@ public class MuleManagerTests {
    */
   @After
   public void cleanUpStreams() {
-    System.setOut(null);
+    System.out.flush();
   }
 
   @Test
