@@ -1,6 +1,6 @@
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
 import team.game.ScoreManager;
 import team.config.Player;
 import team.config.Player.PlayerRace;
@@ -80,7 +80,7 @@ public class ScoreManagerTests {
     assertEquals("Score 4 incorrect,", 3349, curPlayers.get(3).getScore());
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void nullPlayersListThrowsException() {
     sm = new ScoreManager(null);
   }
