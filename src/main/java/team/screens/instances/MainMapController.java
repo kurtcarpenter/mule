@@ -120,7 +120,7 @@ public class MainMapController extends AScreen {
       timerLabel.textProperty().bind(parent.game.getTimerManager()
           .startTimer());
     }
-    scoreLabel.setText("Score " + parent.game.getTurnManager()
+    scoreLabel.setText("Score: " + parent.game.getTurnManager()
         .getCurrentPlayer().getScore());
     timerLabel.textProperty().bind(parent.game.getTimerManager()
         .getTimerBinding());
