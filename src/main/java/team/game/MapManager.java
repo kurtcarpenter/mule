@@ -42,8 +42,7 @@ public class MapManager implements java.io.Serializable {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
       return landSelectManager.buyLand(myX, myY);
     } else {
-      muleManager.placeMule(myX, myY);
-      return false;
+      return muleManager.placeMule(myX, myY);
     }
   }
 

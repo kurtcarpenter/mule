@@ -133,7 +133,7 @@ public class MainMapController extends AScreen {
     for (int i = 0; i < mapLayout.length; i++) {
       for (int j = 0; j < mapLayout[i].length; j++) {
         final String layoutString = mapLayout[i][j];
-        Image image = new Image("graphics/test.png");
+        Image image = new Image("graphics/plain.png");
         switch (mapLayout[i][j]) {
           case "P":
             image = new Image("graphics/plain.png");
@@ -177,6 +177,34 @@ public class MainMapController extends AScreen {
               if (isValidTurn) {
                 newButton.setStyle("-fx-font: 14 arial; -fx-base: " + hex + ";");
                 setPlayerStuff();
+                if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT) {
+                  Image image = new Image("graphics/plainMule.png");
+                  switch (mapLayout[rowIndex][colIndex]) {
+                    case "P":
+                      image = new Image("graphics/plainMule.png");
+                      break;
+                    case "R":
+                      image = new Image("graphics/riverMule.png");
+                      break;
+                    case "M1":
+                      image = new Image("graphics/m1Mule.png");
+                      break;
+                    case "M2":
+                      image = new Image("graphics/m2Mule.png");
+                      break;
+                    case "M3":
+                      image = new Image("graphics/m3Mule.png");
+                      break;
+                    default:
+                      System.out.println("Defaulted");
+                      break;
+                  }
+                  ImageView iv = new ImageView();
+                  iv.setImage(image);
+                  iv.setFitHeight(40);
+                  iv.setFitWidth(40);
+                  newButton.setGraphic(iv);
+                }
               }
             }
           }

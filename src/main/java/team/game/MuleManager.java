@@ -20,21 +20,25 @@ public class MuleManager implements java.io.Serializable {
    * 
    * @param myX the x position of the tile
    * @param myY the y position of the tile
+   * @return true if a mule was placed, false otherwise
    */
-  public void placeMule(int myX, int myY) {
-    Player curPlayer = turnManager.getCurrentPlayer();
-    if (gameMap.getTile(myX, myY).getOwner() == curPlayer) {
-      if (curPlayer.getMule() != null) {
-        gameMap.getTile(myX, myY).setMule(curPlayer.getMule());
-        System.out.println("Placed " + curPlayer.getMule().toString() + "mule at (" + myX + ", "
+  public boolean placeMule(int myX, int myY) {
+    Player currPlayer = turnManager.getCurrentPlayer();
+    if (gameMap.getTile(myX, myY).getOwner() == currPlayer) {
+      if (currPlayer.getMule() != null) {
+        gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
+        System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
             + myY + ")");
-        curPlayer.receiveMule(null);
+        currPlayer.receiveMule(null);
+        return true;
       } else {
         System.out.println("You don't own a mule to place here.");
+        return false;
       }
     } else {
-      curPlayer.receiveMule(null);
+      currPlayer.receiveMule(null);
       System.out.println("You don't own this tile!");
+      return false;
     }
   }
 }
