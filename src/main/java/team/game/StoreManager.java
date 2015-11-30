@@ -67,7 +67,7 @@ public class StoreManager implements java.io.Serializable {
    * @throws PlayerTransactionException if the player tries to sell more than they actually have
    */
   public void sellResource(Resource resource, int quantity)
-      throws PlayerTransactionException, StoreTransactionException {
+      throws PlayerTransactionException {
     Player player = turnManager.getCurrentPlayer();
 
     if (player.getResourceQuantity(resource) < quantity) {
@@ -106,7 +106,6 @@ public class StoreManager implements java.io.Serializable {
           + " mule to buy another one.");
     }
     verifyPurchase(resource, quantity);
-    // Add the below into verifyPurchase
     if (player.getMoney() < (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity) {
       throw new PlayerTransactionException("Player does not have enough money");
@@ -116,6 +115,17 @@ public class StoreManager implements java.io.Serializable {
         * quantity);
     player.receiveMule(muleType);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
+  }
+
+  public void sellMule(Resource muleType) throws PlayerTransactionException {
+    Player player = turnManager.getCurrentPlayer();
+
+    if (player.getMule() != muleType) {
+      throw new PlayerTransactionException("Player cannot sell a mule they do not own");
+    }
+    player.setMoney(prices.get(Resource.MULE));
+    player.setResourceQuantity(Resource.MULE, -1);
+    resourceStorage.put(Resource.MULE, resourceStorage.get(Resource.MULE) + 1);
   }
 
   private void verifyPurchase(Resource resource, int quantity)
