@@ -91,9 +91,11 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            foodQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            foodQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
@@ -107,9 +109,11 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            energyQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            energyQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
@@ -123,9 +127,11 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            smithoreQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            smithoreQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
@@ -139,9 +145,11 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            crystiteQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            crystiteQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
@@ -155,9 +163,11 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            muleQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            muleQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
