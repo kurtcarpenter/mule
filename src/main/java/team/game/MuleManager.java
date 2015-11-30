@@ -29,8 +29,8 @@ public class MuleManager implements java.io.Serializable {
       if (gameMap.getTile(myX, myY).getMule() != null) {
         System.out.println("There is already a mule on this tile. You lost your mule.");
         currPlayer.receiveMule(null);
-      }
-      if (currPlayer.getMule() != null) {
+        return false;
+      } else if (currPlayer.getMule() != null) {
         if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
             == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
           gameMap.getTile(myX, myY).setMule(currPlayer.getMule());

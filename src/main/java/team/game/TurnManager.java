@@ -49,7 +49,7 @@ public class TurnManager implements java.io.Serializable {
   }
 
   /**
-   *Updates each player's score and turn order for the game.
+   * Updates each player's score and turn order for the game.
    */
   public void regenerateList() {
     scoreManager.updateScores();
@@ -72,7 +72,6 @@ public class TurnManager implements java.io.Serializable {
       game.getMapManager().productionMap();
       game.getRandomEventManager().triggerEvent(getCurrentPlayer(), turn);
     }
-
     this.advanceStep(1);
   }
 
