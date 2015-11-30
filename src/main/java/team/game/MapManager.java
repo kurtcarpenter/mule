@@ -75,7 +75,7 @@ public class MapManager implements java.io.Serializable {
             calculateProduction(currentTile, currentPlayer);
             availableEnergy--;
           } else {
-            System.out.println("not enough energy");
+            System.out.println("Not enough energy");
             return;
           }
         }
