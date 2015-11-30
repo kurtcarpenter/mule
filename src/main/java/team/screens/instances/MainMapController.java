@@ -28,8 +28,6 @@ import team.config.Player;
 import team.Game.GameState;
 import team.map.GameMap;
 
-import team.screens.AScreen;
-
 public class MainMapController extends AScreen {
   @FXML
   private GridPane mapGrid;

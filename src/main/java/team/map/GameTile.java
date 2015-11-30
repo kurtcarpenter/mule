@@ -9,6 +9,7 @@ public class GameTile implements java.io.Serializable {
   private final int myY;
   private Player owner;
   private Resource muleType;
+  private Terrain terrain;
   private static final int cost = 1000;
 
   /**
@@ -17,9 +18,10 @@ public class GameTile implements java.io.Serializable {
    * @param myX the x position of the object
    * @param myY the y position of the object
    */
-  public GameTile(int myX, int myY) {
+  public GameTile(int myX, int myY, Terrain myTerrain) {
     this.myX = myX;
     this.myY = myY;
+    terrain = myTerrain;
     muleType = null;
   }
 
@@ -52,7 +54,6 @@ public class GameTile implements java.io.Serializable {
   }
 
   public Terrain getTerrain() {
-    // TODO: IMPLEMENT THIS
-    return Terrain.RIVER;
+    return terrain;
   }
 }

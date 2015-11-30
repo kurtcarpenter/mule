@@ -4,6 +4,7 @@ import team.map.GameMap;
 import team.Game.GameState;
 import team.config.Player;
 import team.game.containers.Resource;
+import team.game.containers.Terrain;
 
 public class MuleManager implements java.io.Serializable {
 
@@ -25,19 +26,25 @@ public class MuleManager implements java.io.Serializable {
   public boolean placeMule(int myX, int myY) {
     Player currPlayer = turnManager.getCurrentPlayer();
     if (gameMap.getTile(myX, myY).getOwner() == currPlayer) {
+      System.out.println(gameMap.getTile(myX, myY).getTerrain());
       if (currPlayer.getMule() != null) {
-        gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
-        System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
-            + myY + ")");
-        currPlayer.receiveMule(null);
-        return true;
+        if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule() == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
+          gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
+          System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
+              + myY + ")");
+          currPlayer.receiveMule(null);
+          return true;
+        } else {
+          System.out.println("You cannot place a smithore or crystite mule on a river tile.");
+          return false;
+        }
       } else {
         System.out.println("You don't own a mule to place here.");
         return false;
       }
     } else {
       currPlayer.receiveMule(null);
-      System.out.println("You don't own this tile!");
+      System.out.println("You don't own this tile! You lost your mule.");
       return false;
     }
   }
