@@ -17,7 +17,7 @@ public class MainApp extends Application {
   public static final String MAINMAP_SCREEN_FXML = "fxml/mainMap.fxml";
   public static final String TOWN_SCREEN = "townScreen";
   public static final String TOWN_SCREEN_FXML = "fxml/town.fxml";
-  public static final String PUB_SCREEN = "pubScreen";
+  public static final String PUB_SCREEN = "pub";
   public static final String PUB_SCREEN_FXML = "fxml/pub.fxml";
   public static final String STORE_SCREEN = "store";
   public static final String STORE_SCREEN_FXML = "fxml/store.fxml";

@@ -42,4 +42,9 @@ public class PubController extends AScreen {
       }
     });
   }
+
+  public void update() {
+    timerLabel.textProperty().bind(parent.game.getTimerManager()
+          .getTimerBinding());
+  }
 }
