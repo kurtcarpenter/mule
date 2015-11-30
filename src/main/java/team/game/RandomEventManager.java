@@ -34,18 +34,14 @@ public class RandomEventManager implements java.io.Serializable {
    * @param round the current round number
    */
   public void triggerEvent(Player player, int round) {
-    System.out.println("checking for event");
     if (rand.nextInt(100) < 27 || chance >= 1) {
-      System.out.println("Executing a random event!");
       int event = rand.nextInt(7) + 1;
-
       if (chance >= 1) {
         event = chance;
       } else if (event > 4) {
         Comparator<Player> comp = (p1, p2) -> Integer.compare( p1.getScore(), p2.getScore());
         int minScore = players.stream().min(comp).get().getScore();
         if (player.getScore() == minScore) {
-          System.out.println("This player has the lowest score so they can't have a bad event");
           return;
         }
       }
@@ -65,15 +61,18 @@ public class RandomEventManager implements java.io.Serializable {
           break;
         case 3:
           player.setMoney(randFactor[round] * 8);
-          System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $ 8*m.");
+          System.out.println("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $"
+              + randFactor[round] * 8 + ".");
           break;
         case 4:
           player.setMoney(randFactor[round] * 2);
-          System.out.println("YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $2*m.");
+          System.out.println("YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $"
+              + randFactor[round] * 2 + ".");
           break;
         case 5:
           player.setMoney(randFactor[round] * -4);
-          System.out.println("FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $4*m.");
+          System.out.println("FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $"
+              + randFactor[round] * 4 + ".");
           break;
         case 6:
           player.setResourceQuantity(Resource.FOOD, player.getFood() / 2);
@@ -82,8 +81,8 @@ public class RandomEventManager implements java.io.Serializable {
           break;
         case 7:
           player.setMoney(randFactor[round] * -6);
-          System.out.println("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $6*m TO"
-              + " CLEAN IT UP.");
+          System.out.println("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
+              + randFactor[round] * -6 + " CLEAN IT UP.");
           break;
         default:
           System.out.println("Defaulted");
