@@ -26,9 +26,13 @@ public class MuleManager implements java.io.Serializable {
   public boolean placeMule(int myX, int myY) {
     Player currPlayer = turnManager.getCurrentPlayer();
     if (gameMap.getTile(myX, myY).getOwner() == currPlayer) {
-      System.out.println(gameMap.getTile(myX, myY).getTerrain());
+      if (gameMap.getTile(myX, myY).getMule() != null) {
+        System.out.println("There is already a mule on this tile. You lost your mule.");
+        currPlayer.receiveMule(null);
+      }
       if (currPlayer.getMule() != null) {
-        if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule() == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
+        if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
+            == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
           gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
           System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
               + myY + ")");

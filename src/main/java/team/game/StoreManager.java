@@ -117,6 +117,12 @@ public class StoreManager implements java.io.Serializable {
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
+  /**
+   * Sells a mule for the current player with the specified type.
+   * 
+   * @param muleType type of mule being sold
+   * @throws PlayerTransactionException if the player tries to sell a mule they do not own
+   */
   public void sellMule(Resource muleType) throws PlayerTransactionException {
     Player player = turnManager.getCurrentPlayer();
 
