@@ -54,8 +54,8 @@ public class StoreManager implements java.io.Serializable {
       throw new PlayerTransactionException("Don't use this method to buy Mule");
     }
     verifyPurchase(resource, quantity);
-    player.setMoney(-1 * prices.get(resource) * quantity);
-    player.setResourceQuantity(resource, quantity);
+    player.addMoney(-1 * prices.get(resource) * quantity);
+    player.addResourceQuantity(resource, quantity);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
@@ -73,8 +73,8 @@ public class StoreManager implements java.io.Serializable {
     if (player.getResourceQuantity(resource) < quantity) {
       throw new PlayerTransactionException("Player has insufficient resources to sell");
     }
-    player.setMoney(prices.get(resource) * quantity);
-    player.setResourceQuantity(resource, -1 * quantity);
+    player.addMoney(prices.get(resource) * quantity);
+    player.addResourceQuantity(resource, -1 * quantity);
     resourceStorage.put(resource, resourceStorage.get(resource) + quantity);
   }
 
@@ -111,7 +111,7 @@ public class StoreManager implements java.io.Serializable {
       throw new PlayerTransactionException("Player does not have enough money");
     }
 
-    player.setMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
+    player.addMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity);
     player.receiveMule(muleType);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
@@ -129,8 +129,8 @@ public class StoreManager implements java.io.Serializable {
     if (player.getMule() != muleType) {
       throw new PlayerTransactionException("Player cannot sell a mule they do not own");
     }
-    player.setMoney(prices.get(Resource.MULE));
-    player.setResourceQuantity(Resource.MULE, -1);
+    player.addMoney(prices.get(Resource.MULE));
+    player.addResourceQuantity(Resource.MULE, -1);
     resourceStorage.put(Resource.MULE, resourceStorage.get(Resource.MULE) + 1);
   }
 

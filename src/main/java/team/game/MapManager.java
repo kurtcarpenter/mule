@@ -137,6 +137,6 @@ public class MapManager implements java.io.Serializable {
         System.out.println("Defaulted");
         break;
     }
-    player.setResourceQuantity(resource, amount);
+    player.addResourceQuantity(resource, amount);
   }
 }

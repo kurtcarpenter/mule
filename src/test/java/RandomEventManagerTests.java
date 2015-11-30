@@ -25,7 +25,7 @@ public class RandomEventManagerTests {
     List<Player> players = getPlayers();
     RandomEventManager rn = new RandomEventManager(players, 2);
     rn.triggerEvent(players.get(0), 1);
-    assertEquals("P1 ore must be 2", 2, players.get(0).getOre());
+    assertEquals("P1 ore must be 2", 2, players.get(0).getResourceQuantity(Resource.SMITHORE));
   }
 
   @Test

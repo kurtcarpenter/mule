@@ -79,7 +79,7 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
     return money;
   }
 
-  public void setMoney(int delta) {
+  public void addMoney(int delta) {
     this.money += delta;
   }
 
@@ -97,14 +97,6 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
 
   public int getScore() {
     return score;
-  }
-
-  public void setOre(int ore) {
-    this.ore = ore;
-  }
-
-  public int getOre() {
-    return ore;
   }
 
   public int getTilesOwned() {
@@ -144,7 +136,7 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
 
   /**
    * Returns the amount of a resource.
-   * 
+   *
    * @param resource the type or resource being checked
    * @return the amount of the resource
    */
@@ -176,7 +168,7 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
    * @param resource the type of resource being set
    * @param quantity the amount of resources to be added to the current amount
    */
-  public void setResourceQuantity(Resource resource, int quantity) {
+  public void addResourceQuantity(Resource resource, int quantity) {
     switch (resource) {
       case FOOD:
         food += quantity;

@@ -25,7 +25,7 @@ public class LandSelectManager implements java.io.Serializable {
         turnManager.getCurrentPlayer().setTilesOwned(1);
         gameMap.getTile(myX, myY).setOwner(turnManager.getCurrentPlayer());
         if (turnManager.getCurrentTurn() > 2) {
-          turnManager.getCurrentPlayer().setMoney(-1 * gameMap.getTile(myX, myY).getCost());
+          turnManager.getCurrentPlayer().addMoney(-1 * gameMap.getTile(myX, myY).getCost());
         }
         turnManager.advanceStep();
         return true;
