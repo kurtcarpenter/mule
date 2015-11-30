@@ -8,6 +8,7 @@ import team.config.Configuration;
 import team.config.GameSettings;
 import team.Game;
 import team.screens.instances.MainMapController;
+import team.screens.instances.StoreController;
 
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ public class ScreenMaster extends StackPane {
   public Game game;
   public Configuration config;
   private IScreen mainMapController;
+  private IScreen storeController;
 
   public ScreenMaster(Game game) {
     this.game = game;
@@ -31,6 +33,8 @@ public class ScreenMaster extends StackPane {
   public boolean displayScreen(String name) {
     if (name.equals("mainMapScreen")) {
       ((MainMapController) mainMapController).setPlayerStuff();
+    } else if (name.equals("store")) {
+      ((StoreController) storeController).updateLabels();
     }
     if (screens.get(name) != null) {
       if (!getChildren().isEmpty()) {
@@ -71,6 +75,8 @@ public class ScreenMaster extends StackPane {
       IScreen screenController = ((IScreen) loader.getController());
       if (name.equals("mainMapScreen")) {
         mainMapController = screenController;
+      } else if (name.equals("store")) {
+        storeController = screenController;
       }
       screenController.setParent(this);
       addScreen(name, node);

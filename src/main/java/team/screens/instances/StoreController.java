@@ -216,51 +216,24 @@ public class StoreController extends AScreen {
         try {
           parent.game.getStoreManager().buyResource(Resource.FOOD, Integer.parseInt(
               foodQuantity.getText()));
-          foodInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.FOOD));
-          foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
 
           parent.game.getStoreManager().buyResource(Resource.ENERGY, Integer.parseInt(
               energyQuantity.getText()));
-          energyInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.ENERGY));
-          energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.ENERGY));
 
           parent.game.getStoreManager().buyResource(Resource.SMITHORE, Integer.parseInt(
               smithoreQuantity.getText()));
-          smithoreInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.SMITHORE));
-          smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.SMITHORE));
 
           parent.game.getStoreManager().buyResource(Resource.CRYSTITE, Integer.parseInt(
               crystiteQuantity.getText()));
-          crystiteInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.CRYSTITE));
-          crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.CRYSTITE));
 
           parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(
               muleQuantity.getText()));
-          Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
-          if (muleType != null) {
-            muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
-          } else {
-            muleInventory.setText("None");
-          }
-          muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
-
-          moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         } catch (team.game.exceptions.StoreTransactionException e) {
           System.out.println(e.getMessage());
         } catch (team.game.exceptions.PlayerTransactionException e) {
           System.out.println(e.getMessage());
         }
+        updateLabels();
       }
     });
 
@@ -270,50 +243,24 @@ public class StoreController extends AScreen {
         try {
           parent.game.getStoreManager().sellResource(Resource.FOOD, Integer.parseInt(
               foodQuantity.getText()));
-          foodInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.FOOD));
-          foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
 
           parent.game.getStoreManager().sellResource(Resource.ENERGY, Integer.parseInt(
               energyQuantity.getText()));
-          energyInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.ENERGY));
-          energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.ENERGY));
 
           parent.game.getStoreManager().sellResource(Resource.SMITHORE, Integer.parseInt(
               smithoreQuantity.getText()));
-          smithoreInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.SMITHORE));
-          smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.SMITHORE));
 
           parent.game.getStoreManager().sellResource(Resource.CRYSTITE, Integer.parseInt(
               crystiteQuantity.getText()));
-          crystiteInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.CRYSTITE));
-          crystiteStock.setText(""
-              + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
 
           parent.game.getStoreManager().sellResource(Resource.MULE, Integer.parseInt(
               muleQuantity.getText()));
-          Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
-          if (muleType != null) {
-            muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
-          } else {
-            muleInventory.setText("None");
-          }
-          muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
-          moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         } catch (team.game.exceptions.StoreTransactionException e) {
           System.out.println(e.getMessage());
         } catch (team.game.exceptions.PlayerTransactionException e) {
           System.out.println(e.getMessage());
         }
+        updateLabels();
       }
     });
 
@@ -335,5 +282,42 @@ public class StoreController extends AScreen {
     total += (Integer.parseInt(mulePrice.getText().substring(1)) + muleConfigPrices[
         muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
     totalLabel.setText("$" + total);
+  }
+
+  /**
+   * Called whenever the labels need to be updated.
+   */
+  public void updateLabels() {
+    foodInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.FOOD));
+    foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
+
+    energyInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.ENERGY));
+    energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
+        Resource.ENERGY));
+
+    smithoreInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.SMITHORE));
+    smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
+        Resource.SMITHORE));
+
+    crystiteInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.CRYSTITE));
+    crystiteStock.setText(""
+        + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
+
+    Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
+    if (muleType != null) {
+      muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
+    } else {
+      muleInventory.setText("None");
+    }
+    muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
+    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
   }
 }
