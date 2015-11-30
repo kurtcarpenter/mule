@@ -116,7 +116,7 @@ public class BuyResourceTests {
 
   @Test
   public void notEnoughMoney() {
-    turnManager.getCurrentPlayer().setMoney(-turnManager.getCurrentPlayer().getMoney() + 1);
+    turnManager.getCurrentPlayer().addMoney(-turnManager.getCurrentPlayer().getMoney() + 1);
     boolean playerExcep = false;
     boolean storeExcep = false;
     int prevPlayerFood = 0;

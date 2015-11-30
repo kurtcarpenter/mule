@@ -42,8 +42,7 @@ public class MapManager implements java.io.Serializable {
     if (turnManager.getGameState() == GameState.LAND_SELECT) {
       return landSelectManager.buyLand(myX, myY);
     } else {
-      muleManager.placeMule(myX, myY);
-      return false;
+      return muleManager.placeMule(myX, myY);
     }
   }
 
@@ -76,7 +75,7 @@ public class MapManager implements java.io.Serializable {
             calculateProduction(currentTile, currentPlayer);
             availableEnergy--;
           } else {
-            System.out.println("not enough energy");
+            System.out.println("Not enough energy");
             return;
           }
         }
@@ -138,6 +137,6 @@ public class MapManager implements java.io.Serializable {
         System.out.println("Defaulted");
         break;
     }
-    player.setResourceQuantity(resource, amount);
+    player.addResourceQuantity(resource, amount);
   }
 }

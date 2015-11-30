@@ -102,7 +102,7 @@ public class MuleManagerTests {
     muleManager.placeMule(4, 0);
     assertNull("Game Tile Mule not null,", gameMap.getTile(4, 0).getMule());
     assertNull("Player Mule not null,", curPlayer.getMule());
-    String outString = "You don't own this tile!";
+    String outString = "You don't own this tile! You lost your mule.";
     assertEquals("Incorrect output,", outString,
         outContent.toString(defaultCharset).trim());
   }
@@ -113,7 +113,7 @@ public class MuleManagerTests {
     muleManager.placeMule(1, 0);
     assertNull("Game Tile Mule not null,", gameMap.getTile(4, 0).getMule());
     assertNull("Player Mule not null,", curPlayer.getMule());
-    String outString = "You don't own this tile!";
+    String outString = "You don't own this tile! You lost your mule.";
     assertEquals("Incorrect output,", outString,
         outContent.toString(defaultCharset).trim());
   }

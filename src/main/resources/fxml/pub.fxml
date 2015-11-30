@@ -7,15 +7,20 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="team.screens.instances.PubController">
   <children>
-    <Button layoutX="261.0" layoutY="205.0" mnemonicParsing="false" text="Gamble" />
+    <Button fx:id="gambleButton" layoutX="210.0" layoutY="205.0" mnemonicParsing="false" text="Gamble" />
     <Label layoutX="253.0" layoutY="14.0" text="Pub">
       <font>
         <Font size="50.0" />
       </font>
     </Label>
-    <Label layoutX="229.0" layoutY="135.0" text="Time Remaining" />
-    <Label layoutX="342.0" layoutY="135.0" text="25" />
+    <Button fx:id="backButton" layoutX="300.0" layoutY="205.0" mnemonicParsing="false" prefWidth="78.0" text="Back" />
+    <Label fx:id="timeLabel" layoutX="251.0" layoutY="143.0" text="Time:">
+      <font>
+        <Font size="25.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="timerLabel" font="$x1" layoutX="313.0" layoutY="143.0" text="50" />
   </children>
 </AnchorPane>

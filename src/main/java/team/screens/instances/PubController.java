@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -21,6 +22,9 @@ public class PubController extends AScreen {
 
   @FXML
   private Button backButton;
+
+  @FXML
+  private Label timerLabel;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -37,5 +41,10 @@ public class PubController extends AScreen {
         parent.game.getPubManager().gamble();
       }
     });
+  }
+
+  public void update() {
+    timerLabel.textProperty().bind(parent.game.getTimerManager()
+          .getTimerBinding());
   }
 }

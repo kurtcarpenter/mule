@@ -54,8 +54,8 @@ public class StoreManager implements java.io.Serializable {
       throw new PlayerTransactionException("Don't use this method to buy Mule");
     }
     verifyPurchase(resource, quantity);
-    player.setMoney(-1 * prices.get(resource) * quantity);
-    player.setResourceQuantity(resource, quantity);
+    player.addMoney(-1 * prices.get(resource) * quantity);
+    player.addResourceQuantity(resource, quantity);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
@@ -67,14 +67,14 @@ public class StoreManager implements java.io.Serializable {
    * @throws PlayerTransactionException if the player tries to sell more than they actually have
    */
   public void sellResource(Resource resource, int quantity)
-      throws PlayerTransactionException, StoreTransactionException {
+      throws PlayerTransactionException {
     Player player = turnManager.getCurrentPlayer();
 
     if (player.getResourceQuantity(resource) < quantity) {
       throw new PlayerTransactionException("Player has insufficient resources to sell");
     }
-    player.setMoney(prices.get(resource) * quantity);
-    player.setResourceQuantity(resource, -1 * quantity);
+    player.addMoney(prices.get(resource) * quantity);
+    player.addResourceQuantity(resource, -1 * quantity);
     resourceStorage.put(resource, resourceStorage.get(resource) + quantity);
   }
 
@@ -106,16 +106,32 @@ public class StoreManager implements java.io.Serializable {
           + " mule to buy another one.");
     }
     verifyPurchase(resource, quantity);
-    // Add the below into verifyPurchase
     if (player.getMoney() < (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity) {
       throw new PlayerTransactionException("Player does not have enough money");
     }
 
-    player.setMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
+    player.addMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity);
     player.receiveMule(muleType);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
+  }
+
+  /**
+   * Sells a mule for the current player with the specified type.
+   * 
+   * @param muleType type of mule being sold
+   * @throws PlayerTransactionException if the player tries to sell a mule they do not own
+   */
+  public void sellMule(Resource muleType) throws PlayerTransactionException {
+    Player player = turnManager.getCurrentPlayer();
+
+    if (player.getMule() != muleType) {
+      throw new PlayerTransactionException("Player cannot sell a mule they do not own");
+    }
+    player.addMoney(prices.get(Resource.MULE));
+    player.addResourceQuantity(Resource.MULE, -1);
+    resourceStorage.put(Resource.MULE, resourceStorage.get(Resource.MULE) + 1);
   }
 
   private void verifyPurchase(Resource resource, int quantity)

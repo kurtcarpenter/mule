@@ -21,7 +21,7 @@
         <TextField fx:id="energyQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
         <TextField fx:id="smithoreQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
         <TextField fx:id="crystiteQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-        <TextField fx:id="muleQuantity" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+        <TextField fx:id="muleQuantity" editable="false" prefWidth="200.0" text="0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
         <Label text="Crystite" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <Label text="Mule" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <Label fx:id="crystiteStock" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
@@ -74,9 +74,10 @@
     <Label fx:id="totalLabel" font="$x1" layoutX="527.0" layoutY="214.0" text="\$0" />
     <Button fx:id="backButton" layoutX="38.0" layoutY="333.0" mnemonicParsing="false" text="Back" />
     <Button fx:id="sellButton" layoutX="256.0" layoutY="360.0" mnemonicParsing="false" text="Sell items" />
-    <RadioButton fx:id="energyButton" layoutX="220.0" layoutY="278.0" mnemonicParsing="false" text="Energy" />
-    <RadioButton fx:id="crystiteButton" layoutX="412.0" layoutY="278.0" mnemonicParsing="false" text="Crystite" />
-    <RadioButton fx:id="foodButton" layoutX="141.0" layoutY="278.0" mnemonicParsing="false" selected="true" text="Food" />
-    <RadioButton fx:id="smithoreButton" layoutX="304.0" layoutY="278.0" mnemonicParsing="false" text="Smithore" />
+    <RadioButton fx:id="energyButton" layoutX="267.0" layoutY="278.0" mnemonicParsing="false" text="Energy" />
+    <RadioButton fx:id="crystiteButton" layoutX="441.0" layoutY="278.0" mnemonicParsing="false" text="Crystite" />
+    <RadioButton fx:id="foodButton" layoutX="199.0" layoutY="278.0" mnemonicParsing="false" selected="false" text="Food" />
+    <RadioButton fx:id="smithoreButton" layoutX="347.0" layoutY="278.0" mnemonicParsing="false" text="Smithore" />
+    <RadioButton fx:id="noneButton" layoutX="128.0" layoutY="278.0" mnemonicParsing="false" selected="true" text="None" />
   </children>
 </AnchorPane>

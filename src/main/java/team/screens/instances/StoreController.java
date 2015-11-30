@@ -62,6 +62,8 @@ public class StoreController extends AScreen {
   @FXML
   private Label muleInventory;
   @FXML
+  private RadioButton noneButton;
+  @FXML
   private RadioButton foodButton;
   @FXML
   private RadioButton energyButton;
@@ -91,13 +93,15 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            foodQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            foodQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
-          System.out.println("NumberFormatException");
+          System.out.println(nfe.getMessage());
         }
       }
     });
@@ -107,13 +111,15 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            energyQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            energyQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
-          System.out.println("NumberFormatException");
+          System.out.println(nfe.getMessage());
         }
       }
     });
@@ -123,13 +129,15 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            smithoreQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            smithoreQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
-          System.out.println("NumberFormatException");
+          System.out.println(nfe.getMessage());
         }
       }
     });
@@ -139,13 +147,15 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            crystiteQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            crystiteQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
-          System.out.println("NumberFormatException");
+          System.out.println(nfe.getMessage());
         }
       }
     });
@@ -155,24 +165,41 @@ public class StoreController extends AScreen {
       public void changed(final ObservableValue<? extends String> observable,
           final String oldValue, final String newValue) {
         try {
-          String newVal = newValue;
-          if (newVal.equals("")) {
-            newVal = "0";
+          if (oldValue.equals("0")) {
+            muleQuantity.setText(newValue.replaceAll("0",""));
+          }
+          if (newValue.equals("")) {
+            muleQuantity.setText("0");
           }
           updateTotal();
         } catch (NumberFormatException nfe) {
-          System.out.println("NumberFormatException");
+          System.out.println(nfe.getMessage());
         }
+      }
+    });
+
+    noneButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        foodButton.setSelected(false);
+        energyButton.setSelected(false);
+        smithoreButton.setSelected(false);
+        crystiteButton.setSelected(false);
+        muleType = Resource.MULE;
+        muleQuantity.setText("0");
+        updateTotal();
       }
     });
 
     foodButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        noneButton.setSelected(false);
         energyButton.setSelected(false);
         smithoreButton.setSelected(false);
         crystiteButton.setSelected(false);
         muleType = Resource.FOOD;
+        muleQuantity.setText("1");
         updateTotal();
       }
     });
@@ -180,10 +207,12 @@ public class StoreController extends AScreen {
     energyButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        noneButton.setSelected(false);
         foodButton.setSelected(false);
         smithoreButton.setSelected(false);
         crystiteButton.setSelected(false);
         muleType = Resource.ENERGY;
+        muleQuantity.setText("1");
         updateTotal();
       }
     });
@@ -191,10 +220,12 @@ public class StoreController extends AScreen {
     smithoreButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        noneButton.setSelected(false);
         foodButton.setSelected(false);
         energyButton.setSelected(false);
         crystiteButton.setSelected(false);
         muleType = Resource.SMITHORE;
+        muleQuantity.setText("1");
         updateTotal();
       }
     });
@@ -202,10 +233,12 @@ public class StoreController extends AScreen {
     crystiteButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        noneButton.setSelected(false);
         foodButton.setSelected(false);
         energyButton.setSelected(false);
         smithoreButton.setSelected(false);
         muleType = Resource.CRYSTITE;
+        muleQuantity.setText("1");
         updateTotal();
       }
     });
@@ -216,51 +249,26 @@ public class StoreController extends AScreen {
         try {
           parent.game.getStoreManager().buyResource(Resource.FOOD, Integer.parseInt(
               foodQuantity.getText()));
-          foodInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.FOOD));
-          foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
 
           parent.game.getStoreManager().buyResource(Resource.ENERGY, Integer.parseInt(
               energyQuantity.getText()));
-          energyInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.ENERGY));
-          energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.ENERGY));
 
           parent.game.getStoreManager().buyResource(Resource.SMITHORE, Integer.parseInt(
               smithoreQuantity.getText()));
-          smithoreInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.SMITHORE));
-          smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.SMITHORE));
 
           parent.game.getStoreManager().buyResource(Resource.CRYSTITE, Integer.parseInt(
               crystiteQuantity.getText()));
-          crystiteInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.CRYSTITE));
-          crystiteStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.CRYSTITE));
-
-          parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(
-              muleQuantity.getText()));
-          Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
-          if (muleType != null) {
-            muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
-          } else {
-            muleInventory.setText("None");
+          
+          if (muleType != Resource.MULE) {
+            parent.game.getStoreManager().buyMule(Resource.MULE, muleType, Integer.parseInt(
+                muleQuantity.getText()));
           }
-          muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
-
-          moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
         } catch (team.game.exceptions.StoreTransactionException e) {
           System.out.println(e.getMessage());
         } catch (team.game.exceptions.PlayerTransactionException e) {
           System.out.println(e.getMessage());
         }
+        updateLabels();
       }
     });
 
@@ -270,50 +278,23 @@ public class StoreController extends AScreen {
         try {
           parent.game.getStoreManager().sellResource(Resource.FOOD, Integer.parseInt(
               foodQuantity.getText()));
-          foodInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.FOOD));
-          foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
 
           parent.game.getStoreManager().sellResource(Resource.ENERGY, Integer.parseInt(
               energyQuantity.getText()));
-          energyInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.ENERGY));
-          energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.ENERGY));
 
           parent.game.getStoreManager().sellResource(Resource.SMITHORE, Integer.parseInt(
               smithoreQuantity.getText()));
-          smithoreInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.SMITHORE));
-          smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
-              Resource.SMITHORE));
 
           parent.game.getStoreManager().sellResource(Resource.CRYSTITE, Integer.parseInt(
               crystiteQuantity.getText()));
-          crystiteInventory.setText(""
-              + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
-              Resource.CRYSTITE));
-          crystiteStock.setText(""
-              + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
 
-          parent.game.getStoreManager().sellResource(Resource.MULE, Integer.parseInt(
-              muleQuantity.getText()));
-          Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
-          if (muleType != null) {
-            muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
-          } else {
-            muleInventory.setText("None");
+          if (muleType != Resource.MULE) {
+            parent.game.getStoreManager().sellMule(muleType);
           }
-          muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
-          moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
-        } catch (team.game.exceptions.StoreTransactionException e) {
-          System.out.println(e.getMessage());
         } catch (team.game.exceptions.PlayerTransactionException e) {
           System.out.println(e.getMessage());
         }
+        updateLabels();
       }
     });
 
@@ -332,8 +313,47 @@ public class StoreController extends AScreen {
         smithorePrice.getText().substring(1)) * Integer.parseInt(smithoreQuantity.getText())
         + Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(
         crystiteQuantity.getText());
-    total += (Integer.parseInt(mulePrice.getText().substring(1)) + muleConfigPrices[
-        muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
+    if (muleType != Resource.MULE) {
+      total += (Integer.parseInt(mulePrice.getText().substring(1)) + muleConfigPrices[
+          muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
+    }
     totalLabel.setText("$" + total);
+  }
+
+  /**
+   * Called whenever the labels need to be updated.
+   */
+  public void updateLabels() {
+    foodInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.FOOD));
+    foodStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.FOOD));
+
+    energyInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.ENERGY));
+    energyStock.setText("" + parent.game.getStoreManager().getResourceStock(
+        Resource.ENERGY));
+
+    smithoreInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.SMITHORE));
+    smithoreStock.setText("" + parent.game.getStoreManager().getResourceStock(
+        Resource.SMITHORE));
+
+    crystiteInventory.setText(""
+        + parent.game.getTurnManager().getCurrentPlayer().getResourceQuantity(
+        Resource.CRYSTITE));
+    crystiteStock.setText(""
+        + parent.game.getStoreManager().getResourceStock(Resource.CRYSTITE));
+
+    Resource muleType = parent.game.getTurnManager().getCurrentPlayer().getMule();
+    if (muleType != null) {
+      muleInventory.setText("" + parent.game.getTurnManager().getCurrentPlayer().getMule());
+    } else {
+      muleInventory.setText("None");
+    }
+    muleStock.setText("" + parent.game.getStoreManager().getResourceStock(Resource.MULE));
+    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer().getMoney());
   }
 }

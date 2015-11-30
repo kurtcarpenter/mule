@@ -1,6 +1,7 @@
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
+import team.game.containers.Resource;
 import team.game.ScoreManager;
 import team.config.Player;
 import team.config.Player.PlayerRace;
@@ -15,72 +16,72 @@ import java.util.ArrayList;
 public class ScoreManagerTests {
 
   ScoreManager sm;
-  List<Player> curPlayers;
+  List<Player> currPlayers;
 
   @Test
   public void initialScoreCorrect() {
-    curPlayers = getSinglePlayer();
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getSinglePlayer();
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Initial score incorrect,", 612, curPlayers.get(0).getScore());
+    assertEquals("Initial score incorrect,", 612, currPlayers.get(0).getScore());
   }
 
   @Test
   public void scoreWithResourcesCorrect() {
-    curPlayers = getSinglePlayer();
-    curPlayers.get(0).setOre(5);
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getSinglePlayer();
+    currPlayers.get(0).addResourceQuantity(Resource.SMITHORE, 5);
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Initial score incorrect,", 612, curPlayers.get(0).getScore());
+    assertEquals("Initial score incorrect,", 617, currPlayers.get(0).getScore());
   }
 
   @Test
   public void scoreWithMoneyCorrect() {
-    curPlayers = getSinglePlayer();
-    curPlayers.get(0).setMoney(1337);
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getSinglePlayer();
+    currPlayers.get(0).addMoney(1337);
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Score incorrect,", 1949, curPlayers.get(0).getScore());
+    assertEquals("Score incorrect,", 1949, currPlayers.get(0).getScore());
   }
 
   @Test
   public void scoreWithTilesCorrect() {
-    curPlayers = getSinglePlayer();
-    curPlayers.get(0).setTilesOwned(2);
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getSinglePlayer();
+    currPlayers.get(0).setTilesOwned(2);
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Score incorrect,", 1612, curPlayers.get(0).getScore());
+    assertEquals("Score incorrect,", 1612, currPlayers.get(0).getScore());
   }
 
   @Test
   public void individualScoreAllResourcesCorrect() {
-    curPlayers = getSinglePlayer();
-    curPlayers.get(0).setOre(5);
-    curPlayers.get(0).setMoney(1337);
-    curPlayers.get(0).setTilesOwned(2);
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getSinglePlayer();
+    currPlayers.get(0).addResourceQuantity(Resource.SMITHORE, 5);
+    currPlayers.get(0).addMoney(1337);
+    currPlayers.get(0).setTilesOwned(2);
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Score incorrect,", 2949, curPlayers.get(0).getScore());
+    assertEquals("Score incorrect,", 2954, currPlayers.get(0).getScore());
   }
 
   @Test
   public void groupScoreAllResourcesCorrect() {
-    curPlayers = getPlayers();
-    curPlayers.get(0).setOre(5);
-    curPlayers.get(1).setMoney(1337);
-    curPlayers.get(2).setTilesOwned(2);
-    curPlayers.get(3).setOre(5);
-    curPlayers.get(3).setMoney(1337);
-    curPlayers.get(3).setTilesOwned(2);
-    sm = new ScoreManager(curPlayers);
+    currPlayers = getPlayers();
+    currPlayers.get(0).addResourceQuantity(Resource.SMITHORE, 5);
+    currPlayers.get(1).addMoney(1337);
+    currPlayers.get(2).setTilesOwned(2);
+    currPlayers.get(3).addResourceQuantity(Resource.SMITHORE, 5);
+    currPlayers.get(3).addMoney(1337);
+    currPlayers.get(3).setTilesOwned(2);
+    sm = new ScoreManager(currPlayers);
     sm.updateScores();
-    assertEquals("Score 1 incorrect,", 612, curPlayers.get(0).getScore());
-    assertEquals("Score 2 incorrect,", 2949, curPlayers.get(1).getScore());
-    assertEquals("Score 3 incorrect,", 1612, curPlayers.get(2).getScore());
-    assertEquals("Score 4 incorrect,", 3349, curPlayers.get(3).getScore());
+    assertEquals("Score 1 incorrect,", 617, currPlayers.get(0).getScore());
+    assertEquals("Score 2 incorrect,", 2949, currPlayers.get(1).getScore());
+    assertEquals("Score 3 incorrect,", 1612, currPlayers.get(2).getScore());
+    assertEquals("Score 4 incorrect,", 3354, currPlayers.get(3).getScore());
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void nullPlayersListThrowsException() {
     sm = new ScoreManager(null);
   }

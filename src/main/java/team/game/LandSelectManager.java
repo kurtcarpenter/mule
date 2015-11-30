@@ -21,13 +21,18 @@ public class LandSelectManager implements java.io.Serializable {
    */
   public boolean buyLand(int myX, int myY) {
     if (gameMap.getTile(myX, myY).getOwner() == null) {
-      turnManager.getCurrentPlayer().setTilesOwned(1);
-      gameMap.getTile(myX, myY).setOwner(turnManager.getCurrentPlayer());
-      if (turnManager.getCurrentTurn() > 2) {
-        turnManager.getCurrentPlayer().setMoney( -1 * gameMap.getTile(myX, myY).getCost());
+      if (turnManager.getCurrentPlayer().getMoney() >= gameMap.getTile(myX, myY).getCost()) {
+        turnManager.getCurrentPlayer().setTilesOwned(1);
+        gameMap.getTile(myX, myY).setOwner(turnManager.getCurrentPlayer());
+        if (turnManager.getCurrentTurn() > 2) {
+          turnManager.getCurrentPlayer().addMoney(-1 * gameMap.getTile(myX, myY).getCost());
+        }
+        turnManager.advanceStep();
+        return true;
+      } else {
+        System.out.println("You do not have enough money to buy this piece of land!");
+        return false;
       }
-      turnManager.advanceStep();
-      return true;
     }
     return false;
   }

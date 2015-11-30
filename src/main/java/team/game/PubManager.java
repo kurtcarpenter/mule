@@ -37,7 +37,7 @@ public class PubManager implements java.io.Serializable {
     int timeBonus = timerManager.getTime();
     int moneyBonus = ROUND_BONUS[turnManager.getCurrentTurn()] + rand.nextInt(timeBonus);
     moneyBonus = moneyBonus > 250 ? 250 : moneyBonus;
-    turnManager.getCurrentPlayer().setMoney(moneyBonus);
+    turnManager.getCurrentPlayer().addMoney(moneyBonus);
     timerManager.resetTimer();
   }
 
