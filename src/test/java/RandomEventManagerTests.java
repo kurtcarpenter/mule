@@ -17,7 +17,7 @@ public class RandomEventManagerTests {
     List<Player> players = getPlayers();
     RandomEventManager rn = new RandomEventManager(players, 1);
     rn.triggerEvent(players.get(0), 1);
-    assertEquals("P1 food must be 19", 19, players.get(0).getResourceQuantity(Resource.FOOD));
+    assertEquals("P1 food must be 11", 11, players.get(0).getResourceQuantity(Resource.FOOD));
   }
 
   @Test
@@ -57,7 +57,7 @@ public class RandomEventManagerTests {
     List<Player> players = getPlayers();
     RandomEventManager rn = new RandomEventManager(players, 6);
     rn.triggerEvent(players.get(0), 1);
-    assertEquals("P1 food must be 12", 12, players.get(0).getResourceQuantity(Resource.FOOD));
+    assertEquals("P1 food must be 4", 4, players.get(0).getResourceQuantity(Resource.FOOD));
   }
 
   @Test
