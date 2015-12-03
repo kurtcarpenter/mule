@@ -2,6 +2,7 @@ package team.config;
 
 import java.lang.Comparable;
 import team.game.containers.Resource;
+import team.config.GameSettings.Difficulty;
 
 public class Player implements Comparable<Player>, java.io.Serializable  {
 
@@ -16,13 +17,13 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   private final String name;
   private final PlayerRace race;
   private final PlayerColor color;
+  private final Difficulty difficulty;
   private int money;
   private int score;
   private int land;
   private int tilesOwned;
   private int food;
   private int energy;
-  private int ore;
   private int smithore;
   private int crystite;
   private Resource mule;
@@ -34,15 +35,21 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
    * @param race the race of the Player
    * @param color the color of the Player
    */
-  public Player(String name, PlayerRace race, PlayerColor color) {
+  public Player(String name, PlayerRace race, PlayerColor color, Difficulty difficulty) {
     this.name = name;
     this.race = race;
     this.color = color;
+    this.difficulty = difficulty;
     setStartingMoney();
-    // Set food to 8, energy to 4, ore to 0 for Beginner Level
-    food = 8;
-    energy = 4;
-    ore = 0;
+    if (this.difficulty == Difficulty.BEGINNER) {
+      food = 8;
+      energy = 4;
+      smithore = 0;
+    } else {
+      food = 4;
+      energy = 2;
+      smithore = 0;
+    }
     mule = null;
   }
 
