@@ -7,6 +7,7 @@ public class GameMap implements java.io.Serializable {
   private GameTile[][] grid;
 
   private Map map;
+  private boolean mapMade = false;
 
   private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
           {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
@@ -67,37 +68,40 @@ public class GameMap implements java.io.Serializable {
   }
 
   public void updateMap() {
-    if (map == Map.RANDOM) {
-      boolean townPlaced = false;
-      for (int i = 0; i < mapLayout.length; i++) {
-        for (int j = 0; j < mapLayout[0].length; j++) {
-          int rand = ((int) (Math.random() * 6));
-          String terrain = "";
-          switch (rand) {
-            case 0:
-              terrain = "P";
-              break;
-            case 1:
-              terrain = "R";
-              break;
-            case 2:
-              if (!townPlaced) {
-                terrain = "Town";
-                townPlaced = true;
-              } else
+    if (!mapMade && map != null) {
+      mapMade = true;
+      if (map == Map.RANDOM) {
+        boolean townPlaced = false;
+        for (int i = 0; i < mapLayout.length; i++) {
+          for (int j = 0; j < mapLayout[0].length; j++) {
+            int rand = ((int) (Math.random() * 6));
+            String terrain = "";
+            switch (rand) {
+              case 0:
                 terrain = "P";
-              break;
-            case 3:
-              terrain = "M1";
-              break;
-            case 4:
-              terrain = "M2";
-              break;
-            default:
-              terrain = "M3";
-              break;
+                break;
+              case 1:
+                terrain = "R";
+                break;
+              case 2:
+                if (!townPlaced) {
+                  terrain = "Town";
+                  townPlaced = true;
+                } else
+                  terrain = "P";
+                break;
+              case 3:
+                terrain = "M1";
+                break;
+              case 4:
+                terrain = "M2";
+                break;
+              default:
+                terrain = "M3";
+                break;
+            }
+            mapLayout[i][j] = terrain;
           }
-          mapLayout[i][j] = terrain;
         }
       }
     }

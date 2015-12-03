@@ -78,9 +78,11 @@ public class MainMapController extends AScreen {
   }
 
   public void update() {
-    parent.game.getMapManager().updateMap();
-    mapLayout = parent.game.getMapManager().getGameMap().getMapLayout();
-    createMap();
+    if (parent.game.getTurnManager().getCurrentTurn() == 1) {
+      parent.game.getMapManager().updateMap();
+      mapLayout = parent.game.getMapManager().getGameMap().getMapLayout();
+      createMap();
+    }
     turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
     nameLabel.setText(parent.game.getTurnManager()
         .getCurrentPlayer().getName());
