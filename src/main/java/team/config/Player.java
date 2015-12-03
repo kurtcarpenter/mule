@@ -6,7 +6,7 @@ import team.game.containers.Resource;
 public class Player implements Comparable<Player>, java.io.Serializable  {
 
   public enum PlayerRace {
-    HUMAN, FLAPPER, OTHERS
+    FLAPPER, BONZOID, UGAITE, BUZZITE, HUMAN
   }
 
   public enum PlayerColor {
@@ -48,13 +48,16 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
 
   private void setStartingMoney() {
     switch (race) {
-      case HUMAN:
-        money = 600;
-        break;
       case FLAPPER:
-        money = 1600;
+        money = 5000;
         break;
-      case OTHERS:
+      case BONZOID:
+        money = 3000;
+        break;
+      case UGAITE:
+        money = 1500;
+        break;
+      case BUZZITE:
         money = 1000;
         break;
       default:

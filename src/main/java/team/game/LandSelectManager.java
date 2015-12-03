@@ -1,6 +1,7 @@
 package team.game;
 
 import team.map.GameMap;
+import team.Game.GameState;
 
 public class LandSelectManager implements java.io.Serializable {
 
@@ -21,7 +22,8 @@ public class LandSelectManager implements java.io.Serializable {
    */
   public boolean buyLand(int myX, int myY) {
     if (gameMap.getTile(myX, myY).getOwner() == null) {
-      if (turnManager.getCurrentPlayer().getMoney() >= gameMap.getTile(myX, myY).getCost()) {
+      if (turnManager.getCurrentPlayer().getMoney() >= gameMap.getTile(myX, myY).getCost()
+          || turnManager.getCurrentTurn() <= 2) {
         turnManager.getCurrentPlayer().setTilesOwned(1);
         gameMap.getTile(myX, myY).setOwner(turnManager.getCurrentPlayer());
         if (turnManager.getCurrentTurn() > 2) {
