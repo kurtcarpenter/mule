@@ -96,6 +96,13 @@ public class MapManager implements java.io.Serializable {
     if (resource == null) {
       return;
     }
+    if (resource == Resource.MAGIC) {
+      player.addResourceQuantity(Resource.FOOD, (int) (Math.random() * 11));
+      player.addResourceQuantity(Resource.ENERGY, (int) (Math.random() * 11));
+      player.addResourceQuantity(Resource.SMITHORE, (int) (Math.random() * 11));
+      player.addResourceQuantity(Resource.CRYSTITE, (int) (Math.random() * 11));
+      return;
+    }
     int amount = 0;
     switch (resource) {
       case FOOD:
