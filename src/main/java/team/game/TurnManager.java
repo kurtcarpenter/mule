@@ -44,6 +44,10 @@ public class TurnManager implements java.io.Serializable {
     currentTurnOrder = new ArrayList<Player>();
   }
 
+  public void updateSettings(List<Player> players) {
+    this.players = players;
+  }
+
   public List<Player> getPlayers() {
     return players;
   }

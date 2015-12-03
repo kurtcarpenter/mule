@@ -56,6 +56,7 @@ public class GameConfigController extends AScreen {
             0,1));
         parent.config.setSettings(new GameSettings(GameSettings.Difficulty.valueOf(
             difficulty.toUpperCase()), GameSettings.Map.valueOf(map.toUpperCase()), numPlayers));
+        parent.game.updateSettings();
         parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
       }
     });

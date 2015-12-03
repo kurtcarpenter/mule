@@ -14,7 +14,6 @@ public class MapManager implements java.io.Serializable {
   private final LandSelectManager landSelectManager;
   private final MuleManager muleManager;
   private final GameMap gameMap;
-  private final Game game;
   private int passCount;
 
   /**
@@ -26,12 +25,11 @@ public class MapManager implements java.io.Serializable {
    * @param gameMap the GameMap object being associated with this object
    */
   public MapManager(TurnManager turnManager, LandSelectManager landSelectManager, 
-      MuleManager muleManager, GameMap gameMap, Game game) {
+      MuleManager muleManager, GameMap gameMap) {
     this.turnManager = turnManager;
     this.landSelectManager = landSelectManager;
     this.muleManager = muleManager;
     this.gameMap = gameMap;
-    this.game = game;
     passCount = 0;
   }
 
@@ -145,10 +143,5 @@ public class MapManager implements java.io.Serializable {
 
   public GameMap getGameMap() {
     return gameMap;
-  }
-
-  public void updateMap() {
-    gameMap.setMap(game.getConfiguration().getSettings().getMap());
-    gameMap.updateMap();
   }
 }

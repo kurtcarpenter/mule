@@ -14,6 +14,7 @@ public class StoreManager implements java.io.Serializable {
   private HashMap<Resource, Integer> resourceStorage;
   private HashMap<Resource, Integer> prices;
   private TurnManager turnManager;
+  private Difficulty difficulty;
   private static final int[] beginnerQuantities = {16, 16, 0, 0, 25};
   private static final int[] stdTrnyQuantities = {8, 8, 8, 0, 14};
   private static final int[] startingPrices = {30, 25, 50, 100, 100};
@@ -29,7 +30,20 @@ public class StoreManager implements java.io.Serializable {
     this.turnManager = turnManager;
     resourceStorage = new HashMap<Resource, Integer>();
     prices = new HashMap<Resource, Integer>();
+    this.difficulty = difficulty;
 
+    for (Resource r : Resource.values()) {
+      if (this.difficulty == Difficulty.BEGINNER) {
+        resourceStorage.put(r, beginnerQuantities[r.ordinal()]);
+      } else {
+        resourceStorage.put(r, stdTrnyQuantities[r.ordinal()]);
+      }
+      prices.put(r, startingPrices[r.ordinal()]);
+    }
+  }
+
+  public void updateSettings(Difficulty difficulty) {
+    this.difficulty = difficulty;
     for (Resource r : Resource.values()) {
       if (difficulty == Difficulty.BEGINNER) {
         resourceStorage.put(r, beginnerQuantities[r.ordinal()]);
