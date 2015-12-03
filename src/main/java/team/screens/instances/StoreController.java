@@ -320,6 +320,15 @@ public class StoreController extends AScreen {
     totalLabel.setText("$" + total);
   }
 
+  public void update() {
+    noneButton.setSelected(true);
+    foodButton.setSelected(false);
+    energyButton.setSelected(false);
+    smithoreButton.setSelected(false);
+    crystiteButton.setSelected(false);
+    updateLabels();
+  }
+
   /**
    * Called whenever the labels need to be updated.
    */

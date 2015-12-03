@@ -31,16 +31,21 @@ public class MuleManager implements java.io.Serializable {
         currPlayer.receiveMule(null);
         return false;
       } else if (currPlayer.getMule() != null) {
-        if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
-            == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
+        System.out.println(gameMap.getTile(myX, myY).getTerrain());
+        if ((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
+            == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER) {
+          System.out.println("You cannot place a smithore or crystite mule on a river tile.");
+          return false;
+        } else if (currPlayer.getMule() == Resource.ENERGY
+            && gameMap.getTile(myX, myY).getTerrain() == Terrain.DESERT) {
+          System.out.println("You cannot place an energy mule on a desert tile.");
+          return false;
+        } else {
           gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
           System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
               + myY + ")");
           currPlayer.receiveMule(null);
           return true;
-        } else {
-          System.out.println("You cannot place a smithore or crystite mule on a river tile.");
-          return false;
         }
       } else {
         System.out.println("You don't own a mule to place here.");

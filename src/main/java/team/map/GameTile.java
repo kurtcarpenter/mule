@@ -56,4 +56,8 @@ public class GameTile implements java.io.Serializable {
   public Terrain getTerrain() {
     return terrain;
   }
+
+  public void setTerrain(Terrain terrain) {
+    this.terrain = terrain;
+  }
 }

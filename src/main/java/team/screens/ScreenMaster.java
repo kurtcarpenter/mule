@@ -36,7 +36,7 @@ public class ScreenMaster extends StackPane {
     if (name.equals("mainMapScreen")) {
       ((MainMapController) mainMapController).update();
     } else if (name.equals("store")) {
-      ((StoreController) storeController).updateLabels();
+      ((StoreController) storeController).update();
     } else if (name.equals("pub")) {
       ((PubController) pubController).update();
     }

@@ -42,6 +42,8 @@ public class GameMap implements java.io.Serializable {
           case "M3":
             terrain = Terrain.M3;
             break;
+          case "D":
+            terrain = Terrain.DESERT;
           default:
             terrain = Terrain.NONE;
             break;
@@ -77,33 +79,51 @@ public class GameMap implements java.io.Serializable {
       boolean townPlaced = false;
       for (int i = 0; i < mapLayout.length; i++) {
         for (int j = 0; j < mapLayout[0].length; j++) {
-          int rand = ((int) (Math.random() * 6));
-          String terrain = "";
+          int rand = ((int) (Math.random() * 7));
+          String terrain = "P";
+          Terrain terrainType = Terrain.PLAIN;
           switch (rand) {
             case 0:
               terrain = "P";
+              terrainType = Terrain.PLAIN;
               break;
             case 1:
               terrain = "R";
+              terrainType = Terrain.RIVER;
               break;
             case 2:
               if (!townPlaced) {
                 terrain = "Town";
+                terrainType = Terrain.NONE;
                 townPlaced = true;
-              } else
+              } else {
                 terrain = "P";
+                terrainType = Terrain.PLAIN;
+              }
               break;
             case 3:
               terrain = "M1";
+              terrainType = Terrain.M1;
               break;
             case 4:
               terrain = "M2";
+              terrainType = Terrain.M2;
+              break;
+            case 5:
+              terrain = "M3";
+              terrainType = Terrain.M3;
+              break;
+            case 6:
+              terrain = "D";
+              terrainType = Terrain.DESERT;
               break;
             default:
-              terrain = "M3";
+              terrain = "P";
+              terrainType = Terrain.PLAIN;
               break;
           }
           mapLayout[i][j] = terrain;
+          grid[i][j].setTerrain(terrainType);
         }
       }
     }
