@@ -127,7 +127,7 @@ public class StoreManager implements java.io.Serializable {
 
     player.addMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity);
-    player.receiveMule(muleType);
+    player.receiveMule(muleType, false);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 

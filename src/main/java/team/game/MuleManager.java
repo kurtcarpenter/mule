@@ -28,11 +28,14 @@ public class MuleManager implements java.io.Serializable {
     if (gameMap.getTile(myX, myY).getOwner() == currPlayer) {
       if (gameMap.getTile(myX, myY).getMule() != null) {
         System.out.println("There is already a mule on this tile. You lost your mule.");
-        currPlayer.receiveMule(null);
+        currPlayer.receiveMule(null, false);
         return false;
       } else if (currPlayer.getMule() != null) {
-        System.out.println(gameMap.getTile(myX, myY).getTerrain());
-        if ((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
+        if (currPlayer.getMule() == Resource.MAGIC && currPlayer.getMulesOnwed() < 3) {
+          System.out.println("You must place three mules before placing a magic mule. You lost your mule.");
+          currPlayer.receiveMule(null, false);
+          return false;
+        } else if ((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
             == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER) {
           System.out.println("You cannot place a smithore or crystite mule on a river tile.");
           return false;
@@ -42,9 +45,9 @@ public class MuleManager implements java.io.Serializable {
           return false;
         } else {
           gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
-          System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
+          System.out.println("Placed " + currPlayer.getMule().toString() + " mule at (" + myX + ", "
               + myY + ")");
-          currPlayer.receiveMule(null);
+          currPlayer.receiveMule(null, true);
           return true;
         }
       } else {
@@ -52,7 +55,7 @@ public class MuleManager implements java.io.Serializable {
         return false;
       }
     } else {
-      currPlayer.receiveMule(null);
+      currPlayer.receiveMule(null, false);
       System.out.println("You don't own this tile! You lost your mule.");
       return false;
     }

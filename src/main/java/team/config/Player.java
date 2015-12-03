@@ -22,6 +22,7 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
   private int score;
   private int land;
   private int tilesOwned;
+  private int mulesOwned;
   private int food;
   private int energy;
   private int smithore;
@@ -41,6 +42,8 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
     this.color = color;
     this.difficulty = difficulty;
     setStartingMoney();
+    tilesOwned = 0;
+    mulesOwned = 0;
     if (this.difficulty == Difficulty.BEGINNER) {
       food = 8;
       energy = 4;
@@ -200,11 +203,17 @@ public class Player implements Comparable<Player>, java.io.Serializable  {
     }
   }
 
-  public void receiveMule(Resource type) {
+  public void receiveMule(Resource type, boolean success) {
+    if (success)
+      mulesOwned++;
     mule = type;
   }
 
   public Resource getMule() {
     return mule;
+  }
+
+  public int getMulesOnwed() {
+    return mulesOwned;
   }
 }

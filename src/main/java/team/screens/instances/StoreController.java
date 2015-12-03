@@ -172,6 +172,7 @@ public class StoreController extends AScreen {
         magicButton.setSelected(false);
         muleType = Resource.MULE;
         muleQuantity.setText("0");
+        mulePrice.setText("$0");
         updateTotal();
       }
     });
@@ -317,8 +318,8 @@ public class StoreController extends AScreen {
         + Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(
         crystiteQuantity.getText());
     if (muleType != Resource.MULE) {
-      total += (Integer.parseInt(mulePrice.getText().substring(1)) + muleConfigPrices[
-          muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
+      mulePrice.setText("$" + (100 + muleConfigPrices[muleType.ordinal()]));
+      total += (100 + muleConfigPrices[muleType.ordinal()]);
     }
     totalLabel.setText("$" + total);
   }
@@ -330,6 +331,7 @@ public class StoreController extends AScreen {
     smithoreButton.setSelected(false);
     crystiteButton.setSelected(false);
     magicButton.setSelected(false);
+    muleQuantity.setText("0");
     updateLabels();
   }
 
