@@ -48,9 +48,14 @@ public class MainMapController extends AScreen {
   @FXML
   private Label scoreLabel;
 
-  private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
-      {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
-      {"P","M2","P","P","R","P","M2","P","P"}, {"P","P","M2","P","R","P","P","P","M2"} };
+  private String[][] mapLayout;
+
+  private Image plain;
+  private Image river;
+  private Image town;
+  private Image m1;
+  private Image m2;
+  private Image m3;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +69,35 @@ public class MainMapController extends AScreen {
         setPlayerStuff();
       }
     });
+    plain = new Image("graphics/plain.png");
+    river = new Image("graphics/river.png");
+    town = new Image("graphics/town.png");
+    m1 = new Image("graphics/m1.png");
+    m2 = new Image("graphics/m2.png");
+    m3 = new Image("graphics/m3.png");
+  }
+
+  public void update() {
+    parent.game.getMapManager().updateMap();
+    mapLayout = parent.game.getMapManager().getGameMap().getMapLayout();
     createMap();
+    turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
+    nameLabel.setText(parent.game.getTurnManager()
+        .getCurrentPlayer().getName());
+    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer()
+        .getMoney());
+    playerColor.setFill(Color.valueOf(
+        parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
+    // Change init time based on player attributes
+    if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT
+        && parent.game.getTimerManager().isStart()) {
+      timerLabel.textProperty().bind(parent.game.getTimerManager()
+          .startTimer());
+    }
+    scoreLabel.setText("Score: " + parent.game.getTurnManager()
+        .getCurrentPlayer().getScore());
+    timerLabel.textProperty().bind(parent.game.getTimerManager()
+        .getTimerBinding());
   }
 
   /**
@@ -131,25 +164,25 @@ public class MainMapController extends AScreen {
     for (int i = 0; i < mapLayout.length; i++) {
       for (int j = 0; j < mapLayout[i].length; j++) {
         final String layoutString = mapLayout[i][j];
-        Image image = new Image("graphics/plain.png");
+        Image image = plain;
         switch (mapLayout[i][j]) {
           case "P":
-            image = new Image("graphics/plain.png");
+            image = plain;
             break;
           case "R":
-            image = new Image("graphics/river.png");
+            image = river;
             break;
           case "Town":
-            image = new Image("graphics/town.png");
+            image = town;
             break;
           case "M1":
-            image = new Image("graphics/m1.png");
+            image = m1;
             break;
           case "M2":
-            image = new Image("graphics/m2.png");
+            image = m2;
             break;
           case "M3":
-            image = new Image("graphics/m3.png");
+            image = m3;
             break;
           default:
             System.out.println("Defaulted");

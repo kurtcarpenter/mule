@@ -1,18 +1,23 @@
 package team.map;
 
 import team.game.containers.Terrain;
+import team.config.GameSettings.Map;
 
 public class GameMap implements java.io.Serializable {
   private GameTile[][] grid;
 
+  private Map map;
+
   private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
-      {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
-      {"P","M2","P","P","R","P","M2","P","P"}, {"P","P","M2","P","R","P","P","P","M2"} };
+          {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
+          {"P","M2","P","P","R","P","M2","P","P"}, {"P","P","M2","P","R","P","P","P","M2"} };
 
   /**
    * Creates a GameMap object.
    */
-  public GameMap() {
+  public GameMap(Map map) {
+    this.map = map;
+    updateMap();
     grid = new GameTile[5][9];
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
@@ -45,11 +50,56 @@ public class GameMap implements java.io.Serializable {
     }
   }
 
+  public String[][] getMapLayout() {
+    return mapLayout;
+  }
+
   public GameTile[][] getGrid() {
     return grid.clone();
   }
 
   public GameTile getTile(int myX, int myY) {
     return grid[myX][myY];
+  }
+
+  public void setMap(Map map) {
+    this.map = map;
+  }
+
+  public void updateMap() {
+    if (map == Map.RANDOM) {
+      boolean townPlaced = false;
+      for (int i = 0; i < mapLayout.length; i++) {
+        for (int j = 0; j < mapLayout[0].length; j++) {
+          int rand = ((int) (Math.random() * 6));
+          String terrain = "";
+          switch (rand) {
+            case 0:
+              terrain = "P";
+              break;
+            case 1:
+              terrain = "R";
+              break;
+            case 2:
+              if (!townPlaced) {
+                terrain = "Town";
+                townPlaced = true;
+              } else
+                terrain = "P";
+              break;
+            case 3:
+              terrain = "M1";
+              break;
+            case 4:
+              terrain = "M2";
+              break;
+            default:
+              terrain = "M3";
+              break;
+          }
+          mapLayout[i][j] = terrain;
+        }
+      }
+    }
   }
 }

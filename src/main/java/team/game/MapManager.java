@@ -1,5 +1,6 @@
 package team.game;
 
+import team.Game;
 import team.map.GameMap;
 import team.Game.GameState;
 import team.config.Player;
@@ -13,6 +14,7 @@ public class MapManager implements java.io.Serializable {
   private final LandSelectManager landSelectManager;
   private final MuleManager muleManager;
   private final GameMap gameMap;
+  private final Game game;
   private int passCount;
 
   /**
@@ -24,11 +26,12 @@ public class MapManager implements java.io.Serializable {
    * @param gameMap the GameMap object being associated with this object
    */
   public MapManager(TurnManager turnManager, LandSelectManager landSelectManager, 
-      MuleManager muleManager, GameMap gameMap) {
+      MuleManager muleManager, GameMap gameMap, Game game) {
     this.turnManager = turnManager;
     this.landSelectManager = landSelectManager;
     this.muleManager = muleManager;
     this.gameMap = gameMap;
+    this.game = game;
     passCount = 0;
   }
 
@@ -138,5 +141,14 @@ public class MapManager implements java.io.Serializable {
         break;
     }
     player.addResourceQuantity(resource, amount);
+  }
+
+  public GameMap getGameMap() {
+    return gameMap;
+  }
+
+  public void updateMap() {
+    gameMap.setMap(game.getConfiguration().getSettings().getMap());
+    gameMap.updateMap();
   }
 }

@@ -34,7 +34,7 @@ public class ScreenMaster extends StackPane {
    */
   public boolean displayScreen(String name) {
     if (name.equals("mainMapScreen")) {
-      ((MainMapController) mainMapController).setPlayerStuff();
+      ((MainMapController) mainMapController).update();
     } else if (name.equals("store")) {
       ((StoreController) storeController).updateLabels();
     } else if (name.equals("pub")) {

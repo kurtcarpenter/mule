@@ -49,14 +49,14 @@ public class Game implements Serializable {
   public Game(Configuration config) {
     currentState = GameState.CONFIGURE;
     configuration = config;
-    gameMap = new GameMap();
+    gameMap = new GameMap(config.getSettings().getMap());
     scoreManager = new ScoreManager(configuration.getPlayers());
     turnManager = new TurnManager(configuration.getPlayers(), currentState,
         scoreManager, this);
     timerManager = new TimerManager(turnManager);
     landSelectManager = new LandSelectManager(turnManager, gameMap);
     muleManager = new MuleManager(turnManager, gameMap);
-    mapManager = new MapManager(turnManager, landSelectManager, muleManager, gameMap);
+    mapManager = new MapManager(turnManager, landSelectManager, muleManager, gameMap, this);
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
     storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
     randomEventManager = new RandomEventManager(configuration.getPlayers(), 0);
