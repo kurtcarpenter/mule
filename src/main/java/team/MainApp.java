@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import team.screens.ScreenMaster;
 import team.config.Configuration;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.net.URL;
 
 public class MainApp extends Application {
   public static final String GAME_CONFIG_SCREEN = "gameConfig";
@@ -37,6 +40,12 @@ public class MainApp extends Application {
     main.loadScreen(STORE_SCREEN, STORE_SCREEN_FXML);
     main.loadScreen(PUB_SCREEN, PUB_SCREEN_FXML);
     main.displayScreen(GAME_CONFIG_SCREEN);
+
+    final URL resource = getClass().getClassLoader().getResource("music/themeSong.mp3");
+    final Media media = new Media(resource.toString());
+    final MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
+    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
     Group root = new Group();
     root.getChildren().addAll(main);
