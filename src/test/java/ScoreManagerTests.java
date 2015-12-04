@@ -6,6 +6,7 @@ import team.game.ScoreManager;
 import team.config.Player;
 import team.config.Player.PlayerRace;
 import team.config.Player.PlayerColor;
+import team.config.GameSettings.Difficulty;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -88,17 +89,17 @@ public class ScoreManagerTests {
 
   private List<Player> getSinglePlayer() {
     List<Player> players = new ArrayList<Player>();
-    Player p1 = new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED);
+    Player p1 = new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED, Difficulty.BEGINNER);
     players.add(p1);
     return players;
   }
 
   private List<Player> getPlayers() {
     List<Player> players = new ArrayList<Player>();
-    Player p1 = new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED);
-    Player p2 = new Player("Bob", PlayerRace.FLAPPER, PlayerColor.YELLOW);
-    Player p3 = new Player("Candice", PlayerRace.HUMAN, PlayerColor.BLUE);
-    Player p4 = new Player("Destiny", PlayerRace.OTHERS, PlayerColor.GREEN);
+    Player p1 = new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED, Difficulty.BEGINNER);
+    Player p2 = new Player("Bob", PlayerRace.FLAPPER, PlayerColor.YELLOW, Difficulty.BEGINNER);
+    Player p3 = new Player("Candice", PlayerRace.HUMAN, PlayerColor.BLUE, Difficulty.BEGINNER);
+    Player p4 = new Player("Destiny", PlayerRace.BONZOID, PlayerColor.GREEN, Difficulty.BEGINNER);
     players.add(p1);
     players.add(p2);
     players.add(p3);

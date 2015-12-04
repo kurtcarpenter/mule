@@ -21,6 +21,8 @@ public class MainApp extends Application {
   public static final String PUB_SCREEN_FXML = "fxml/pub.fxml";
   public static final String STORE_SCREEN = "store";
   public static final String STORE_SCREEN_FXML = "fxml/store.fxml";
+  public static final String GAME_OVER = "gameOver";
+  public static final String GAME_OVER_FXML = "fxml/gameOver.fxml";
   public Game game;
 
   @Override
@@ -36,11 +38,12 @@ public class MainApp extends Application {
     main.loadScreen(TOWN_SCREEN, TOWN_SCREEN_FXML);
     main.loadScreen(STORE_SCREEN, STORE_SCREEN_FXML);
     main.loadScreen(PUB_SCREEN, PUB_SCREEN_FXML);
+    main.loadScreen(GAME_OVER, GAME_OVER_FXML);
     main.displayScreen(GAME_CONFIG_SCREEN);
 
     Group root = new Group();
     root.getChildren().addAll(main);
-    Scene scene = new Scene(root); // 850, 400
+    Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }

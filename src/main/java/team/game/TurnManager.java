@@ -10,6 +10,7 @@ import team.game.ScoreManager;
 import team.game.MapManager;
 import team.game.RandomEventManager;
 import team.config.Configuration;
+import team.screens.ScreenMaster;
 import team.Game;
 
 
@@ -23,6 +24,7 @@ public class TurnManager implements java.io.Serializable {
   private ScoreManager scoreManager;
   private MapManager mapManager;
   private Game game;
+  private ScreenMaster screenMaster;
 
   /**
    * Creates a TurnManager object.
@@ -117,5 +119,9 @@ public class TurnManager implements java.io.Serializable {
 
   public GameState getGameState() {
     return currentState;
+  }
+
+  public void passScreenMaster(ScreenMaster screenMaster) {
+    this.screenMaster = screenMaster;
   }
 }

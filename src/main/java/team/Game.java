@@ -118,6 +118,7 @@ public class Game implements Serializable {
   public void passScreenMaster(ScreenMaster screenMaster) {
     main = screenMaster;
     timerManager.passScreenMaster(screenMaster);
+    turnManager.passScreenMaster(screenMaster);
   }
 
   /**
