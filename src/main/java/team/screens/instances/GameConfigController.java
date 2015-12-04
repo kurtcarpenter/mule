@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-//import javafx.scene.control.*;
 
 import team.screens.AScreen;
 import team.MainApp;
@@ -56,6 +55,7 @@ public class GameConfigController extends AScreen {
             0,1));
         parent.config.setSettings(new GameSettings(GameSettings.Difficulty.valueOf(
             difficulty.toUpperCase()), GameSettings.Map.valueOf(map.toUpperCase()), numPlayers));
+        parent.game.updateSettings();
         parent.displayScreen(MainApp.PLAYER_CONFIG_SCREEN);
       }
     });

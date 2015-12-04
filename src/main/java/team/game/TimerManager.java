@@ -80,8 +80,12 @@ public class TimerManager {
     // Next step
     turnManager.advanceStep();
     // Get MainMap view to change
-    screenMaster.displayScreen("mainMapScreen");
-    startTimer();
+    if (turnManager.getCurrentTurn() > 12) {
+      screenMaster.displayScreen("gameOver");
+    } else {
+      screenMaster.displayScreen("mainMapScreen");
+      startTimer();
+    }
   }
 
   public void stopTimer() {

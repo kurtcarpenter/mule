@@ -72,6 +72,8 @@ public class StoreController extends AScreen {
   @FXML
   private RadioButton crystiteButton;
   @FXML
+  private RadioButton magicButton;
+  @FXML
   private Button purchaseButton;
   @FXML
   private Button sellButton;
@@ -84,7 +86,7 @@ public class StoreController extends AScreen {
 
   private Resource muleType = Resource.FOOD;
   private int total = 0;
-  private final int[] muleConfigPrices = {25, 50, 75, 100};
+  private final int[] muleConfigPrices = {25, 50, 75, 100, 900};
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -160,24 +162,6 @@ public class StoreController extends AScreen {
       }
     });
 
-    muleQuantity.textProperty().addListener(new ChangeListener<String>() {
-      @Override
-      public void changed(final ObservableValue<? extends String> observable,
-          final String oldValue, final String newValue) {
-        try {
-          if (oldValue.equals("0")) {
-            muleQuantity.setText(newValue.replaceAll("0",""));
-          }
-          if (newValue.equals("")) {
-            muleQuantity.setText("0");
-          }
-          updateTotal();
-        } catch (NumberFormatException nfe) {
-          System.out.println(nfe.getMessage());
-        }
-      }
-    });
-
     noneButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
@@ -185,8 +169,10 @@ public class StoreController extends AScreen {
         energyButton.setSelected(false);
         smithoreButton.setSelected(false);
         crystiteButton.setSelected(false);
+        magicButton.setSelected(false);
         muleType = Resource.MULE;
         muleQuantity.setText("0");
+        mulePrice.setText("$0");
         updateTotal();
       }
     });
@@ -198,6 +184,7 @@ public class StoreController extends AScreen {
         energyButton.setSelected(false);
         smithoreButton.setSelected(false);
         crystiteButton.setSelected(false);
+        magicButton.setSelected(false);
         muleType = Resource.FOOD;
         muleQuantity.setText("1");
         updateTotal();
@@ -211,6 +198,7 @@ public class StoreController extends AScreen {
         foodButton.setSelected(false);
         smithoreButton.setSelected(false);
         crystiteButton.setSelected(false);
+        magicButton.setSelected(false);
         muleType = Resource.ENERGY;
         muleQuantity.setText("1");
         updateTotal();
@@ -224,6 +212,7 @@ public class StoreController extends AScreen {
         foodButton.setSelected(false);
         energyButton.setSelected(false);
         crystiteButton.setSelected(false);
+        magicButton.setSelected(false);
         muleType = Resource.SMITHORE;
         muleQuantity.setText("1");
         updateTotal();
@@ -237,7 +226,22 @@ public class StoreController extends AScreen {
         foodButton.setSelected(false);
         energyButton.setSelected(false);
         smithoreButton.setSelected(false);
+        magicButton.setSelected(false);
         muleType = Resource.CRYSTITE;
+        muleQuantity.setText("1");
+        updateTotal();
+      }
+    });
+
+    magicButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        noneButton.setSelected(false);
+        foodButton.setSelected(false);
+        energyButton.setSelected(false);
+        smithoreButton.setSelected(false);
+        crystiteButton.setSelected(false);
+        muleType = Resource.MAGIC;
         muleQuantity.setText("1");
         updateTotal();
       }
@@ -314,10 +318,21 @@ public class StoreController extends AScreen {
         + Integer.parseInt(crystitePrice.getText().substring(1)) * Integer.parseInt(
         crystiteQuantity.getText());
     if (muleType != Resource.MULE) {
-      total += (Integer.parseInt(mulePrice.getText().substring(1)) + muleConfigPrices[
-          muleType.ordinal()]) * Integer.parseInt(muleQuantity.getText());
+      mulePrice.setText("$" + (100 + muleConfigPrices[muleType.ordinal()]));
+      total += (100 + muleConfigPrices[muleType.ordinal()]);
     }
     totalLabel.setText("$" + total);
+  }
+
+  public void update() {
+    noneButton.setSelected(true);
+    foodButton.setSelected(false);
+    energyButton.setSelected(false);
+    smithoreButton.setSelected(false);
+    crystiteButton.setSelected(false);
+    magicButton.setSelected(false);
+    muleQuantity.setText("0");
+    updateLabels();
   }
 
   /**

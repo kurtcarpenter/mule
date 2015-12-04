@@ -39,7 +39,7 @@ public class BuyResourceTests {
   @Before
   public void setup() {
     players = new ArrayList<>();
-    players.add(new Player("Player 1", PlayerRace.HUMAN, PlayerColor.RED));
+    players.add(new Player("Player 1", PlayerRace.HUMAN, PlayerColor.RED, Difficulty.BEGINNER));
     currentState = GameState.MAIN;
     scoreManager = new ScoreManager(players);
     turnManager = new TurnManager(players, currentState, scoreManager, null);

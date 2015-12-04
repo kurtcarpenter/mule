@@ -28,8 +28,10 @@
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Flapper" />
+              <String fx:value="Bonzoid" />
+              <String fx:value="Ugaite" />
+              <String fx:value="Buzzite" />
               <String fx:value="Human" />
-              <String fx:value="Others" />
             </FXCollections>
           </items>
         </ComboBox>

@@ -5,6 +5,7 @@ import team.game.RandomEventManager;
 import team.config.Player;
 import team.config.Player.PlayerRace;
 import team.config.Player.PlayerColor;
+import team.config.GameSettings.Difficulty;
 import team.game.containers.Resource;
 import java.util.List;
 import java.util.ArrayList;
@@ -70,9 +71,9 @@ public class RandomEventManagerTests {
 
   private List<Player> getPlayers() {
     List<Player> players = new ArrayList<Player>();
-    players.add(new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED));
-    players.add(new Player("Bob", PlayerRace.FLAPPER, PlayerColor.YELLOW));
-    players.add(new Player("Candice", PlayerRace.HUMAN, PlayerColor.BLUE));
+    players.add(new Player("Alice", PlayerRace.HUMAN, PlayerColor.RED, Difficulty.BEGINNER));
+    players.add(new Player("Bob", PlayerRace.FLAPPER, PlayerColor.YELLOW, Difficulty.BEGINNER));
+    players.add(new Player("Candice", PlayerRace.HUMAN, PlayerColor.BLUE, Difficulty.BEGINNER));
     return players;
   }
 }

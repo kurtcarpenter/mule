@@ -28,26 +28,34 @@ public class MuleManager implements java.io.Serializable {
     if (gameMap.getTile(myX, myY).getOwner() == currPlayer) {
       if (gameMap.getTile(myX, myY).getMule() != null) {
         System.out.println("There is already a mule on this tile. You lost your mule.");
-        currPlayer.receiveMule(null);
+        currPlayer.receiveMule(null, false);
         return false;
       } else if (currPlayer.getMule() != null) {
-        if (!((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
-            == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER)) {
-          gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
-          System.out.println("Placed " + currPlayer.getMule().toString() + "mule at (" + myX + ", "
-              + myY + ")");
-          currPlayer.receiveMule(null);
-          return true;
-        } else {
+        if (currPlayer.getMule() == Resource.MAGIC && currPlayer.getMulesOnwed() < 3) {
+          System.out.println("You must place three mules before placing a magic mule. You lost your mule.");
+          currPlayer.receiveMule(null, false);
+          return false;
+        } else if ((currPlayer.getMule() == Resource.SMITHORE || currPlayer.getMule()
+            == Resource.CRYSTITE) && gameMap.getTile(myX, myY).getTerrain() == Terrain.RIVER) {
           System.out.println("You cannot place a smithore or crystite mule on a river tile.");
           return false;
+        } else if (currPlayer.getMule() == Resource.ENERGY
+            && gameMap.getTile(myX, myY).getTerrain() == Terrain.DESERT) {
+          System.out.println("You cannot place an energy mule on a desert tile.");
+          return false;
+        } else {
+          gameMap.getTile(myX, myY).setMule(currPlayer.getMule());
+          System.out.println("Placed " + currPlayer.getMule().toString() + " mule at (" + myX + ", "
+              + myY + ")");
+          currPlayer.receiveMule(null, true);
+          return true;
         }
       } else {
         System.out.println("You don't own a mule to place here.");
         return false;
       }
     } else {
-      currPlayer.receiveMule(null);
+      currPlayer.receiveMule(null, false);
       System.out.println("You don't own this tile! You lost your mule.");
       return false;
     }

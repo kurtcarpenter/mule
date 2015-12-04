@@ -14,10 +14,11 @@ public class StoreManager implements java.io.Serializable {
   private HashMap<Resource, Integer> resourceStorage;
   private HashMap<Resource, Integer> prices;
   private TurnManager turnManager;
-  private static final int[] beginnerQuantities = {16, 16, 0, 0, 25};
-  private static final int[] stdTrnyQuantities = {8, 8, 8, 0, 14};
-  private static final int[] startingPrices = {30, 25, 50, 100, 100};
-  private static final int[] muleConfigPrices = {25, 50, 75, 100};
+  private Difficulty difficulty;
+  private static final int[] beginnerQuantities = {16, 16, 0, 0, 0, 25};
+  private static final int[] stdTrnyQuantities = {8, 8, 8, 0, 0, 14};
+  private static final int[] startingPrices = {30, 25, 50, 100, 0, 100};
+  private static final int[] muleConfigPrices = {25, 50, 75, 100, 900};
 
   /**
    * Creates a StoreManager object.
@@ -29,7 +30,20 @@ public class StoreManager implements java.io.Serializable {
     this.turnManager = turnManager;
     resourceStorage = new HashMap<Resource, Integer>();
     prices = new HashMap<Resource, Integer>();
+    this.difficulty = difficulty;
 
+    for (Resource r : Resource.values()) {
+      if (this.difficulty == Difficulty.BEGINNER) {
+        resourceStorage.put(r, beginnerQuantities[r.ordinal()]);
+      } else {
+        resourceStorage.put(r, stdTrnyQuantities[r.ordinal()]);
+      }
+      prices.put(r, startingPrices[r.ordinal()]);
+    }
+  }
+
+  public void updateSettings(Difficulty difficulty) {
+    this.difficulty = difficulty;
     for (Resource r : Resource.values()) {
       if (difficulty == Difficulty.BEGINNER) {
         resourceStorage.put(r, beginnerQuantities[r.ordinal()]);
@@ -113,7 +127,7 @@ public class StoreManager implements java.io.Serializable {
 
     player.addMoney(-1 * (prices.get(resource) + muleConfigPrices[muleType.ordinal()])
         * quantity);
-    player.receiveMule(muleType);
+    player.receiveMule(muleType, false);
     resourceStorage.put(resource, resourceStorage.get(resource) - quantity);
   }
 
@@ -129,7 +143,7 @@ public class StoreManager implements java.io.Serializable {
     if (player.getMule() != muleType) {
       throw new PlayerTransactionException("Player cannot sell a mule they do not own");
     }
-    player.addMoney(prices.get(Resource.MULE));
+    player.addMoney(prices.get(Resource.MULE) + muleConfigPrices[muleType.ordinal()]);
     player.addResourceQuantity(Resource.MULE, -1);
     resourceStorage.put(Resource.MULE, resourceStorage.get(Resource.MULE) + 1);
   }

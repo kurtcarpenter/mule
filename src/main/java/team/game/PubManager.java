@@ -30,6 +30,10 @@ public class PubManager implements java.io.Serializable {
     rand = new Random(System.currentTimeMillis());
   }
 
+  public void updateSettings(List<Player> players) {
+    this.players = players;
+  }
+
   /**
    * Method called when a player decides to gamble in the pub.
    */

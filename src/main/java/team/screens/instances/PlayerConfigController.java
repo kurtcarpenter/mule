@@ -62,7 +62,7 @@ public class PlayerConfigController extends AScreen {
           colorsUsed.add(color);
           parent.config.getPlayers().add(new Player(nameField.getText(),
               Player.PlayerRace.valueOf(race.toUpperCase()),
-              Player.PlayerColor.valueOf(color.toUpperCase())));
+              Player.PlayerColor.valueOf(color.toUpperCase()), parent.config.getSettings().getDifficulty()));
           if (parent.config.getSettings().getNumPlayers() <= parent.config.getPlayers().size()) {
             parent.game.setCurrentState(GameState.LAND_SELECT);
             parent.game.getTurnManager().setState(GameState.LAND_SELECT);

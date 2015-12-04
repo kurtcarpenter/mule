@@ -48,9 +48,23 @@ public class MainMapController extends AScreen {
   @FXML
   private Label scoreLabel;
 
-  private String[][] mapLayout = { {"P","P","M1","P","R","P","M3","P","P"},
-      {"P","M1","P","P","R","P","P","P","M3"}, {"M3","P","P","P","Town","P","P","P","M1"},
-      {"P","M2","P","P","R","P","M2","P","P"}, {"P","P","M2","P","R","P","P","P","M2"} };
+  private String[][] mapLayout;
+
+  private Image plain;
+  private Image river;
+  private Image town;
+  private Image m1;
+  private Image m2;
+  private Image m3;
+  private Image desert;
+  private Image plainMule;
+  private Image riverMule;
+  private Image m1Mule;
+  private Image m2Mule;
+  private Image m3Mule;
+  private Image desertMule;
+
+  private boolean createdMap = false;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +78,43 @@ public class MainMapController extends AScreen {
         setPlayerStuff();
       }
     });
-    createMap();
+    plain = new Image("graphics/plain.png");
+    river = new Image("graphics/river.png");
+    town = new Image("graphics/town.png");
+    m1 = new Image("graphics/m1.png");
+    m2 = new Image("graphics/m2.png");
+    m3 = new Image("graphics/m3.png");
+    desert = new Image("graphics/desert.png");
+
+    plainMule = new Image("graphics/plainMule.png");
+    riverMule = new Image("graphics/riverMule.png");
+    m1Mule = new Image("graphics/m1Mule.png");
+    m2Mule = new Image("graphics/m2Mule.png");
+    m3Mule = new Image("graphics/m3Mule.png");
+    desertMule = new Image("graphics/desertMule.png");
+  }
+
+  public void update() {
+    mapLayout = parent.game.getMapManager().getGameMap().getMapLayout();
+    if (parent.game.getTurnManager().getCurrentTurn() == 1 && !createdMap)
+      createMap();
+    turnLabel.setText("Turn " + parent.game.getTurnManager().getCurrentTurn());
+    nameLabel.setText(parent.game.getTurnManager()
+        .getCurrentPlayer().getName());
+    moneyLabel.setText("$" + parent.game.getTurnManager().getCurrentPlayer()
+        .getMoney());
+    playerColor.setFill(Color.valueOf(
+        parent.game.getTurnManager().getCurrentPlayer().getColor().toString()));
+    // Change init time based on player attributes
+    if (parent.game.getTurnManager().getGameState() != GameState.LAND_SELECT
+        && parent.game.getTimerManager().isStart()) {
+      timerLabel.textProperty().bind(parent.game.getTimerManager()
+          .startTimer());
+    }
+    scoreLabel.setText("Score: " + parent.game.getTurnManager()
+        .getCurrentPlayer().getScore());
+    timerLabel.textProperty().bind(parent.game.getTimerManager()
+        .getTimerBinding());
   }
 
   /**
@@ -128,28 +178,32 @@ public class MainMapController extends AScreen {
    * Creates the map.
    */
   public void createMap() {
+    createdMap = true;
     for (int i = 0; i < mapLayout.length; i++) {
       for (int j = 0; j < mapLayout[i].length; j++) {
         final String layoutString = mapLayout[i][j];
-        Image image = new Image("graphics/plain.png");
+        Image image = plain;
         switch (mapLayout[i][j]) {
           case "P":
-            image = new Image("graphics/plain.png");
+            image = plain;
             break;
           case "R":
-            image = new Image("graphics/river.png");
+            image = river;
             break;
           case "Town":
-            image = new Image("graphics/town.png");
+            image = town;
             break;
           case "M1":
-            image = new Image("graphics/m1.png");
+            image = m1;
             break;
           case "M2":
-            image = new Image("graphics/m2.png");
+            image = m2;
             break;
           case "M3":
-            image = new Image("graphics/m3.png");
+            image = m3;
+            break;
+          case "D":
+            image = desert;
             break;
           default:
             System.out.println("Defaulted");
@@ -179,19 +233,22 @@ public class MainMapController extends AScreen {
                   Image image = new Image("graphics/plainMule.png");
                   switch (mapLayout[rowIndex][colIndex]) {
                     case "P":
-                      image = new Image("graphics/plainMule.png");
+                      image = plainMule;
                       break;
                     case "R":
-                      image = new Image("graphics/riverMule.png");
+                      image = riverMule;
                       break;
                     case "M1":
-                      image = new Image("graphics/m1Mule.png");
+                      image = m1Mule;
                       break;
                     case "M2":
-                      image = new Image("graphics/m2Mule.png");
+                      image = m2Mule;
                       break;
                     case "M3":
-                      image = new Image("graphics/m3Mule.png");
+                      image = m3Mule;
+                      break;
+                    case "D":
+                      image = desertMule;
                       break;
                     default:
                       System.out.println("Defaulted");

@@ -49,7 +49,7 @@ public class Game implements Serializable {
   public Game(Configuration config) {
     currentState = GameState.CONFIGURE;
     configuration = config;
-    gameMap = new GameMap();
+    gameMap = new GameMap(configuration.getSettings().getMap());
     scoreManager = new ScoreManager(configuration.getPlayers());
     turnManager = new TurnManager(configuration.getPlayers(), currentState,
         scoreManager, this);
@@ -60,6 +60,15 @@ public class Game implements Serializable {
     pubManager = new PubManager(configuration.getPlayers(), turnManager, timerManager);
     storeManager = new StoreManager(configuration.getSettings().getDifficulty(), turnManager);
     randomEventManager = new RandomEventManager(configuration.getPlayers(), 0);
+  }
+
+  public void updateSettings() {
+    gameMap.updateSettings(configuration.getSettings().getMap());
+    scoreManager.updateSettings(configuration.getPlayers());
+    turnManager.updateSettings(configuration.getPlayers());
+    pubManager.updateSettings(configuration.getPlayers());
+    storeManager.updateSettings(configuration.getSettings().getDifficulty());
+    randomEventManager.updateSettings(configuration.getPlayers());
   }
 
   public Configuration getConfiguration() {
@@ -109,6 +118,7 @@ public class Game implements Serializable {
   public void passScreenMaster(ScreenMaster screenMaster) {
     main = screenMaster;
     timerManager.passScreenMaster(screenMaster);
+    turnManager.passScreenMaster(screenMaster);
   }
 
   /**

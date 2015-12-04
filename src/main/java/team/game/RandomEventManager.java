@@ -27,6 +27,10 @@ public class RandomEventManager implements java.io.Serializable {
     this.chance = chance;
   }
 
+  public void updateSettings(List<Player> players) {
+    this.players = players;
+  }
+
   /**
    * Method called when a random event has been triggered.
    *

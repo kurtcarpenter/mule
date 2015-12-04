@@ -39,4 +39,8 @@ public class ScoreManager implements java.io.Serializable {
     return MONEY_MULTIPLIER * player.getMoney() + TILE_MULTIPLIER * player.getTilesOwned()
         + RESOURCE_MULTIPLIER * player.getScorableResources();
   }
+
+  public void updateSettings(List<Player> players) {
+    this.players = players;
+  }
 }
